@@ -1,0 +1,14 @@
+.content-main_homePage {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+.content-main_homePage h2:hover {
+    color: #da0b4e;
+}
+
+.list-course_best-seller {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px -10px;
+    justify-content: space-between;
+}

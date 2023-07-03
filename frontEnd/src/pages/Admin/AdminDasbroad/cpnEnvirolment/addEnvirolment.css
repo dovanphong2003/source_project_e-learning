@@ -1,0 +1,28 @@
+.button_form-add-envirolment {
+    padding: 10px 18px;
+    color: #fff;
+    background-color: var(--color-default_hover-admin);
+    border: 1px solid var(--color-default_hover-admin);
+    outline: none;
+}
+.button_form-add-envirolment:active {
+    opacity: 0.8;
+}
+
+.add_envirolment {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0px;
+    margin-top: 20px;
+    box-shadow: var(--box-shadow-default-admin);
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
+.title_form_envirolment {
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    background-color: var(--color-default_hover-admin);
+}

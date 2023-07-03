@@ -1,0 +1,58 @@
+.upload_file_image-video {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.upload_file_image-video img {
+    width: 140px;
+}
+.label_bnt-upload-file_video {
+    margin-right: 0 !important;
+    max-width: 100% !important;
+}
+.label_bnt-upload-file_video .bnt_upload-video {
+    padding: 10px 20px;
+    background-color: #0f2862;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+.info_file_video {
+    max-width: 400px;
+    text-align: center;
+    padding: 0px 20px;
+    border-radius: 6px;
+    color: #000000;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    margin-bottom: 30px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Số dòng tối đa */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.label_bnt-upload-file_video .bnt_upload-video:hover {
+    background-color: #1f4192;
+}
+.upload-course-label_video {
+    display: flex;
+    padding: 6px 12px;
+    width: 100%;
+    text-align: center;
+    max-width: 100% !important;
+    border-bottom: 1px solid #000;
+    cursor: pointer;
+    cursor: default;
+}
+.border-dashed {
+    border: 2px dotted #7a7a7a;
+}

@@ -1,0 +1,14 @@
+main {
+    background-color: #faf9ff;
+    padding-bottom: 70px;
+}
+.container-main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.course_our_user {
+    background-color: #ffffff;
+    border-bottom: 1px solid #da0b4cdb;
+    border-top: 1px solid #da0b4cdb;
+    padding: 20px;
+}

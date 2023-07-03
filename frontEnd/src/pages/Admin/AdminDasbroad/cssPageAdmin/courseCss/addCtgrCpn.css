@@ -1,0 +1,25 @@
+.display-flex-box {
+    display: flex;
+    justify-content: center !important;
+    margin: 0px auto;
+}
+.form_add-category-list {
+    text-align: center;
+    width: 800px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: var(--box-shadow-default-admin);
+}
+.form_add-category-list h3 {
+    color: var(--color-default_admin);
+    font-weight: 500;
+    font-size: 20px;
+}
+.bnt-submit-craete-student button {
+    height: 42px;
+    min-width: 120px;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

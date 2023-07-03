@@ -1,0 +1,65 @@
+.ul_course-was_buy {
+    margin: 10px 0px;
+}
+.ul_course-was_buy li {
+    padding: 4px 0px;
+}
+.ul_course-was_buy li span {
+    font-size: 14px;
+}
+.span_icon_arrow-right {
+    margin-right: 4px;
+    color: rgb(84, 42, 42);
+}
+.info_add-user-db {
+    background-color: #fff;
+    box-shadow: var(--box-shadow-default-admin);
+    margin-top: 20px;
+    padding-bottom: 40px;
+}
+.header-info_add-user-db {
+    padding: 20px 0px;
+    background-color: var(--color-default_hover-admin);
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
+.submit-create-student {
+    display: flex;
+    justify-content: center;
+}
+.all-element_submit-create-sudent {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.all-element_submit-create-sudent span {
+    font-size: 34px;
+    color: rgb(0, 255, 0);
+}
+.all-element_submit-create-sudent h4 {
+    font-size: 24px;
+    color: var(--color-default_admin);
+}
+.all-element_submit-create-sudent p {
+    font-size: 14px;
+}
+.bnt-submit-craete-student {
+    display: flex;
+    justify-content: center;
+}
+.all-element_submit-create-sudent button {
+    background-color: var(--color-default_hover-admin);
+    color: #fff;
+    padding: 12px 20px;
+    border: 1px solid var(--color-default_hover-admin);
+    outline: none;
+    border-radius: 6px;
+    opacity: 1;
+}
+.all-element_submit-create-sudent button:active {
+    opacity: 0.8;
+}

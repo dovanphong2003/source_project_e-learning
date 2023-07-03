@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,700&display=swap");
+
+:root {
+    --color-default_admin: #6c757d;
+    --color-default-bnt_user: #a435f0;
+    --colot-default-hover-bnt-user: #8710d8;
+    --color-default_hover-admin: #727cf5;
+    --box-shadow-default-admin: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    --box-shadow-default-user: 0 0 35px 0 rgba(154, 161, 171, 0.2);
+
+    --border-radius-default-admin: 0.25rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+html {
+    font-size: 62.5%; /* Đặt font-size của phần tử html là 62.5% */
+}
+
+body {
+    font-size: 1.6rem; /* Đặt font-size của phần tử body là 1.6rem (tương đương 16px) */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+:root {
+    --plyr-color-main: rgb(28, 199, 73);
+}
+
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
+    font-size: 26px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.content {
+    flex: 1;
+}
+button {
+    cursor: pointer;
+}
+
+main {
+    min-height: 70vh;
+}
+.hidden {
+    display: none !important;
+}
+.rotate-effect {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+.rotate-effect2 {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.rotate-effect {
+    transform: rotate(180deg);
+}
+
+.rotate-effect2 {
+    transform: rotate(360deg);
+}
+.card-info_dash-board {
+    margin: 20px 0px;
+    border: 1px solid #dee2e6;
+}
+.mr-r-5 {
+    margin-right: 5px;
+}
+.mr-l-5 {
+    margin-left: 5px;
+}
+.border_left {
+    border-left: 1px solid #dee2e6 !important;
+}
+.border_right {
+    border-right: 1px solid #dee2e6 !important;
+}
+
+.border_bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+.cl-white {
+    color: #e6e6e6 !important;
+}
+.mr-r-20px {
+    margin-right: 20px;
+}
+.border-norm {
+    border: 1px solid #cccccc41;
+}
+.dIyxTF input {
+    height: 20px;
+    width: 20px;
+}
+.fxCBCN {
+    opacity: 1 !important;
+    background-color: red !important;
+}
+.under_line-mid {
+    text-decoration: line-through !important;
+    cursor: context-menu;
+    background-color: #fff !important;
+}

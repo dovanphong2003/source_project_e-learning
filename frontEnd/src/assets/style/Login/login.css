@@ -1,0 +1,87 @@
+.form-log-in {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    /* margin-top: 70px; */
+    padding-top: 70px;
+}
+
+.form_all_login {
+    background-color: #faf9ff;
+    padding: 50px;
+    border: 2px solid #da0b4c50;
+    border-radius: 10px;
+}
+
+.h2-login {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-top: 12px;
+}
+.input-log-in {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #df19fb;
+    width: 400px;
+    height: 50px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 20px;
+}
+.main_form-log_in label {
+    padding-left: 12px;
+}
+.password-login {
+    margin-bottom: 6px;
+}
+.forget_password {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+.a_forget_password {
+    color: #000000;
+    opacity: 0.7;
+}
+.a_forget_password:hover {
+    color: #341212;
+    opacity: 1;
+}
+.button-sign-in {
+    width: 100%;
+    padding: 16px;
+    color: #faf9ff;
+    background-color: #da0b4e;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.span_form-log-in {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.icon_login {
+    display: flex;
+    justify-content: center;
+}
+.facebook_log-in,
+.google_log-in {
+    cursor: pointer;
+    width: 52px;
+    margin: 10px;
+    height: 52px;
+}
+.span_form-log-in a {
+    color: #da0b4e;
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+}

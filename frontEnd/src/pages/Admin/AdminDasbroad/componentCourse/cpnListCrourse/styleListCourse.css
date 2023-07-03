@@ -1,0 +1,31 @@
+.bnt-course-edit {
+    position: relative;
+    color: #727cf5;
+    border-color: #727cf5;
+    outline: none;
+    border-radius: 12px;
+    background-color: #eff5ff;
+}
+.bnt-course-edit:hover {
+    background-color: #727df5ad;
+    color: #fff;
+}
+.container_edit-course {
+    width: 200px;
+    /* padding: 10px; */
+    background-color: #fff;
+    color: #000;
+    border: 1px #ccc solid;
+    position: absolute;
+    top: -12px;
+    right: 28px;
+    z-index: 999999;
+}
+.container_edit-course li {
+    border-bottom: 1px solid #ccc;
+    color: #727cf5;
+    padding: 6px 0px;
+}
+.container_edit-course li:hover {
+    background-color: #ebebeb;
+}

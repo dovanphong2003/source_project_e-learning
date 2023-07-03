@@ -1,0 +1,86 @@
+.card {
+    width: 33.33333333%;
+    padding: 10px;
+}
+.br-card {
+    border: 1px solid #e8ebf1;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.br-card:hover {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.img_course {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.img_course {
+    transition: transform 0.3s ease;
+}
+
+.img_course:hover {
+    transform: scale(1.1);
+}
+.note_card {
+    padding: 8px;
+    position: absolute;
+}
+.img_card {
+    position: relative;
+    overflow: hidden;
+    height: 219px;
+    z-index: 1;
+}
+.debuted {
+    opacity: 0.9;
+    left: 0;
+    top: 0;
+    background: #f26651db;
+    box-shadow: 0px 0px 0px 4px #06833dab;
+    color: #fff;
+}
+.undebuted {
+    opacity: 0.9;
+    left: auto;
+    right: 0px !important;
+    top: 0px;
+    background: #f26651db;
+    box-shadow: 0px 0px 0px 4px #06833dab;
+    color: #fff;
+}
+
+.title_card {
+    padding: 20px 20px 5px;
+}
+
+.title_card .title {
+    font-size: 17px;
+    margin-bottom: 10px;
+    min-height: 52px;
+    font-weight: 500;
+}
+.info_card a:hover,
+.title_card .title a:hover {
+    cursor: pointer;
+    color: #da0b4e;
+}
+.info_card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #f0f1f5;
+    padding: 1rem 1.5rem;
+}
+
+.info_lecture {
+    background: rgba(30, 173, 107, 0.13);
+    color: #1ead6b;
+    display: flex;
+    align-items: center;
+    padding: 6px 15px;
+    font-size: 13px;
+    border-radius: 50px;
+}

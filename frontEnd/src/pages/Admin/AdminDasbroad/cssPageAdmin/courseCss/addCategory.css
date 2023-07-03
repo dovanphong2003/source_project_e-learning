@@ -1,0 +1,132 @@
+.category_list-admin {
+    padding-bottom: 50px;
+}
+.haeder_category_list-admin {
+    display: flex;
+    padding: 20px 0px;
+    justify-content: space-between;
+    margin: 0px 20px;
+}
+.add_new_category {
+    margin-right: 40px;
+    color: #727cf5;
+    border: 1px solid #727cf5;
+    border-radius: 2rem;
+    padding: 12px 16px;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+.add_new_category:hover {
+    color: #ffffff;
+    background-color: #727cf5;
+}
+.main_category-list_admin {
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+}
+.element_category-admin {
+    width: 30%;
+    box-shadow: var(--box-shadow-default-admin);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.image_element-category-admin {
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 200px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    overflow: hidden;
+}
+.image_element-category-admin img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.name-category_admin {
+    margin: 0px 16px;
+    flex-direction: column;
+}
+.content_name-category_admin {
+    display: flex;
+    align-items: center;
+}
+.content_name-category_admin p {
+    font-size: 16px;
+    max-width: 100%;
+    text-align: start;
+    /* white-space: nowrap; Ngăn chặn xuống dòng */
+    overflow: hidden; /* Ẩn phần dư thừa */
+    text-overflow: ellipsis; /* Hiển thị dấu "..." */
+}
+.content_name-category_admin span {
+    margin-right: 4px;
+    font-size: 16px;
+}
+.additional-content_category_admin i {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--color-default_admin);
+    line-height: 0px;
+    display: block;
+}
+.sub-category_content_admin {
+    border-top: 1px solid #e6e5e5;
+    border-bottom: 1px solid #e6e5e5;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+.sub-category_content_admin ul {
+    padding: 6px 32px;
+    font-size: 15px;
+    color: var(--color-default_admin);
+    padding-bottom: 32px;
+}
+.sub-category_content_admin ul li {
+    padding: 4px 0px;
+    white-space: nowrap; /* Ngăn chặn xuống dòng */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Hiển thị dấu "..." */
+}
+.two_bnt-sub_category {
+    display: none;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    margin: 0px 16px;
+}
+.element_category-admin:hover .two_bnt-sub_category {
+    display: flex;
+}
+.bnt-sub_categor_edit {
+    width: 90px;
+    color: #27c3fc;
+    border: 1px solid #27c3fc;
+    border-radius: 4px;
+    padding: 6px 16px;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+.bnt-sub_categor_delete {
+    width: 90px;
+    color: #ff2121cb;
+    border: 1px solid #ff2121;
+    border-radius: 4px;
+    padding: 6px 16px;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+.bnt-sub_categor_edit:hover {
+    color: #ffffff;
+    background-color: #27c3fc;
+}
+.bnt-sub_categor_delete:hover {
+    color: #ffffffcb;
+    background-color: #ff5555;
+}
+.dispay-two_btn {
+    height: 0px;
+}

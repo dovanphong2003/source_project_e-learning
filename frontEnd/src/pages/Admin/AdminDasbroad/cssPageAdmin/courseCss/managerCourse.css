@@ -1,0 +1,70 @@
+.h5-manage-course {
+    font-weight: 300;
+    color: rgb(0, 0, 0);
+}
+.course-list_course {
+}
+.title-course-list_course {
+    font-size: 18px;
+    padding: 0;
+    padding-left: 20px;
+    text-align: start;
+}
+.dcTwyf {
+    font-size: 18px !important;
+    color: #6c757d !important;
+}
+.list_course-admin {
+    box-shadow: var(--box-shadow-default-admin);
+    position: relative;
+}
+.list_course-admin .bnt-list_course-admin {
+    position: absolute;
+    top: 0px;
+    z-index: 100;
+    right: 0;
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 3px;
+    background-color: #d7ebf9;
+    height: 56px;
+    border: 1px solid #1c1d1f;
+    font-weight: 500;
+    animation: opacity 3s ease-in;
+}
+.list_course-admin .bnt-list_course-admin:hover {
+    background-color: #cce3f4;
+    color: #131415;
+}
+.tag_p-title_course_manager {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important; /* Số dòng tối đa */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.status_course_manager_table {
+    font-size: 14px;
+    color: #2e2e2ecf;
+    background-color: #8bf0bad6;
+    padding: 6px 10px;
+    border-radius: 2px;
+    border: 1px solid #000000;
+    text-align: center;
+}
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.swal2-popup {
+    font-size: 1.6rem !important;
+    font-family: Georgia, serif;
+}

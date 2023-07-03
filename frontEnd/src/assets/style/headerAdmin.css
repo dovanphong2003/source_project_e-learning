@@ -1,0 +1,192 @@
+.header-admin {
+    justify-content: space-between !important;
+    min-height: 72px !important;
+    padding: 0 !important;
+    max-width: 1400px !important;
+}
+.header_bgrcl {
+    background-color: #313a46 !important;
+}
+
+.block1-header-admin {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: start !important;
+    padding-left: 50px !important;
+}
+.visit-website,
+.title-header {
+    padding: 0px 10px !important;
+}
+.title-header {
+    font-size: 24px !important;
+    font-weight: 500 !important;
+    color: #fff !important;
+}
+.logo-haeder-admin {
+    width: 70% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+.visite-website {
+    min-width: 120px !important;
+    border: 1px solid #e3eaef !important;
+    text-decoration: none !important;
+    padding: 0 12px !important;
+    margin-left: 40px !important;
+}
+.visite-website:hover .visited-website_content {
+    color: #313a46 !important;
+    font-weight: 400 !important;
+}
+.visite-website:hover {
+    background-color: #e3eaef !important;
+}
+.bgr-admin-header {
+    background-color: #313a46 !important;
+}
+.visited-website_content {
+    color: #e3eaef !important;
+    font-weight: 300 !important;
+}
+.block2-header-admin {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: end;
+    max-height: 72px;
+    padding-right: 50px;
+}
+.frame-admin {
+    display: flex;
+    align-items: center;
+    color: #e3eaef;
+    margin-left: 20px;
+    padding: 20px 10px;
+    background-color: #3c4655;
+    border: 1px solid #414d5d;
+    max-height: 72px;
+    cursor: pointer;
+}
+.img-frame-admin {
+    max-height: 40px;
+    max-width: 40px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.info-frame-admin {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.info-frame-admin span {
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+}
+.info-frame-admin p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+}
+.dashboard-icon {
+    cursor: pointer;
+    color: #98a6ad;
+    font-size: 32px;
+    margin-right: 10px;
+}
+.control-header-admin {
+    position: relative;
+    display: flex;
+    padding: 10px;
+    user-select: none;
+}
+.table-control-header-admin {
+    position: absolute;
+    min-width: 320px;
+    min-height: 240px;
+    /* background-color: aquamarine; */
+    right: 0;
+    top: 52px;
+    z-index: 6;
+}
+.header-table-control_header-admin {
+    text-align: center;
+    padding: 30px 0px;
+    background-color: #727cf5 !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom: 1px solid #dee2e6 !important;
+    cursor: text;
+}
+.header-table-control_header-admin span {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+.element-control_header-table {
+    width: 50%;
+}
+.element-control_header-table a {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+}
+.element-control_header-table a:hover {
+    background-color: #f3f5f9 !important;
+}
+.element-control_header-table a:hover span {
+    color: #2b3af0;
+}
+.element-control_header-table a span {
+    text-align: center;
+    color: #727cf5;
+    font-size: 26px;
+    margin-bottom: 2px;
+}
+.element-control_header-table a p {
+    font-size: 14px;
+    text-align: center;
+    color: #98a6ad !important;
+}
+.control-speed-header-table-control {
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: rgba(50, 50, 93, 0.164) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.187) 0px 1px 3px -1px;
+    background-color: #ffffff;
+}
+
+.animate-show {
+    animation: mymoveShow 0.3s ease-in;
+}
+@keyframes mymoveShow {
+    from {
+        top: 72px;
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        top: 52px;
+    }
+}
+.modal {
+    background-color: #eaeaea;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    opacity: 0.1;
+    z-index: 5;
+}
+.info_was-sig-in_admin {
+    position: absolute;
+    min-width: 240px;
+    background-color: #fff;
+    position: absolute;
+    top: 56px;
+    right: -10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 10px;
+    border-radius: 6px;
+}

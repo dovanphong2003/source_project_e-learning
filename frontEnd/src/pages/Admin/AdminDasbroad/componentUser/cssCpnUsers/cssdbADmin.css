@@ -1,0 +1,23 @@
+.blGEez {
+    justify-content: center !important;
+}
+.kiNFoh {
+    justify-content: center !important;
+}
+
+.list_admin-course {
+    margin-top: 20px;
+    box-shadow: var(--box-shadow-default-admin);
+}
+.root_list_admin {
+    padding: 1px 8px;
+    color: #fff;
+    background-color: #0acf97;
+    border-radius: 4px;
+}
+.admin-branch_list_admin {
+    padding: 1px 8px;
+    color: #ffffff;
+    background-color: #dd9714;
+    border-radius: 4px;
+}

@@ -1,0 +1,121 @@
+.container-cart_course {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.title_container-cart {
+    padding: 40px 0px;
+    font-size: 30px;
+    color: #000;
+}
+.container-cart {
+    background-color: #faf9ff;
+    width: 70%;
+    padding: 16px;
+    /* box-shadow: var(--box-shadow-default-user); */
+}
+.header-container_cart {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.header-container_cart p {
+    font-size: 16px;
+    color: #333333;
+}
+.header-container_cart button {
+    padding: 8px 16px;
+    border: 1px solid var(--color-default-bnt_userr);
+    outline: none;
+    background-color: #fff;
+    border: 1px solid #1c1d1f;
+}
+.header-container_cart button:active {
+    background-color: #ebebeb;
+    border: 1px solid #1c1d1f;
+}
+.info-title_course {
+    font-size: 16px;
+}
+.author-course_cart {
+    font-weight: 300;
+    font-size: 14px;
+}
+.info_course-cart {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.image_price-course {
+    display: flex;
+}
+.info-title-course-author {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.image_course-cart {
+    height: 100px;
+    width: 145px;
+}
+.image_course-cart img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+.price-course_info {
+    margin-right: 16px;
+    font-size: 20px;
+    color: var(--color-default-bnt_user);
+}
+.price_delete-el_cart {
+    display: flex;
+}
+.price_delete-el_cart button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    background-color: #fff;
+    color: red;
+    border: none;
+    outline: none;
+}
+.price_delete-el_cart button:active {
+    border: 1px solid red;
+}
+.container-cart_check-out-cart {
+    display: flex;
+    justify-content: space-between;
+}
+.pay-cart_course {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+.pay-cart_course p {
+    text-align: start;
+    color: #777777;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0;
+}
+.pay-cart_course h2 {
+    font-size: 32px;
+    font-weight: 600;
+    padding-bottom: 4px;
+}
+.pay-cart_course button {
+    font-size: 16px;
+    padding: 14px 24px;
+    background-color: var(--color-default-bnt_user);
+    border: 1px solid var(--color-default-bnt_user);
+    color: #fff;
+}
+.pay-cart_course button:active {
+    opacity: 0.8;
+}
+.pay-cart_course button:hover {
+    background-color: var(--colot-default-hover-bnt-user);
+}

@@ -1,0 +1,202 @@
+.view-video_course {
+    background-color: #f5f4fc;
+}
+.container-main-view-video {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 24px;
+}
+.header-video-container_video {
+    width: 76%;
+    margin-right: 20px;
+}
+.list-lession_container-video {
+    width: 24%;
+    margin-left: 20px;
+}
+.title-container_video {
+    padding-bottom: 10px;
+}
+.header-container_video {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: #ffffff;
+}
+.hr_video {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.146);
+}
+video {
+    /* background-color: black; */
+    border: 1px solid #000000;
+    display: block;
+}
+.plyr__controls {
+    /* position: sticky !important; */
+    /* margin-top: 100px !important; */
+    transition: opacity 0s ease-in-out, transform 0s ease-in-out !important;
+}
+.border-video_lession {
+    display: flex;
+    max-width: 800px;
+    max-height: 450px;
+    background-color: #000000;
+    position: relative;
+}
+.plyr {
+    position: static !important;
+}
+.video_lession {
+    width: 100%;
+}
+.db-flex-for-video_url {
+    display: flex;
+    justify-content: center;
+}
+.db-text-center-for-video_youtube {
+    text-align: center;
+    overflow: hidden;
+}
+.list-root_video {
+    padding: 10px 6px;
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+.header-ll_container-video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background-color: #008038;
+    color: #ffffff;
+}
+.list-content-video {
+    padding-bottom: 30px;
+}
+.title_list-video {
+    padding-bottom: 6px;
+    font-weight: 400;
+}
+.list-content-video a {
+    color: #4a5682;
+}
+.btn-lession {
+    padding: 7px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #008038;
+    font-weight: 500;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+.btn-lession:hover {
+    background: #ff9900;
+}
+.all-bnt-lession {
+    display: flex;
+    justify-content: space-between;
+}
+.bnt-next_hidden {
+    display: flex;
+}
+.connect-lecturers {
+    color: #2d3954;
+    font-size: 21px;
+    font-weight: 500;
+}
+.connect-lecturers button {
+    padding: 12px 18px;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #008038;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    background: #da0b4e;
+    border: 1px solid #da0b4e;
+    border-radius: 2px;
+}
+.connect-lecturers button:hover {
+    background: #e05707;
+    border: 1px solid #e05707;
+    color: #ffffff !important;
+}
+.container-middle {
+    padding-top: 20px;
+}
+.comment-lession h3 {
+    font-size: 24px;
+    font-weight: 500;
+}
+.comment-lession {
+    padding: 12px 40px;
+    background-color: #ffffff;
+}
+.main-comment {
+    display: flex;
+    /* height: 300px; */
+    width: 100%;
+}
+.submit-comment button {
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #008038;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    background: #da0b4e;
+    border: 1px solid #da0b4e;
+    border-radius: 2px;
+    padding: 12px 25px;
+    cursor: pointer;
+    border-radius: 0.1rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.submit-comment button:hover {
+    background: #ec0750;
+}
+.list-comment h3 {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.ql-container {
+    min-height: 10rem;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ql-editor {
+    padding: 20px !important;
+    font-size: 16px !important;
+    min-height: 100px !important;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    color: #0c34ff !important;
+    background: #ffffff;
+    border-radius: 0px !important;
+}
+.ql-container {
+    padding: 0px !important;
+}
+.min-height_500-px {
+    min-height: 400px !important;
+}
+.setup_video {
+    width: 200px;
+    height: 100px;
+}

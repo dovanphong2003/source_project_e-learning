@@ -1,0 +1,67 @@
+.filter_specifically {
+    min-width: 280px;
+    position: absolute;
+    top: 80px;
+    z-index: 3;
+    background-color: #faf9ff;
+    border: 1px solid #ccc;
+    box-shadow: rgba(115, 180, 237, 0.48) 6px 2px 16px 0px,
+        rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+.filter-rating {
+    font-size: 20px;
+    font-family: 400;
+}
+.block_filter-child {
+    padding: 12px;
+    padding-bottom: 16px;
+}
+.hr-filter {
+    margin: 0 auto;
+    width: 70%;
+}
+.header_block_filter-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.star {
+    margin: 0px 4px;
+    width: 16px;
+    height: 16px;
+}
+
+.select-rating_input {
+    width: 16px;
+    height: 16px;
+    margin-right: 16px;
+}
+
+.block_select-rating {
+    display: flex;
+    align-items: center;
+    max-width: 70%;
+    margin-bottom: 16px;
+}
+.container_display-search {
+    min-height: 600px;
+}
+
+.resest-filter {
+    display: flex;
+    justify-content: center;
+}
+
+.resest-filter button {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 60%;
+    background-color: #faf9ff;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+.resest-filter button:hover {
+    border: 1px solid #c5c5c5;
+    background-color: #dadada5f;
+}
