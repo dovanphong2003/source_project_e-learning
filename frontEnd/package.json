@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@babel/core": "^7.22.9",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
@@ -19,15 +20,15 @@
         "react-loader-spinner": "^5.3.4",
         "react-loading-skeleton": "^3.3.1",
         "react-markdown": "^8.0.7",
-        "react-quill": "^2.0.0",
+        "react-quill": "^0.0.2",
         "react-router-dom": "^6.11.2",
-        "react-scripts": "^5.0.1",
+        "react-scripts": "^2.1.3",
         "react-select": "^5.7.3",
         "react-spinners": "^0.13.8",
         "react-toastify": "^9.1.3",
         "rehype-raw": "^6.1.1",
         "remark-gfm": "^3.0.1",
-        "sweetalert2": "^11.7.11",
+        "sweetalert2": "^11.6.13",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
