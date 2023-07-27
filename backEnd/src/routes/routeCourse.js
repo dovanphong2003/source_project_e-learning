@@ -14,6 +14,14 @@ const {
     postLessonAPI,
     getDataForCourseAPI,
     getCourseBSellerAndNewsAPI,
+    getInfoCourseUseIdAPI,
+    getLessonCourseUseIdAPI,
+    getDataSearchAPI,
+    addCourseToCartAPI,
+    getCartItemsAPI,
+    deleteCourseCartAPI,
+    deleteAllCourseCartAPI,
+    getCourseOfUserAPI,
 } = require("../controllers/CRUD_Course");
 // config upload image
 const multer = require("multer"); // use multer upload image
@@ -111,12 +119,16 @@ routeAPICourse.post(
 routeAPICourse.post("/postModuleAPI", postModuleAPI);
 routeAPICourse.post("/setBesellerAPI", setBesellerAPI);
 
-// getAllCourse
+// getCourse
 routeAPICourse.get("/getAllCourseAPI", getAllCourseAPI);
+routeAPICourse.get("/getInfoCourseUseIdAPI", getInfoCourseUseIdAPI);
 routeAPICourse.get("/getNameAndIdAPI", getNameAndIdAPI);
 routeAPICourse.get("/getNameModuleAPI", getNameModuleAPI);
 routeAPICourse.get("/getDataForCourseAPI", getDataForCourseAPI);
 routeAPICourse.get("/getCourseBSellerAndNewsAPI", getCourseBSellerAndNewsAPI);
+routeAPICourse.get("/getLessonCourseUseIdAPI", getLessonCourseUseIdAPI);
+routeAPICourse.get("/getCourseOfUserAPI", getCourseOfUserAPI);
+
 // POST lesson
 routeAPICourse.post("/postLessonOneAPI", postLessonAPI);
 
@@ -210,9 +222,17 @@ routeAPICourse.post(
                     });
                 });
         });
-        ////////////////////////////////////////////////////////////////////////////
     }
 );
+
+///////// search --
+routeAPICourse.get("/getDataSearchAPI", getDataSearchAPI);
+routeAPICourse.post("/addCourseToCartAPI", addCourseToCartAPI);
+routeAPICourse.get("/getCartItemsAPI", getCartItemsAPI);
+
+// delete cartItem
+routeAPICourse.delete("/deleteCourseCartAPI", deleteCourseCartAPI);
+routeAPICourse.delete("/deleteAllCourseCartAPI", deleteAllCourseCartAPI);
 
 module.exports = {
     routeAPICourse,

@@ -1,0 +1,51 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+    .header_container-main {
+        flex-direction: column;
+    }
+    .title_DetailCourse {
+        width: 100%;
+    }
+    .content_container-main {
+        width: 100%;
+        max-width: 100%;
+    }
+    .detail-describe {
+        padding: 30px 12px;
+    }
+    .detail-info {
+        width: 100%;
+        max-width: 100%;
+    }
+    .image-detail {
+        height: 250px;
+    }
+    .li-lesson_detail-title {
+        min-width: auto;
+    }
+    .vision-li-lession {
+        margin-right: 6px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+    .title_DetailCourse {
+        width: 100%;
+    }
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+    .title_DetailCourse {
+        width: 100%;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+}

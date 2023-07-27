@@ -4,19 +4,35 @@ import { Link } from "react-router-dom";
 
 export const Banner = () => {
     return (
-        <div className="banner">
-            <img
-                className="banner-main"
-                src="/image/banner.jpg"
-                alt="banner website"
-            />
-            <div className="bnt-all_course">
-                <Link to="/all-Course">
-                    <button className="bnt-banner">
-                        Xem Tất Cả Khóa Học Tại Đây!
-                    </button>
-                </Link>
+        <>
+            <div className="banner banner-all">
+                <img
+                    className="banner-main"
+                    src="/education-banner.jpg"
+                    alt="banner website"
+                />
+                <div className="bnt-all_course">
+                    <Link to="/all-Course">
+                        <button className="bnt-banner">
+                            Xem Tất Cả Khóa Học Tại Đây!
+                        </button>
+                    </Link>
+                </div>
             </div>
-        </div>
+            <div className="banner banner-mobile">
+                <img
+                    className="banner-main banner-main-mobile"
+                    src="/banner_mobile.png"
+                    alt="banner website"
+                />
+                <div className="bnt-all_course">
+                    <Link to="/all-Course">
+                        <button className="bnt-banner">
+                            Xem Tất Cả Khóa Học Tại Đây!
+                        </button>
+                    </Link>
+                </div>
+            </div>
+        </>
     );
 };

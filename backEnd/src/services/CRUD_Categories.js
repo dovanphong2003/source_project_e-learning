@@ -56,20 +56,21 @@ const getLessonCourseAPI = async (req, res) => {
         });
     }
 };
-const getModuleLessonAPI = async (req, res) => {
+const getModuleLessonDetailAPI = async (req, res) => {
     try {
         const response = await pool.query(
-            `SELECT m.module_name, l.lesson_name  FROM modulelesson m 
+            `SELECT m.module_name, l.lesson_name,l.lesson_id FROM modulelesson m 
             INNER JOIN lesson l ON l.module_id  = m.module_id
             INNER JOIN courses c ON c.course_id  = m.course_id 
-            WHERE c.course_id  = $1`,
+            WHERE c.course_id  = $1 ORDER BY m.module_id ASC, l.lesson_id ASC `,
             [req.query.idCourse]
         );
         res.status(200).json({
             EC: 0,
-            data: response,
+            data: response.rows,
         });
     } catch (error) {
+        console.log("error get detail course: ", error);
         res.status(404).json({
             EC: error,
         });
@@ -189,14 +190,41 @@ const getOneCategory = async (id) => {
         return null;
     }
 };
+const getAllProductLimitAPI = async (req, res) => {
+    const limit = Number(req.query.limit);
+    const page = Number(req.query.page);
+    const offset = limit * (page - 1);
+    try {
+        const response = await pool.query(
+            `SELECT c.*, u.user_name AS name_author 
+            FROM courses c 
+            INNER JOIN users u ON u.user_id = c.instructor_id
+    ORDER BY c.course_id
+    LIMIT $1 OFFSET $2`,
+            [limit, offset]
+        );
+        console.log(response.rows);
+        res.status(200).json({ data: response.rows });
+    } catch (error) {
+        console.log("error get all product limit: ", error);
+        res.status(400).json({ err: error });
+    }
+};
+const getLengthAllProductsAPI = async (req, res) => {
+    const response = await pool.query(`SELECT COUNT(course_id) FROM courses`);
+    console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", response);
+    res.status(200).json({ lengthCourse: response.rows[0].count });
+};
 module.exports = {
     getAllProductAPI,
     getProductAPI,
     getLessonCourseAPI,
-    getModuleLessonAPI,
+    getModuleLessonDetailAPI,
     handleCreateCategory,
     getCategory,
     getOneCategory,
     handleEditCategory,
     getCourseOfCategory,
+    getAllProductLimitAPI,
+    getLengthAllProductsAPI,
 };

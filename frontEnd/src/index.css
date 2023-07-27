@@ -19,6 +19,7 @@
 }
 html {
     font-size: 62.5%; /* Đặt font-size của phần tử html là 62.5% */
+    padding: 0 !important;
 }
 
 body {
@@ -28,7 +29,9 @@ body {
     min-height: 100vh;
     position: relative;
 }
-
+/* a {
+    text-decoration: none !important;
+} */
 :root {
     --plyr-color-main: rgb(28, 199, 73);
 }
@@ -111,4 +114,24 @@ main {
     text-decoration: line-through !important;
     cursor: context-menu;
     background-color: #fff !important;
+}
+/*
+config css skeleton
+*/
+.skeleton-css {
+    border-radius: 4px !important;
+    color: #c6c6c6;
+    margin: 6px 0px !important;
+}
+.material-symbols-outlined {
+    user-select: none;
+}
+.skeleton-container {
+    display: grid;
+    grid-template-columns: repeat(3, 33.33333%);
+    gap: 10px; /* Adjust the gap as needed */
+}
+.skeleton-css-mr-0 {
+    margin: 0px !important;
+    padding: 10px 0px !important;
 }

@@ -65,7 +65,7 @@ export const InfoStudent = ({ data }) => {
                                         className="label-element-info-user"
                                         htmlFor=""
                                     >
-                                        Đổi mật khẩu
+                                        Mật khẩu
                                     </label>
                                     <br />
                                     <input
@@ -90,7 +90,7 @@ export const InfoStudent = ({ data }) => {
                                     }`}
                                 />
                             </div>
-                            <div className="submit-comment">
+                            {/* <div className="submit-comment">
                                 <button
                                     onClick={(e) => {
                                         e.preventDefault();
@@ -99,7 +99,7 @@ export const InfoStudent = ({ data }) => {
                                 >
                                     Cập Nhật
                                 </button>
-                            </div>
+                            </div> */}
                         </form>
                     </div>
                 </div>

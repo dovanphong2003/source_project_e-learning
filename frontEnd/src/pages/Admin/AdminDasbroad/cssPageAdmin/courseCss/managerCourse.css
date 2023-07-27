@@ -36,6 +36,7 @@
     border: 1px solid #1c1d1f;
     font-weight: 500;
     animation: opacity 3s ease-in;
+    display: none;
 }
 .list_course-admin .bnt-list_course-admin:hover {
     background-color: #cce3f4;

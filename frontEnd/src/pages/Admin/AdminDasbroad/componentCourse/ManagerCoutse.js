@@ -68,9 +68,7 @@ export const ManagerCoutse = () => {
                         pending_actions
                     </span>
                     <p>{courseHandle}</p>
-                    <h5 className="h5-manage-course">
-                        Khóa học đang chờ xử lí
-                    </h5>
+                    <h5 className="h5-manage-course">Khóa học chờ xử lí</h5>
                 </Link>
                 <Link
                     to="#"

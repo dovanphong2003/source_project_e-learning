@@ -1,0 +1,159 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+    .navigation_dash-board {
+        position: fixed;
+        width: auto;
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+            rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        z-index: 999999;
+        max-height: 400px;
+        overflow: auto;
+    }
+    .dash-board {
+        padding: 16px;
+    }
+    .content-main-dash-board {
+        width: 300px;
+    }
+    .db-add_course .tage-add_course {
+        flex-direction: column;
+        align-items: center;
+    }
+    .tage-add_course span {
+        min-width: 200px;
+    }
+    .form-course-title {
+        flex-direction: column;
+    }
+    .des-form-course {
+        width: 300px !important;
+    }
+    .content-main-dash-board {
+        max-width: 360px;
+    }
+    .form-course-title input {
+        width: 300px;
+    }
+    .form-course-title .select_form-course_title {
+        width: 300px !important;
+        min-width: auto !important;
+    }
+    .dash-board {
+        padding: 0;
+        min-width: 300px;
+    }
+    .main_dash-board {
+        display: flex;
+        justify-content: center;
+    }
+    .dash-board {
+        padding-top: 40px;
+    }
+    #myChartOverview {
+        max-width: 160px;
+        max-height: 160px;
+    }
+    .trending-down,
+    .trending-grow {
+        margin-right: 0;
+    }
+    .info-charOverview {
+        margin-left: 0;
+    }
+    .trending-grow p {
+        font-size: 16px;
+    }
+    .trending-down p {
+        font-size: 16px;
+    }
+    .trending-down,
+    .trending-grow {
+        width: 50%;
+    }
+    .cart-char_revenue-admin {
+        padding: 20px 0px;
+    }
+    .content-main-dash-board {
+        margin-left: 0;
+    }
+    .tab-navigation-menu {
+        background-color: #ffffff;
+        padding: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* border: 1px solid #ccc; */
+        box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    }
+    .plus_result_end {
+        margin-right: 10px;
+    }
+    .form-course-title_image {
+        flex-direction: column;
+    }
+    .form-course-title_image label {
+        min-width: 200px;
+        padding-bottom: 12px;
+    }
+    .form-course-title_image input {
+        width: 300px;
+    }
+    .classForMenuAll {
+        display: none;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+    #myChartOverview {
+        max-width: 160px;
+        max-height: 160px;
+    }
+    .trending-down,
+    .trending-grow {
+        margin-right: 0;
+    }
+    .info-charOverview {
+        margin-left: 0;
+    }
+    .trending-grow p {
+        font-size: 16px;
+    }
+    .trending-down p {
+        font-size: 16px;
+    }
+    .trending-down,
+    .trending-grow {
+        width: 50%;
+    }
+    .tab-navigation-menu {
+        display: none;
+    }
+    .classForMenuMobile {
+        display: none;
+    }
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+    .tab-navigation-menu {
+        display: none;
+    }
+    .classForMenuMobile {
+        display: none;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+    .tab-navigation-menu {
+        display: none;
+    }
+    .classForMenuMobile {
+        display: none;
+    }
+}

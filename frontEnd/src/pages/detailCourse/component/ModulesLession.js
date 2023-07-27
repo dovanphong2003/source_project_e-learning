@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-export const ModulesLession = ({ title }) => {
+export const ModulesLession = ({
+    title,
+    arrLesson,
+    indexModule,
+    arrIdLesson,
+    id_course,
+    numberIndex,
+    checkBuyCourse,
+}) => {
     const [hiddenContentModule, setHiddenContentModule] = useState(true);
     const [checkAddAndRemove, setCheckAddAndRemove] = useState(true);
     const addAndRemoveModule = (e) => {
         setHiddenContentModule(!hiddenContentModule);
         setCheckAddAndRemove(!checkAddAndRemove);
     };
+    const notifyWarning = (content) => toast.warning(content);
+
     return (
         <div className="container-main_module-detail">
             <div onClick={addAndRemoveModule} className=" title-container-main">
-                <h3>{title}</h3>
+                <h3>{`Chương ${indexModule}: ${title}`}</h3>
                 {checkAddAndRemove ? (
                     <span class=" material-symbols-outlined">add</span>
                 ) : (
@@ -23,73 +35,37 @@ export const ModulesLession = ({ title }) => {
                     hiddenContentModule ? "hidden" : ""
                 } ul-container-main_detail`}
             >
-                <a href="">
-                    <li className="li-lesson_detail">
-                        <span class="arrow-li-lesson material-symbols-outlined">
-                            play_arrow
-                        </span>
-                        <span className="li-lesson_detail-title">
-                            Bài 01: Regular Expression là gì? Ý nghĩa của
-                            Regular Expression
-                        </span>
-                        <span class="vision-li-lession  material-symbols-outlined">
-                            visibility
-                        </span>
-                    </li>
-                </a>
-                <a href="">
-                    <li className="li-lesson_detail">
-                        <span class="arrow-li-lesson material-symbols-outlined">
-                            play_arrow
-                        </span>
-                        <span className="li-lesson_detail-title">
-                            Bài 02: Khớp độ dài trong Regular Expression
-                        </span>
-                        <span class="vision-li-lession  material-symbols-outlined">
-                            visibility
-                        </span>
-                    </li>
-                </a>
-                <a href="">
-                    <li className="li-lesson_detail">
-                        <span class="arrow-li-lesson material-symbols-outlined">
-                            play_arrow
-                        </span>
-                        <span className="li-lesson_detail-title">
-                            Bài 03: Website kiểm tra Regular Expression
-                        </span>
-                        <span class="vision-li-lession material-symbols-outlined">
-                            visibility
-                        </span>
-                    </li>
-                </a>
-                <a href="">
-                    <li className="li-lesson_detail">
-                        <span class="arrow-li-lesson material-symbols-outlined">
-                            play_arrow
-                        </span>
-                        <span className="li-lesson_detail-title">
-                            Bài 04: Các ký hiệu cơ bản trong Regular Expression
-                        </span>
-                        <span class="vision-li-lession  material-symbols-outlined">
-                            visibility
-                        </span>
-                    </li>
-                </a>
-                <a href="">
-                    <li className="li-lesson_detail">
-                        <span class="arrow-li-lesson  material-symbols-outlined">
-                            play_arrow
-                        </span>
-                        <span className="li-lesson_detail-title">
-                            Bài 05: Khớp đầu và cuối chuỗi trong Regular
-                            Expression
-                        </span>
-                        <span class="vision-li-lession  material-symbols-outlined">
-                            visibility
-                        </span>
-                    </li>
-                </a>
+                {arrLesson.map((el, index) => {
+                    return (
+                        <Link
+                            onClick={() => {
+                                console.log("check:  ", checkBuyCourse);
+                                if (!checkBuyCourse) {
+                                    notifyWarning(
+                                        "Bạn hãy mua khóa học để xem video !"
+                                    );
+                                }
+                            }}
+                            to={
+                                checkBuyCourse
+                                    ? `/detail-course/${id_course}/view-video/${arrIdLesson[index]}?numberLesson=${numberIndex}`
+                                    : "#"
+                            }
+                        >
+                            <li className="li-lesson_detail">
+                                <span class="arrow-li-lesson material-symbols-outlined">
+                                    play_arrow
+                                </span>
+                                <span className="li-lesson_detail-title">
+                                    {`Bài ${numberIndex++}: ${el}`}
+                                </span>
+                                <span class="vision-li-lession  material-symbols-outlined">
+                                    visibility
+                                </span>
+                            </li>
+                        </Link>
+                    );
+                })}
             </ul>
         </div>
     );

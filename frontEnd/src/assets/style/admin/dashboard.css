@@ -41,6 +41,7 @@
 }
 .ul-navigation_dash-board li {
     padding: 10px 0px;
+    display: block;
 }
 .ul-navigation_dash-board p {
     font-size: 14px;
@@ -213,4 +214,9 @@ p {
 }
 .info-charOverview h5 {
     font-size: 26px;
+}
+.tab-navigation-menu {
+    position: fixed;
+    z-index: 9999999;
+    cursor: pointer;
 }

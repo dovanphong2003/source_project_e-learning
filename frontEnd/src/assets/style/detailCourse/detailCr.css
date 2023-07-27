@@ -12,6 +12,7 @@
 .content_container-main {
     margin-right: 100px;
     width: 70%;
+    max-width: 70%;
 }
 .icon_done {
     color: rgba(35, 216, 19, 0.781);
@@ -38,6 +39,22 @@
     height: 100%;
     overflow: hidden;
     box-shadow: rgba(37, 37, 37, 0.15) 2.4px 2.4px 3.2px;
+}
+.detail_description p {
+    font-size: 18px;
+    text-align: left;
+}
+.detail_description img {
+    max-width: 180px;
+    max-height: 120px;
+    object-fit: cover;
+}
+.detail_description a {
+    text-decoration: underline;
+    color: #0d1675b3;
+}
+.detail_description ul li {
+    padding: 4px 0px;
 }
 .image-detail {
     width: 100%;
@@ -144,9 +161,13 @@
 .li-lesson_detail {
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding: 16px 0px;
+    margin-left: 16px;
     border-bottom: 1px solid #e5e8ef;
     color: #4a5682e7;
+}
+.li-lesson_detail:hover {
+    color: #da0b4e;
 }
 .arrow-li-lesson {
     margin-right: 10px;
@@ -160,4 +181,14 @@
     padding: 4px;
     background-color: rgba(76, 175, 80, 0.12);
     border-radius: 50%;
+}
+.delete-cart {
+    background-color: #4460ff !important;
+    border: 1px solid #4460ff !important;
+}
+.course-no-lessson button {
+    cursor: not-allowed !important;
+}
+.course-no-lessson:hover {
+    opacity: 0.6;
 }

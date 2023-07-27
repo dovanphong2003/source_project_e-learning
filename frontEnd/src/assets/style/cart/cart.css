@@ -98,8 +98,9 @@
     text-align: start;
     color: #777777;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     padding: 0;
+    letter-spacing: 0.07cm;
 }
 .pay-cart_course h2 {
     font-size: 32px;
@@ -107,7 +108,7 @@
     padding-bottom: 4px;
 }
 .pay-cart_course button {
-    font-size: 16px;
+    font-size: 18px;
     padding: 14px 24px;
     background-color: var(--color-default-bnt_user);
     border: 1px solid var(--color-default-bnt_user);
@@ -118,4 +119,80 @@
 }
 .pay-cart_course button:hover {
     background-color: var(--colot-default-hover-bnt-user);
+}
+
+/* check out*/
+.container_all-checkout {
+    padding-top: 40px;
+}
+.container_check-out-detail {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+}
+.info-header-container-check_out {
+    display: flex;
+    justify-content: space-between;
+}
+.bnt-close {
+    cursor: pointer;
+    padding: 6px 18px;
+    text-align: center;
+    border: 1px solid #000;
+    background-color: #fff;
+    border-radius: 1px;
+}
+.bnt-close:hover {
+    background-color: #f0f0f0af;
+    color: rgb(0, 0, 0);
+}
+.info_main-check_out {
+    padding-top: 8px;
+    /* font-weight: bold; */
+    color: #000000c0;
+    border-top: 1px solid #c2c2c2a0;
+    font-weight: 600;
+    font-size: 18px;
+}
+li {
+    padding: 6px 0px;
+    display: flex;
+    align-items: center;
+}
+.arrow-check-out {
+    font-size: 18px;
+    padding-right: 8px;
+}
+b {
+    font-size: 18px;
+    color: #000000c0;
+}
+
+.confirm-checkOut {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.confirm-checkOut span {
+    color: rgb(0, 255, 34);
+    font-size: 30px;
+}
+.confirm-checkOut button {
+    background-color: #a535f0be;
+    max-width: 400px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 16px;
+    border: 1px solid #9900ffa8;
+    outline: none;
+    border-radius: 2px;
+    margin-top: 10px;
+}
+.confirm-checkOut button:hover {
+    background-color: #a535f0;
+}
+.confirm-checkOut button:active {
+    background-color: #9900ff;
 }

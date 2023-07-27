@@ -2,6 +2,11 @@
     width: 33.33333333%;
     padding: 10px;
 }
+.course_have-buy {
+    /* box-shadow: rgba(128, 82, 253, 0.45) 0px 5px 20px 4px; */
+    box-shadow: rgba(254, 35, 104, 0.265) 0px 15px 25px,
+        rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
 .br-card {
     border: 1px solid #e8ebf1;
     background: #ffffff;
@@ -11,6 +16,10 @@
 .br-card:hover {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.course_have-buy:hover {
+    box-shadow: rgba(254, 35, 105, 0.45) 0px 15px 25px,
+        rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 .img_course {
     width: 100%;
@@ -31,8 +40,42 @@
 .img_card {
     position: relative;
     overflow: hidden;
-    height: 219px;
+    height: 250px;
     z-index: 1;
+}
+.link_course_img-card {
+    position: relative;
+}
+.bnt-go-course {
+    position: absolute;
+    font-size: 40px;
+    background: #2419197a;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    display: none;
+}
+.br-card:hover .bnt-go-course {
+    display: flex;
+}
+.pay_go-to-course {
+    user-select: none;
+    font-size: 50px;
+    color: #000000d0;
+    padding: 6px;
+    background: #ffffffd6;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.pay_go-to-course:hover {
+    transform: scale(1.2);
+    background: #ffffff;
+    color: #000000d0;
 }
 .debuted {
     opacity: 0.9;
@@ -41,6 +84,7 @@
     background: #f26651db;
     box-shadow: 0px 0px 0px 4px #06833dab;
     color: #fff;
+    text-align: center;
 }
 .undebuted {
     opacity: 0.9;

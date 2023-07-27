@@ -1,0 +1,119 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+    .header-container_video {
+        flex-direction: column;
+    }
+    .header-video-container_video {
+        width: 100%;
+        margin-right: 0;
+    }
+    .list-lession_container-video {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 40px;
+    }
+    .bnt-next_hidden {
+        width: 120px;
+    }
+    .btn-lession {
+        width: 120px;
+        padding: 7px 6px;
+    }
+    .connect-lecturers-all {
+        display: none;
+    }
+    .connect-lecturers-mobile {
+        margin-top: 50px;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
+    .header-container_video {
+        padding: 40px 20px;
+    }
+    .comment-lession {
+        padding: 12px 20px;
+    }
+    .content-comment-user {
+        padding: 10px 10px 10px 10px;
+    }
+    .container_list-comment-ul-li {
+        margin: 0px -20px;
+    }
+    .div-delete-add-comment {
+        width: auto;
+    }
+    .reply-comment-user {
+        width: auto;
+        padding: 0px 4px;
+        height: 30px;
+        padding: 0 10px;
+        margin-top: 12px;
+    }
+
+    .container_list-comment {
+        width: 100%;
+    }
+    .div-delete-add-comment-mobile {
+    }
+    .div-delete-add-comment-all {
+        display: none;
+    }
+    .img-user_comment {
+        height: 44px;
+    }
+    .container_list-comment-li {
+        margin-right: 20px;
+    }
+    .submit-comment button {
+        padding: 10px 25px;
+    }
+    .submit-comment {
+        text-align: center;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+
+    .connect-lecturers-mobile {
+        display: none;
+    }
+    .div-delete-add-comment-all {
+        display: none;
+    }
+    .container_list-comment-li {
+        margin-right: 20px;
+    }
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+
+    .connect-lecturers-mobile {
+        display: none;
+    }
+    .div-delete-add-comment-mobile {
+        display: none;
+    }
+    .container_list-comment-li {
+        margin-right: 20px;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+
+    .connect-lecturers-mobile {
+        display: none;
+    }
+    .div-delete-add-comment-mobile {
+        display: none;
+    }
+    .container_list-comment-li {
+        margin-right: 20px;
+    }
+}

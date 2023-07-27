@@ -13,7 +13,7 @@ export const ResultForm = () => {
                 <ul id="node-list_result_course">
                     <li className="result-ecr-input_plus div_course-result_li">
                         <input
-                            placeholder="kết quả sau khi hoàn thành khóa học..."
+                            placeholder="kết quả..."
                             className="plus_result_end"
                             id="input_default_one_result-course"
                             type="text"

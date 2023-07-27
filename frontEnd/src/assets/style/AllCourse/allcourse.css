@@ -19,6 +19,8 @@
     width: 40px;
     height: 30px;
     margin: 0px 15px;
+    display: flex;
+    justify-content: center;
 }
 .pagination_all-course ul li:hover {
     color: #ee4d2d;
@@ -39,4 +41,5 @@
     background-color: #ee4d2d;
     color: #fff !important;
     border-radius: 2px;
+    border: 1px solid #ff3912;
 }

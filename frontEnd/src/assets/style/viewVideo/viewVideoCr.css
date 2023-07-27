@@ -4,7 +4,7 @@
 .container-main-view-video {
     max-width: 1200px;
     margin: 0 auto;
-    padding-top: 60px;
+    padding-top: 30px;
     padding-bottom: 24px;
 }
 .header-video-container_video {
@@ -17,12 +17,16 @@
 }
 .title-container_video {
     padding-bottom: 10px;
+    font-size: 26px;
 }
 .header-container_video {
     display: flex;
     justify-content: space-between;
     padding: 40px;
     background-color: #ffffff;
+}
+.plyr__video-wrapper {
+    aspect-ratio: 16/9 !important;
 }
 .hr_video {
     margin-top: 2rem;
@@ -42,7 +46,7 @@ video {
 }
 .border-video_lession {
     display: flex;
-    max-width: 800px;
+    max-width: 830px;
     max-height: 450px;
     background-color: #000000;
     position: relative;
@@ -63,7 +67,7 @@ video {
 }
 .list-root_video {
     padding: 10px 6px;
-    max-height: 500px;
+    max-height: 580px;
     overflow: hidden;
     overflow-y: scroll;
     background-color: #fafafa;
@@ -85,6 +89,12 @@ video {
 }
 .list-content-video a {
     color: #4a5682;
+}
+.li_name-lesson_course {
+    padding: 4px 0px;
+}
+.li_name-lesson_course input {
+    margin-right: 4px;
 }
 .btn-lession {
     padding: 7px 18px;
@@ -146,6 +156,7 @@ video {
     display: flex;
     /* height: 300px; */
     width: 100%;
+    border: 1px solid #000;
 }
 .submit-comment button {
     font-size: 18px;
@@ -190,13 +201,140 @@ video {
     background: #ffffff;
     border-radius: 0px !important;
 }
+.ql-editor p {
+    color: #000000 !important;
+    display: block;
+}
 .ql-container {
     padding: 0px !important;
+    color: #0c34ff !important;
 }
 .min-height_500-px {
     min-height: 400px !important;
+    color: #000 !important;
 }
 .setup_video {
     width: 200px;
     height: 100px;
+}
+
+/* comment css*/
+
+.container_list-comment {
+}
+
+.container_list-comment-li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2px;
+    padding-bottom: 14px;
+    width: 100%;
+}
+.img-user_comment {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 12px;
+}
+.content-comment-user {
+    display: flex;
+    flex-direction: column;
+    /* max-width: 70%; */
+    background-color: #f5f4fc;
+    padding: 10px;
+    width: 100%;
+}
+.info-basic-comment {
+    display: flex;
+    justify-content: space-between;
+    color: #404040;
+    margin-bottom: 10px;
+}
+.container_list-comment-p {
+    text-align: start;
+    color: #000;
+    font-size: 16px;
+    width: 100%;
+}
+.container_list-comment-p p {
+    text-align: start;
+    color: #000000;
+    font-size: 16px;
+    width: 100%;
+}
+.container_list-comment-p img {
+    max-width: 200px;
+    max-height: 140px;
+    object-fit: cover;
+}
+.reply-comment-user {
+    color: #0c34ff;
+    width: 100px;
+    background-color: #fff;
+    border: 1px solid #000000c1;
+    /* outline: none; */
+    height: 30px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+.reply-comment-user:hover {
+    text-decoration: underline;
+    border: 1px solid #000000;
+    background-color: #efefef;
+}
+.delete-comment-user {
+    color: #ff1818;
+    background-color: #fff;
+    border: 1px solid #000000c1;
+    padding: 0px 10px;
+    /* outline: none; */
+    height: 30px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+.delete-comment-user:hover {
+    text-decoration: underline;
+    border: 1px solid #000000;
+    background-color: #efefef;
+}
+.date_time-info_basic-comment {
+    padding-right: 12px;
+}
+.container_list-comment-ul-li {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+.container-reply-comment {
+    width: 100%;
+    display: flex;
+    padding-bottom: 40px;
+}
+.reply_comment-input {
+    margin-left: 20px;
+    border: 1px solid #000000a5;
+    width: 100%;
+    position: relative;
+}
+.send_data-reply-comment {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    padding: 6px;
+    user-select: none;
+}
+.send_data-reply-comment:hover {
+    border: 1px solid #2d3954;
+
+    border-radius: 4px;
+}
+.send_data-reply-comment:active {
+    border: 1px solid #2b6bff;
+    border-radius: 4px;
+    color: #da0b4e;
+}
+.container_list-comment-ul {
+    margin-left: 20px;
 }

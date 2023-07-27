@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationMain } from "../../navigationAdmin/NavigationMain";
 
-export const Navigationdb = () => {
+export const Navigationdb = ({ dataUser, forEl }) => {
     const arrInfo = [
         { icon: "dashboard", title: "Trang Chủ" },
         { icon: "queue_play_next", title: "Khóa Học" },
@@ -43,34 +43,60 @@ export const Navigationdb = () => {
     const iPlus = () => {
         i++;
     };
+    const [setHiddenMenu, checkSetHiddenMenu] = useState(true);
     return (
-        <div className="navigation_dash-board">
-            <div className="header-navigation_dash-board">
-                <div className="image-name_hd-nav-db">
-                    <img
-                        src="/image/image_admin.jpg"
-                        alt=""
-                        className="img-frame-admin"
-                    />
-                    <span>Đỗ Văn Phong</span>
+        <>
+            <div
+                onClick={(e) => {
+                    e.preventDefault();
+                    if (forEl === "mobile") {
+                        checkSetHiddenMenu(!setHiddenMenu);
+                    }
+                }}
+                className="tab-navigation-menu"
+            >
+                <span class="material-symbols-outlined">menu</span>
+            </div>
+            <div
+                className={`${
+                    forEl === "mobile"
+                        ? "classForMenuMobile"
+                        : "classForMenuAll"
+                }  ${
+                    forEl === "mobile" ? (setHiddenMenu ? "hidden" : "") : ""
+                } navigation_dash-board`}
+            >
+                <div className="header-navigation_dash-board">
+                    <div className="image-name_hd-nav-db">
+                        <img
+                            src="/image/image_admin.jpg"
+                            alt=""
+                            className="img-frame-admin"
+                        />
+                        <span>
+                            {dataUser.name ? dataUser.name : "loading..."}
+                        </span>
+                    </div>
+                </div>
+                <div className="main-navigation_dash-board">
+                    <ul className="ul-navigation_dash-board">
+                        <p>Điều Hướng</p>
+                        {/**content navigation */}
+                        {arrInfo.map((el) => {
+                            iPlus();
+                            return (
+                                <NavigationMain
+                                    categoryNav={categoryNav[i]}
+                                    icon={el.icon}
+                                    title={el.title}
+                                    setHidden={setHiddenMenu}
+                                    checkSetHidden={checkSetHiddenMenu}
+                                />
+                            );
+                        })}
+                    </ul>
                 </div>
             </div>
-            <div className="main-navigation_dash-board">
-                <ul className="ul-navigation_dash-board">
-                    <p>Điều Hướng</p>
-                    {/**content navigation */}
-                    {arrInfo.map((el) => {
-                        iPlus();
-                        return (
-                            <NavigationMain
-                                categoryNav={categoryNav[i]}
-                                icon={el.icon}
-                                title={el.title}
-                            />
-                        );
-                    })}
-                </ul>
-            </div>
-        </div>
+        </>
     );
 };

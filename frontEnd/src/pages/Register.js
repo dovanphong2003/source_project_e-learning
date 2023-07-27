@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "../assets/style/Login/register.css";
+import "../assets/style/responsiveCss/resRegister.css";
+
 import { Link } from "react-router-dom";
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";

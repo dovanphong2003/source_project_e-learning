@@ -25,6 +25,7 @@
     border-bottom: 1px solid #ccc;
     color: #727cf5;
     padding: 6px 0px;
+    padding-left: 6px;
 }
 .container_edit-course li:hover {
     background-color: #ebebeb;

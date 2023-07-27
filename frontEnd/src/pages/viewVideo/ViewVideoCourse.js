@@ -1,20 +1,98 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "../../assets/style/viewVideo/viewVideoCr.css";
-import ReactMarkdown from "react-markdown";
+import "../../assets/style/responsiveCss/resViewVideoCourse.css";
 import ReactQuill from "react-quill";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
-import Parser from "html-react-parser";
-import video from "../../assets/video/music_very_hay.mp4";
-import lancuoi from "../../assets/video/music_lan_cuoi.mp4";
 import imageDemo from "../../assets/image/image_demo.png";
+import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Plyr from "plyr";
 import "https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js";
-// import { ControlVideo } from "./component/ControlVideo";
+import { ToastContainer, toast } from "react-toastify"; // toast
+import { RoleContext } from "../../context/RoleContext";
+import { useContext } from "react";
+import { CommentCpn } from "./CommentCpn";
+import axios from "axios";
 export const ViewVideoCourse = () => {
-    const [checkClasslist, setCheckClasslist] = useState("");
-    const [sectionTypeVideo, setSectionTypeVideo] = useState("youtube");
+    const clearComment = useRef(null);
+    const navigation = useNavigate();
+    const notifyWarning = (content) => toast.warning(content);
+    const notifySuccess = (content) => toast.success(content);
+    const param = useParams();
+    const [dataLesson, setDataLesson] = useState({});
+    const [dataModulAndLesson, setDataModuleAndLesson] = useState([]);
+    const [dtComment, getDtComment] = useState([]);
+    const handleGetDataLeson = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:8081/course/getLessonCourseUseIdAPI?idLesson=${param.idvideo}`
+            );
+            if (response.data.data.length) {
+                setDataLesson(response.data.data[0]);
+            }
+        } catch (error) {
+            console.log("err handle get data lesson: ", error);
+            navigation("/error");
+        }
+    };
+    const getModuleLesson = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:8081/product/getModuleLessonDetailAPI?idCourse=${param.id}`
+            );
+            setDataModuleAndLesson(response.data.data);
+        } catch (error) {
+            console.log("error where detailCourse: ", error);
+            navigation("/error");
+        }
+    };
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "auto" });
+        handleGetDataLeson();
+        getModuleLesson();
+    }, [param.idvideo]);
+    const getDataComment = async () => {
+        const response = await axios.get(
+            `http://localhost:8081/comment/getDataCommentAPI?id_lesson=${param.idvideo}`
+        );
+        getDtComment(
+            response.data.data.map((el) => {
+                return {
+                    ...el,
+                    child_el: [],
+                };
+            })
+        );
+    };
+    const dataModuleLessonConfig = dataModulAndLesson.length
+        ? dataModulAndLesson.reduce((arr, el) => {
+              const checkFind = arr.find(
+                  (element) => element.module_name === el.module_name
+              );
+              if (checkFind) {
+                  checkFind.lesson_id.push(el.lesson_id);
+                  checkFind.lesson_name.push(el.lesson_name);
+              } else {
+                  arr.push({
+                      lesson_id: [el.lesson_id],
+                      lesson_name: [el.lesson_name],
+                      module_name: el.module_name,
+                  });
+              }
+              return arr;
+          }, [])
+        : null;
+    const [sectionTypeVideo, setSectionTypeVideo] = useState("");
+    useEffect(() => {
+        if (dataLesson.type_video) {
+            setSectionTypeVideo(dataLesson.type_video);
+        }
+    }, [dataLesson]);
     const [value, setValue] = useState("");
+    const [value2, setValue2] = useState("");
+    const refDivParent = useRef(null);
     setTimeout(() => {
         const controls = [
             "play-large", // The large play button in the center
@@ -37,14 +115,173 @@ export const ViewVideoCourse = () => {
 
         const player = new Plyr(".player", { controls });
     }, 1);
+    const urlParams = new URLSearchParams(window.location.search);
+    const numberLesson = urlParams.get("numberLesson");
+    let numberIndex = 1;
+    const indexNumberLesson = dataModulAndLesson.length
+        ? dataModulAndLesson.reduce((arr, obj) => {
+              arr.push(obj.lesson_id);
+              return arr;
+          }, [])
+        : "";
+
+    const handleLessonBefore = (event) => {
+        event.preventDefault();
+        const indexCurrent = Number(param.idvideo);
+        if (indexCurrent || indexCurrent === 0) {
+            let lastIndex;
+            for (let i = 0; i < indexNumberLesson.length; i++) {
+                if (indexNumberLesson[i] === indexCurrent) {
+                    if (i === 0) {
+                        notifyWarning("bạn đang ở bài học đầu tiên !");
+                        return;
+                    } else {
+                        lastIndex = indexNumberLesson[i - 1];
+                        navigation(
+                            `/detail-course/${
+                                param.id
+                            }/view-video/${lastIndex}?numberLesson=${
+                                Number(numberLesson) - 1
+                            }`
+                        );
+                        window.location.reload();
+                        return;
+                    }
+                }
+            }
+        }
+    };
+    const handleLessonNext = (event) => {
+        event.preventDefault();
+        const indexCurrent = Number(param.idvideo);
+        if (indexCurrent || indexCurrent === 0) {
+            let indexNext;
+            for (let i = 0; i < indexNumberLesson.length; i++) {
+                if (indexNumberLesson[i] === indexCurrent) {
+                    if (i === indexNumberLesson.length - 1) {
+                        notifyWarning("bạn đang ở bài học cuối !");
+                        return;
+                    } else {
+                        indexNext = indexNumberLesson[i + 1];
+                        navigation(
+                            `/detail-course/${
+                                param.id
+                            }/view-video/${indexNext}?numberLesson=${
+                                Number(numberLesson) + 1
+                            }`
+                        );
+                        window.location.reload();
+                        return;
+                    }
+                }
+            }
+        }
+    };
+
+    /////////////////////////////// comment
+
+    const { isIdUser, getIdUser } = useContext(RoleContext);
+    const handlePostComment = async (event) => {
+        event.preventDefault();
+        if (!value || value === "<p><br></p>") {
+            notifyWarning("Vui lòng điền nội dung comment !");
+            return;
+        }
+        if (value.length > 3000) {
+            notifyWarning("Độ dài vượt quá quy định !");
+            return;
+        }
+
+        const data = {
+            user_id: isIdUser,
+            comment_content: value,
+            lesson_id: param.idvideo,
+            comment_parent: null,
+        };
+        try {
+            const response = await axios.post(
+                "http://localhost:8081/comment/postCommentAPI",
+                data
+            );
+            notifySuccess("comment thành công !");
+            setValue("");
+            const editor = clearComment.current.getEditor();
+            getDataComment();
+            editor.setContents([]);
+        } catch (error) {
+            notifyWarning("Đã xảy ra lỗi, comment không thành công !");
+            console.log("Err: ", error);
+        }
+    };
+
+    // handle get data comment
+    useEffect(() => {
+        getDataComment();
+    }, [param.idvideo]);
+    const funcFindParent = (arrParent, id_parent, obj) => {
+        arrParent.forEach((el) => {
+            if (el && el.comment_id === id_parent) {
+                el.child_el.push(obj);
+                return arrParent;
+            } else {
+                if (el.child_el && Array.isArray(el.child_el)) {
+                    return funcFindParent(el.child_el, id_parent, obj);
+                }
+            }
+        });
+        return arrParent;
+    };
+    const [dtNew, setDtNew] = useState([]);
+    useEffect(() => {
+        if (dtComment.length > 0) {
+            setDtNew(
+                dtComment.reduce((arr, obj) => {
+                    if (obj.parent_id === null) {
+                        arr.push(obj);
+                        return arr;
+                    } else {
+                        const arrNew = funcFindParent(arr, obj.parent_id, obj);
+                        return arrNew;
+                    }
+                }, [])
+            );
+        } else {
+            setDtNew([]);
+        }
+    }, [dtComment]);
     return (
         <main className="view-video_course">
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <div className="container-main-view-video">
                 <div className="header-container_video">
                     <div className="header-video-container_video">
                         <h1 className="title-container_video">
-                            Bài 04: Kiểm tra thông tin PHP - phpinfo()
+                            {numberLesson && dataLesson.lesson_name ? (
+                                `Bài ${numberLesson}: ${dataLesson.lesson_name}`
+                            ) : (
+                                <Skeleton
+                                    width={"100%"}
+                                    height={"60px"}
+                                    duration={2}
+                                    count={1}
+                                    className="skeleton-css"
+                                    baseColor="#dadada"
+                                    highlightColor="#ffff"
+                                />
+                            )}
                         </h1>
+
                         <hr className="hr_video" />
                         <div className="border-video_lession">
                             <div
@@ -58,22 +295,22 @@ export const ViewVideoCourse = () => {
                                     <div className="player ">
                                         <iframe
                                             width="560"
-                                            height="315"
-                                            src="https://www.youtube.com/watch?v=2Tuo5u39qM8&t=706s"
+                                            height="215"
+                                            src={`${dataLesson.video_url}`}
                                             title="YouTube video player"
                                             frameborder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                             allowfullscreen
                                         ></iframe>
                                     </div>
-                                ) : sectionTypeVideo === "url" ? (
+                                ) : sectionTypeVideo === "Videofile" ? (
                                     <video
                                         controls
                                         data-poster={imageDemo}
                                         class="vid1 player"
                                     >
                                         <source
-                                            src="https://firebasestorage.googleapis.com/v0/b/upload-video-to-firebase-f9d48.appspot.com/o/bandicam%202021-10-30%2019-48-34-224.mp4?alt=media&token=a5fb745a-432d-4691-a07e-ecac34486105"
+                                            src={`${dataLesson.video_url}`}
                                             type="video/mp4"
                                         />
                                     </video>
@@ -84,164 +321,170 @@ export const ViewVideoCourse = () => {
                         </div>
                         <script></script>
                         <hr className="hr_video" />
-                        <div className="all-bnt-lession">
-                            <button className="btn-lession">
-                                <span class="material-symbols-outlined">
-                                    keyboard_double_arrow_left
-                                </span>
-                                <span>Bài trước</span>
-                            </button>
-                            <div className="bnt-next_hidden">
-                                <button className="btn-lession mr-r-5">
+                        {numberLesson && dataLesson.lesson_name ? (
+                            <div className="all-bnt-lession">
+                                <button
+                                    onClick={handleLessonBefore}
+                                    className="btn-lession"
+                                >
                                     <span class="material-symbols-outlined">
-                                        keyboard_double_arrow_right
+                                        keyboard_double_arrow_left
                                     </span>
-                                    <span>Bài tiếp</span>
+
+                                    <span>Bài trước</span>
                                 </button>
-                                <button className="btn-lession mr-l-5">
-                                    <span>Ẩn bài học</span>
+                                <div className="bnt-next_hidden">
+                                    <button
+                                        onClick={handleLessonNext}
+                                        className="btn-lession mr-r-5"
+                                    >
+                                        <span>Bài tiếp</span>
+                                        <span class="material-symbols-outlined">
+                                            keyboard_double_arrow_right
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        ) : (
+                            <Skeleton
+                                width={"100%"}
+                                height={"40px"}
+                                duration={2}
+                                count={1}
+                                className="skeleton-css"
+                                baseColor="#dadada"
+                                highlightColor="#ffff"
+                            />
+                        )}
+
+                        <hr className="hr_video" />
+                        {numberLesson && dataLesson.lesson_name ? (
+                            <div className="connect-lecturers connect-lecturers-all">
+                                <h3>Kết Nối Với Giảng Viên</h3>
+                                <button className="mr-r-5">Chat Zalo</button>
+                                <button className="mr-l-5">
+                                    Chat Facebook
                                 </button>
                             </div>
-                        </div>
-                        <hr className="hr_video" />
-                        <div className="connect-lecturers">
-                            <h3>Kết Nối Với Giảng Viên</h3>
-                            <button className="mr-r-5">Chat Zalo</button>
-                            <button className="mr-l-5">Chat Facebook</button>
-                        </div>
+                        ) : (
+                            <Skeleton
+                                width={"40%"}
+                                height={"40px"}
+                                duration={2}
+                                count={2}
+                                className="skeleton-css"
+                                baseColor="#dadada"
+                                highlightColor="#ffff"
+                            />
+                        )}
                     </div>
                     <div className="list-lession_container-video">
                         <div className="header-ll_container-video">
                             <span class="material-symbols-outlined">
                                 track_changes
                             </span>
-                            <span> Hoàn Thành: 13.23%</span>
+                            <span> Hoàn Thành: 0%</span>
                         </div>
                         <div className="content_container-video">
+                            {/** video */}
                             <ul className="list-root_video">
-                                <li className="name-module_video">
-                                    <ul className="list-content-video">
-                                        <h3 className="title_list-video">
-                                            Module 01: Nhập môn lập trình PHP
-                                        </h3>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 01: Giới thiệu ngôn ngữ PHP
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 02: Lộ trình - Phương pháp
-                                                học PHP & MySQL hiệu quả
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 03: Cài đặt công cụ - môi
-                                                trường cần thiết
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="name-module_video">
-                                    <ul className="list-content-video">
-                                        <h3 className="title_list-video">
-                                            Module 02: Cơ sở dữ liệu và ngôn ngữ
-                                            truy vấn SQL
-                                        </h3>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 01: Giới thiệu ngôn ngữ PHP
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 02: Lộ trình - Phương pháp
-                                                học PHP & MySQL hiệu quả
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 03: Cài đặt công cụ - môi
-                                                trường cần thiết
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>{" "}
-                                <li className="name-module_video">
-                                    <ul className="list-content-video">
-                                        <h3 className="title_list-video">
-                                            Module 03: Nhập môn lập trình PHP
-                                        </h3>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 01: Giới thiệu ngôn ngữ PHP
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 02: Lộ trình - Phương pháp
-                                                học PHP & MySQL hiệu quả
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 03: Cài đặt công cụ - môi
-                                                trường cần thiết
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>{" "}
-                                <li className="name-module_video">
-                                    <ul className="list-content-video">
-                                        <h3 className="title_list-video">
-                                            Module 04: Nhập môn lập trình PHP
-                                        </h3>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 01: Giới thiệu ngôn ngữ PHP
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 02: Lộ trình - Phương pháp
-                                                học PHP & MySQL hiệu quả
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" />
-                                            <a href="">
-                                                {" "}
-                                                Bài 03: Cài đặt công cụ - môi
-                                                trường cần thiết
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {dataModuleLessonConfig
+                                    ? dataModuleLessonConfig.map(
+                                          (el, index) => {
+                                              return (
+                                                  <li className="name-module_video">
+                                                      <ul className="list-content-video">
+                                                          <h3 className="title_list-video">
+                                                              {` Module ${
+                                                                  index + 1
+                                                              }: ${
+                                                                  el.module_name
+                                                              }`}
+                                                          </h3>
+                                                          {el.lesson_name.map(
+                                                              (
+                                                                  el_child,
+                                                                  indexChild
+                                                              ) => {
+                                                                  return (
+                                                                      <li className="li_name-lesson_course">
+                                                                          <input type="checkbox" />
+                                                                          <Link
+                                                                              to="#"
+                                                                              id={`${numberIndex}`}
+                                                                              onClick={(
+                                                                                  e
+                                                                              ) => {
+                                                                                  const numberIndexLesson =
+                                                                                      e
+                                                                                          .target
+                                                                                          .id;
+
+                                                                                  navigation(
+                                                                                      `/detail-course/${param.id}/view-video/${el.lesson_id[indexChild]}?numberLesson=${numberIndexLesson}`
+                                                                                  );
+                                                                                  window.location.reload();
+                                                                              }}
+                                                                          >
+                                                                              {" "}
+                                                                              {`Bài
+                                                                              ${numberIndex++}:
+                                                                              ${el_child}`}
+                                                                          </Link>
+                                                                      </li>
+                                                                  );
+                                                              }
+                                                          )}
+                                                      </ul>
+                                                  </li>
+                                              );
+                                          }
+                                      )
+                                    : [1, 2, 3, 4].map((el) => {
+                                          return (
+                                              <>
+                                                  <Skeleton
+                                                      width={"100%"}
+                                                      height={"40px"}
+                                                      duration={2}
+                                                      count={1}
+                                                      className="skeleton-css"
+                                                      baseColor="#dadada"
+                                                      highlightColor="#ffff"
+                                                  />
+                                                  <Skeleton
+                                                      width={"60%"}
+                                                      height={"20px"}
+                                                      duration={2}
+                                                      count={6}
+                                                      className="skeleton-css"
+                                                      baseColor="#dadada"
+                                                      highlightColor="#ffff"
+                                                  />
+                                              </>
+                                          );
+                                      })}
                             </ul>
                         </div>
+                        {numberLesson && dataLesson.lesson_name ? (
+                            <div className="connect-lecturers connect-lecturers-mobile">
+                                <h3>Kết Nối Với Giảng Viên</h3>
+                                <button className="mr-r-5">Chat Zalo</button>
+                                <button className="mr-l-5">
+                                    Chat Facebook
+                                </button>
+                            </div>
+                        ) : (
+                            <Skeleton
+                                width={"40%"}
+                                height={"40px"}
+                                duration={2}
+                                count={2}
+                                className="skeleton-css"
+                                baseColor="#dadada"
+                                highlightColor="#ffff"
+                            />
+                        )}
                     </div>
                 </div>
             </div>
@@ -251,27 +494,53 @@ export const ViewVideoCourse = () => {
                     <div className="main-comment">
                         <ReactQuill
                             style={{ minHeight: "500px" }}
+                            ref={clearComment}
                             className="ql-container min-height_500-px ql-editor"
                             theme="snow"
                             // readOnly={true}
-                            value={value}
-                            onChange={setValue}
+                            // value={value}
+                            onChange={(content) => {
+                                setValue(content);
+                            }}
                             toolbar="#toolbar"
                             spellCheck={false} // tat kiem tra chinh ta
                         />
                     </div>
                     <div className="submit-comment">
-                        <button
-                            onClick={() => {
-                                setValue("");
-                            }}
-                        >
-                            Gửi
-                        </button>
+                        <button onClick={handlePostComment}>Gửi</button>
                     </div>
                     <hr className="hr_video" />
                     <div className="list-comment">
-                        <h3>0 Bình Luận</h3>
+                        <h3>{dtComment.length} Bình Luận</h3>
+                    </div>
+                    <div className="container_list-comment">
+                        <CommentCpn />
+                        {dtNew.length
+                            ? dtNew.map((el) => {
+                                  const arrayChild = el.child_el;
+                                  if (el.child_el) {
+                                      return (
+                                          <CommentCpn
+                                              data={el}
+                                              getDataComment={getDataComment}
+                                              refDivParent={refDivParent}
+                                              cpnChild={arrayChild}
+                                              isIdUser={isIdUser}
+                                          />
+                                      );
+                                  } else {
+                                      return (
+                                          <CommentCpn
+                                              data={el}
+                                              getDataComment={getDataComment}
+                                              refDivParent={refDivParent}
+                                              cpnChild={arrayChild}
+                                              isIdUser={isIdUser}
+                                          />
+                                      );
+                                  }
+                              })
+                            : ""}
                     </div>
                 </div>
             </div>

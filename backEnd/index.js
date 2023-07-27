@@ -11,6 +11,7 @@ const { routeAPIProduct } = require("./src/routes/routeProduct");
 const { routeAPICategory } = require("./src/routes/routeCategory");
 const { routeAPICourse } = require("./src/routes/routeCourse");
 const { routeAPIEnrolment } = require("./src/routes/routeEnrolment");
+const { routerComment } = require("./src/routes/routeComment");
 const cookieParser = require("cookie-parser");
 // const upload = multer({ dest: "./image" });
 // bytes.format("2mb");
@@ -31,6 +32,7 @@ app.use("/product", routeAPIProduct);
 app.use("/category", routeAPICategory);
 app.use("/course", routeAPICourse);
 app.use("/enrolment", routeAPIEnrolment);
+app.use("/comment", routerComment);
 app.listen(port, async () => {
     console.log(`Example app listening on port ${port}`);
 });

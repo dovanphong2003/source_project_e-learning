@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-export const NavigationMain = ({ icon, title, categoryNav }) => {
+export const NavigationMain = ({
+    icon,
+    title,
+    categoryNav,
+    setHidden,
+    checkSetHidden,
+}) => {
     const [checkHidden, setCheckHidden] = useState(true);
     const [checkDb, setCheckDb] = useState(false);
     useEffect(() => {
@@ -47,7 +53,12 @@ export const NavigationMain = ({ icon, title, categoryNav }) => {
                 {categoryNav.map((el) => {
                     const { name, link } = el;
                     return (
-                        <li>
+                        <li
+                            onClick={(e) => {
+                                e.preventDefault();
+                                checkSetHidden(!setHidden);
+                            }}
+                        >
                             <span class={`material-symbols-outlined`}>
                                 arrow_right
                             </span>{" "}

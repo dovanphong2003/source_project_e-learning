@@ -1,0 +1,90 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+    .banner {
+        display: none;
+    }
+    .banner-mobile {
+        display: block;
+        object-fit: none;
+    }
+    .banner-main-mobile {
+        object-fit: contain !important;
+        height: auto !important;
+    }
+    .bnt-banner {
+        min-height: 40px !important;
+        min-width: auto !important;
+        background-color: #da0b4cdb;
+        border: 2px solid #000000af;
+        border-radius: 30px;
+        box-shadow: #000000b1 4px 4px 0 0;
+        color: #ffffffe1;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 600;
+        font-size: 18px !important;
+        padding: 0 18px;
+        line-height: 40px;
+    }
+    .card {
+        width: 94% !important;
+    }
+    .list-course_best-seller {
+        justify-content: center !important;
+    }
+    .container-main {
+        padding: 0 10px !important;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+    .banner-mobile {
+        display: none;
+    }
+    .banner-main {
+        object-fit: contain !important;
+        height: auto !important;
+    }
+    .card {
+        width: 50% !important;
+        padding: -10px !important;
+        /* padding: 10px 0px !important; */
+    }
+    .container-main {
+        padding: 0 10px !important;
+        margin: 0 10px;
+    }
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+    .banner-mobile {
+        display: none;
+    }
+    .banner-main {
+        /* object-fit: contain !important; */
+        height: auto !important;
+    }
+    .card {
+        width: 48% !important;
+        padding: -10px !important;
+        margin: auto;
+        /* padding: 10px 0px !important; */
+    }
+    .container-main {
+        padding: 0 10px !important;
+        margin: 0 10px;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+    .banner-mobile {
+        display: none;
+    }
+}

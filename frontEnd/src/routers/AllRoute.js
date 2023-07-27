@@ -32,6 +32,7 @@ export const AllRoute = () => {
                 path="/caregories-course/:id"
                 element={<CategoryCourse />}
             ></Route>
+            <Route path="/error" element={<PageNotFound />}></Route>
             <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
     );

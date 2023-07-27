@@ -65,6 +65,34 @@ const handleGetAllCourse = async () => {
     }
 };
 
+const handleGetInfoCourseUseIdAPI = async (course_id) => {
+    try {
+        const response = await pool.query(
+            `SELECT  c.*, u.user_name  
+            FROM  courses c 
+            INNER JOIN users u ON c.instructor_id = u.user_id WHERE c.course_id = $1 `,
+            [course_id]
+        );
+        return response.rows;
+    } catch (error) {
+        console.log("err getInfoCourseUseId: ", error);
+        return null;
+    }
+};
+
+const handleGetLessonCourseUseIdAPI = async (lesson_id) => {
+    try {
+        const response = await pool.query(
+            `SELECT  * FROM lesson WHERE lesson_id = $1 `,
+            [lesson_id]
+        );
+        return response.rows;
+    } catch (error) {
+        console.log("err getInfoCourseUseId: ", error);
+        return null;
+    }
+};
+
 const getDataForCourse = async () => {
     try {
         const response = await pool.query(
@@ -187,11 +215,16 @@ const getCourseBSellerAndNews = async () => {
         dataCourseSeller: null,
     };
     try {
-        const dataCourseNews = await pool.query(`SELECT * FROM courses
-        WHERE created_at BETWEEN current_date - interval '7 days' AND current_date`);
+        const dataCourseNews =
+            await pool.query(`SELECT c.*, u.user_name AS name_author 
+        FROM courses c 
+        INNER JOIN users u ON u.user_id = c.instructor_id
+        WHERE c.created_at BETWEEN current_date - interval '7 days' AND current_date`);
         data.dataCourseNews = dataCourseNews.rows;
         const dataCourseSeller = await pool.query(
-            `SELECT * FROM courses c WHERE c.bestseller = TRUE`
+            `SELECT c.*, u.user_name AS name_author 
+            FROM courses c 
+            INNER JOIN users u ON u.user_id = c.instructor_id WHERE c.bestseller = TRUE`
         );
         data.dataCourseSeller = dataCourseSeller.rows;
         return data;
@@ -201,6 +234,101 @@ const getCourseBSellerAndNews = async () => {
     }
 };
 
+const handleGetDataSeach = async (content) => {
+    try {
+        const result = await pool.query(
+            `SELECT * 
+    FROM courses c  
+    WHERE c.course_name  ~* $1
+    ORDER BY c.course_id DESC`,
+            [content]
+        );
+        console.log("ressult: ", result);
+        if (!result.rows.length) {
+            return "zero course";
+        } else {
+            return result.rows;
+        }
+    } catch (error) {
+        console.log("error get course search: ", error);
+        return null;
+    }
+};
+
+const handleAddCourseToCart = async (idCourse, id_user) => {
+    try {
+        const result = await pool.query(
+            `INSERT INTO cartitems(course_id,user_id) 
+        VALUES($1,$2)`,
+            [idCourse, id_user]
+        );
+        console.log("result: ", result);
+        return "insert success";
+    } catch (error) {
+        console.log("error handle add course to cart: ", error);
+        return null;
+    }
+};
+const handleDeleteCourseToCart = async (idCourse, id_user) => {
+    try {
+        const result = await pool.query(
+            `DELETE FROM cartitems
+            WHERE course_id = $1 AND user_id = $2`,
+            [idCourse, id_user]
+        );
+        console.log("result: ", result);
+        return "delete success";
+    } catch (error) {
+        console.log("error handle delete course to cart: ", error);
+        return null;
+    }
+};
+
+const handleDeleteAllCourseToCart = async (id_user) => {
+    try {
+        const result = await pool.query(
+            `DELETE FROM cartitems
+            WHERE user_id = $1`,
+            [id_user]
+        );
+        console.log("result: ", result);
+        return "delete success";
+    } catch (error) {
+        console.log("error handle delete course to cart: ", error);
+        return null;
+    }
+};
+const handleGetCartItems = async (user_id) => {
+    try {
+        const result = await pool.query(
+            `SELECT cc.cart_item_id ,c.*,u.user_name FROM cartitems cc 
+            INNER JOIN courses c ON c.course_id  = cc.course_id 
+            INNER JOIN users u ON c.instructor_id  = u.user_id 
+            WHERE cc.user_id = $1 `,
+            [user_id]
+        );
+        console.log("result: ", result);
+        return result.rows;
+    } catch (error) {
+        console.log("error handler get cart items: ", error);
+        return null;
+    }
+};
+const handleGetAllCourseOfUser = async (user_id) => {
+    try {
+        const data = await pool.query(
+            `SELECT c.*,u.user_name AS name_author  FROM enrollments e 
+        INNER JOIN courses c ON c.course_id = e.course_id
+        INNER JOIN users u ON u.user_id  =  c.instructor_id
+        WHERE e.user_id = $1`,
+            [user_id]
+        );
+        return data.rows;
+    } catch (error) {
+        console.log("error handle get all course of user; ", error);
+        return null;
+    }
+};
 module.exports = {
     handleCheckCreateCourse,
     handleCreateCourse,
@@ -213,4 +341,12 @@ module.exports = {
     handleCreateLessonOne,
     hanleSetBestSeller,
     getCourseBSellerAndNews,
+    handleGetInfoCourseUseIdAPI,
+    handleGetLessonCourseUseIdAPI,
+    handleGetDataSeach,
+    handleAddCourseToCart,
+    handleGetCartItems,
+    handleDeleteCourseToCart,
+    handleDeleteAllCourseToCart,
+    handleGetAllCourseOfUser,
 };

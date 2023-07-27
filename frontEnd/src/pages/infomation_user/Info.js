@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { InfoStudent } from "./InfoStudent";
 import "../../assets/style/info/infoUser.css";
+import "../../assets/style/responsiveCss/resInfoUser.css";
 import { InfoTeacher } from "./InfoTeacher";
 import { RoleContext } from "../../context/RoleContext";
 import { useContext } from "react";
@@ -19,22 +20,14 @@ export const Info = () => {
     const getInfoUser = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8081/getInfoUserAPI?idUser=${param.id}&accessToken=${isAccess}`
+                `http://localhost:8081/getInfoUserAPI?idUser=${param.id}`
             );
             getDataUser(response.data.dataUser);
             return response.data.dataUser;
         } catch (error) {
-            if (error.response.data) {
-                if (error.response.data.message === "jwt expired") {
-                    const newtoken = await RefeshToken();
-                    getIsAccess(newtoken);
-                    localStorage.setItem("accessToken", newtoken);
-                    navigate(`/info-user/${param.id}`);
-                }
-            } else if (error.response.data.ec) {
-                navigate("/");
-                return "";
-            }
+            console.log("error handle info user: ", error);
+            navigate("/");
+            return "";
         }
     };
     useEffect(() => {

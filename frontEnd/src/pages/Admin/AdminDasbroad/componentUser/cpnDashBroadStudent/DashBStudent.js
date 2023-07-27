@@ -12,6 +12,7 @@ export const DashBStudent = () => {
         "học pascal từ basic đến medium",
     ];
     const [dataStudent, setDataStudent] = useState([]);
+    const [dataCourseHaveBuy, setDataCourseHaveBuy] = useState([]);
     const getInfoStudent = async () => {
         const response = await axios.get(
             "http://localhost:8081/getInfoStudentAPI"
@@ -22,13 +23,56 @@ export const DashBStudent = () => {
                 name: el.user_name,
                 email: el.user_email,
                 create: el.created_at,
+                courseHaveBuy: [],
             }))
         );
     };
+    const getCourseUserHaveBuy = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:8081/enrolment/getDataEnrolmentAPI"
+            );
+            setDataCourseHaveBuy(response.data.data);
+        } catch (error) {
+            console.log("error get course user have buy: ", error);
+        }
+    };
     console.log(dataStudent);
+    console.log(dataCourseHaveBuy);
 
+    // handle use id_user -> get course of user
+    const fncHandleData = (id_user, dataCourseHaveBuy, arrData) => {
+        const checkData = dataCourseHaveBuy.find(
+            (el) => el.user_id === id_user
+        );
+        if (checkData) {
+            arrData.push(checkData.name_course);
+            const dataNew = dataCourseHaveBuy.filter(
+                (element) => element.name_course !== checkData.name_course
+            );
+            return fncHandleData(id_user, dataNew, arrData);
+        } else {
+            return arrData;
+        }
+    };
+
+    const dataAllForUser =
+        dataStudent.length && dataCourseHaveBuy.length
+            ? dataStudent.map((el) => {
+                  const getDataCourseOfUser = fncHandleData(
+                      el.user_id,
+                      dataCourseHaveBuy,
+                      []
+                  );
+                  console.log("el: ", el);
+                  console.log("dataaaaaaaaa; ", getDataCourseOfUser);
+                  return { ...el, courseHaveBuy: getDataCourseOfUser };
+              })
+            : "";
+    console.log("data allllllllll: ", dataAllForUser);
     useEffect(() => {
         getInfoStudent();
+        getCourseUserHaveBuy();
     }, []);
     const columns = [
         {
@@ -56,18 +100,23 @@ export const DashBStudent = () => {
             name: "Khóa học đã mua",
             cell: (row) => (
                 <ul className="ul_course-was_buy">
-                    {/* {" "}
-                    {row.courseHB.map((el) => {
-                        return (
-                            <li>
-                                <span class="span_icon_arrow-right material-symbols-outlined">
-                                    arrow_right_alt
-                                </span>
-                                <span>{el}</span>
-                            </li>
-                        );
-                    })} */}
-                    Chưa xử lí chức năng này
+                    {" "}
+                    {row.courseHaveBuy.length ? (
+                        row.courseHaveBuy.map((el) => {
+                            return (
+                                <li style={{ color: "#727cf5" }}>
+                                    <span class="span_icon_arrow-right material-symbols-outlined">
+                                        arrow_right_alt
+                                    </span>
+                                    <span>{el}</span>
+                                </li>
+                            );
+                        })
+                    ) : (
+                        <p style={{ fontSize: "14px" }}>
+                            Chưa có khóa học nào !
+                        </p>
+                    )}
                 </ul>
             ),
         },
@@ -112,7 +161,6 @@ export const DashBStudent = () => {
         },
     };
     const [pending, setPending] = useState(true);
-    const [rows, setRows] = useState([]);
     useEffect(() => {
         const timeout = setTimeout(() => {
             setPending(false);
@@ -144,7 +192,7 @@ export const DashBStudent = () => {
                         <DataTable
                             title="Danh Sách Học Viên"
                             columns={columns}
-                            data={dataStudent}
+                            data={dataAllForUser}
                             direction="auto"
                             fixedHeader
                             fixedHeaderScrollHeight="400px"
@@ -154,7 +202,6 @@ export const DashBStudent = () => {
                             paginationComponentOptions={
                                 paginationComponentOptions
                             }
-                            selectableRows
                             selectableRowsHighlight
                             selectableRowsNoSelectAll
                             selectableRowsRadio="checkbox"

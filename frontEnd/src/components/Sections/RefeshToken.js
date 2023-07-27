@@ -3,7 +3,7 @@ export const RefeshToken = async () => {
     try {
         const refeshToken = await axios.get(
             "http://localhost:8081/refeshTokenAPI",
-            { withCredentials: true } // cai con cu cac nay de gui http only cookie tu phia client len server
+            { withCredentials: true } // cai nay de gui http only cookie tu phia client len server
         );
         return refeshToken.data.accessTokenNew;
         // if(responseVerify)

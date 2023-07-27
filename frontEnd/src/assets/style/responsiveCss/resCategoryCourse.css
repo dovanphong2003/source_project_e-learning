@@ -1,0 +1,41 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+    .main_category-list_admin {
+        flex-direction: column;
+    }
+    .element_category-admin {
+        width: auto;
+        max-width: 300px;
+    }
+    .two_bnt-sub_category-main {
+        display: none;
+    }
+    .two_bnt-sub_category-mobile {
+        display: flex !important;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+    .two_bnt-sub_category-main {
+        display: none;
+    }
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+    .two_bnt-sub_category-mobile {
+        display: none;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+    .two_bnt-sub_category-mobile {
+        display: none;
+    }
+}

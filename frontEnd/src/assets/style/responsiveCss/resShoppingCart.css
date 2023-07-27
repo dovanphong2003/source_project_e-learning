@@ -1,0 +1,98 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+    .image_course-cart img {
+        height: 60px;
+        width: 100%;
+    }
+    .price-course_info {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .bnt-delete-cartitem {
+        font-size: 32px;
+        border: 1px solid #e68989;
+    }
+    .container-cart_check-out-cart {
+        flex-direction: column;
+    }
+    .container-cart_course {
+        padding: 10px;
+    }
+    .container-cart {
+        padding: 0;
+        width: 100%;
+    }
+    .title_container-cart {
+        font-size: 28px;
+        padding-top: 12px;
+        padding-bottom: 16px;
+    }
+    .pay-cart_course {
+        width: 100%;
+        justify-content: center;
+        /* text-align: center; */
+    }
+    .pay-cart_course {
+        font-size: 24px !important;
+    }
+    .pay-cart_course h2 {
+        font-size: 28px !important;
+    }
+    .pay-cart_course p {
+        font-size: 20px !important;
+        padding-top: 20px;
+    }
+    .pay-cart_course-mobile {
+    }
+    .pay-cart_course-all {
+        display: none;
+    }
+    .bnt-pay-mobile {
+        font-size: 18px;
+        padding: 14px 24px;
+        background-color: var(--color-default-bnt_user);
+        border: 1px solid var(--color-default-bnt_user);
+        color: #fff;
+    }
+    .bnt-pay-mobile:active {
+        opacity: 0.8;
+    }
+    .bnt-pay-mobile:hover {
+        background-color: var(--colot-default-hover-bnt-user);
+    }
+    .main-check-out {
+        min-height: 100vh;
+    }
+    .pay-cart_course-mobile button {
+        font-size: 20px;
+    }
+    .img-cart-empty {
+        height: 200px;
+        width: 200px !important;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+    .pay-cart_course-mobile {
+        display: none;
+    }
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+    .pay-cart_course-mobile {
+        display: none;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+    .pay-cart_course-mobile {
+        display: none;
+    }
+}

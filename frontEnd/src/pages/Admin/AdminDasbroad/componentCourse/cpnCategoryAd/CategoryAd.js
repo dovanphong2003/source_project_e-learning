@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../cssPageAdmin/courseCss/addCategory.css";
+import "../../../../../assets/style/responsiveCss/resCategoryCourse.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { ElementCategory } from "./component/ElementCategory";
@@ -13,7 +14,6 @@ export const CategoryAd = () => {
         );
         setDataCategory(newData);
     };
-    // console.log("data: ", dataCategory);
     const getDataCategory = async () => {
         try {
             const response = await axios.get(
@@ -60,7 +60,7 @@ export const CategoryAd = () => {
                 </button>
             </div>
             <div className="main_category-list_admin">
-                {dataCategory
+                {dataCategory.length
                     ? dataCategory.map((el) => {
                           return (
                               <ElementCategory

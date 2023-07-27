@@ -1,20 +1,40 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "../../assets/style/Search/search.css";
 import { useEffect } from "react";
 import { FilterSearch } from "../filter/FilterSearch";
 import { CategoryListCard } from "../../pages/home/CategoryListCard";
+import axios from "axios";
 export const SearchCourse = () => {
     const [searchParam, changeSearchParam] = useSearchParams();
     const contentSearch = searchParam.get("contentSearch");
-    const [sort, setSort] = useState("");
+    const [sortCourse, setSort] = useState("");
+    console.log("sourrt course: ", sortCourse);
     const [hdfilter, setHdFilter] = useState(false);
-    let resultgetSort = searchParam.get("sort");
-    if (sort) {
-        // switch (sort) {
-        //     case "":
-        // }
-    }
+    console.log("hehe boy; ", contentSearch);
+    const [dataSearch, setDataSearch] = useState([false]);
+    const getDataSearch = async () => {
+        const response = await axios.get(
+            `http://localhost:8081/course/getDataSearchAPI?key_word=${contentSearch}`
+        );
+        if (!response.data.data) {
+            setDataSearch([]);
+        } else {
+            setDataSearch(response.data.data);
+        }
+    };
+    useEffect(() => {
+        setDataSearch([false]);
+        if (contentSearch) {
+            getDataSearch();
+        }
+    }, [contentSearch]);
+    console.log("data; ", dataSearch);
+    const sortedData =
+        dataSearch[0] !== false
+            ? dataSearch.slice().sort((a, b) => a.course_id - b.course_id)
+            : "";
     return (
         <main>
             <div className="main_search">
@@ -24,7 +44,7 @@ export const SearchCourse = () => {
                     </h1>
                     <div className="result_search-header">
                         <div className="select_input">
-                            <div
+                            {/* <div
                                 onClick={() => {
                                     setHdFilter(!hdfilter);
                                 }}
@@ -36,16 +56,13 @@ export const SearchCourse = () => {
                                     </span>
                                     <span>Filter</span>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="filter_sort-by">
                                 <form
                                     className="form_sort-by"
                                     action=""
                                     onChange={(e) => {
                                         e.preventDefault();
-                                        changeSearchParam(
-                                            `?contentSearch=${contentSearch}&sort=${e.target.value}`
-                                        );
                                         setSort(e.target.value);
                                     }}
                                 >
@@ -55,21 +72,67 @@ export const SearchCourse = () => {
                                         id="cars"
                                     >
                                         <option value="default">
-                                            Mặc Định
+                                            Mặc Định ( mới nhất )
                                         </option>
-                                        <option value="rateTop">
+                                        {/* <option value="rateTop">
                                             Xếp Hạng Cao Nhất
-                                        </option>
-                                        <option value="news">Mới Nhất</option>
+                                        </option> */}
+                                        <option value="olds">Cũ Nhất</option>
                                     </select>
                                 </form>
                             </div>
-                            <FilterSearch hdfilter={hdfilter} />
+                            {/* <FilterSearch
+                                dataSearch={dataSearch}
+                                setDataSearch={setDataSearch}
+                                hdfilter={hdfilter}
+                            /> */}
                         </div>
-                        <div className="result_info">12 Kết quả </div>
+                        <div className="result_info">
+                            {dataSearch[0] !== false ? dataSearch.length : "0"}{" "}
+                            Kết quả{" "}
+                        </div>
                     </div>
+                    <span
+                        className={`${
+                            dataSearch.length ? "hidden" : ""
+                        } span-result-not-defined`}
+                    >
+                        <p> Không có kết quả nào cho tìm kiếm trên</p>
+                    </span>
                     <div className="container_display-search">
-                        <CategoryListCard title="" />
+                        {dataSearch[0] === false ? (
+                            <>
+                                <Skeleton
+                                    width={"100%"}
+                                    height={"200px"}
+                                    duration={2}
+                                    count={2}
+                                    className="skeleton-css"
+                                    baseColor="#faf9ff"
+                                    highlightColor="#dadada"
+                                />
+                                <Skeleton
+                                    width={"100%"}
+                                    height={"40px"}
+                                    duration={2}
+                                    count={4}
+                                    className="skeleton-css"
+                                    baseColor="#faf9ff"
+                                    highlightColor="#dadada"
+                                />
+                            </>
+                        ) : dataSearch.length ? (
+                            <CategoryListCard
+                                title=""
+                                data={
+                                    sortCourse === "olds"
+                                        ? sortedData
+                                        : dataSearch
+                                }
+                            />
+                        ) : (
+                            ""
+                        )}
                     </div>
                 </div>
             </div>

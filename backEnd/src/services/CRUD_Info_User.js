@@ -4,34 +4,16 @@ const jwt = require("jsonwebtoken");
 const getInfoUserAPI = async (req, res) => {
     try {
         const id = req.query.idUser;
-        const accessToken = req.query.accessToken;
-        if (accessToken) {
-            const decode = await jwt.verify(
-                accessToken,
-                process.env.SECRETKEY_ACCOUNT_USER_LOGIN
-            );
-            if (decode.id == id) {
-                const data = await pool.query(
-                    "SELECT * FROM users WHERE user_id = $1",
-                    [id]
-                );
-                res.status(200).json({
-                    dataUser: data.rows[0],
-                });
-            } else {
-                res.status(404).json({
-                    ec: "error id user",
-                });
-            }
-        }
+        const data = await pool.query(
+            "SELECT * FROM users WHERE user_id = $1",
+            [id]
+        );
+        res.status(200).json({
+            dataUser: data.rows[0],
+        });
     } catch (error) {
         console.log("err get info user: ", error);
-        if (error === "jwt expired") {
-            res.status(400).json({ message: "jwt expired" });
-        } else if (error === "")
-            res.status(404).json({
-                ec: "lỗi nặng rồi bro",
-            });
+        res.status(400).json({ ec: error });
     }
 };
 
@@ -53,8 +35,30 @@ const getInfoStudentAPI = async (req, res) => {
         dataUser: response.rows,
     });
 };
+const getInfoUserByAccessTokenAPI = async (req, res) => {
+    const accessToken = req.query.accessToken;
+    console.log("accestoken: ", accessToken);
+    if (accessToken) {
+        try {
+            const decode = await jwt.verify(
+                accessToken,
+                process.env.SECRETKEY_ACCOUNT_USER_LOGIN
+            );
+            res.status(200).json({ data: decode });
+        } catch (error) {
+            console.log("error get info user by access token: ", error);
+            res.status(400).json({ ec: error });
+            return;
+        }
+    } else {
+        res.status(404).json({
+            ec: "Not found accessToken",
+        });
+    }
+};
 module.exports = {
     getInfoUserAPI,
     getInfoAdminAPI,
     getInfoStudentAPI,
+    getInfoUserByAccessTokenAPI,
 };

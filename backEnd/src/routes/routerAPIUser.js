@@ -11,6 +11,7 @@ const {
     getInfoUserAPI,
     getInfoAdminAPI,
     getInfoStudentAPI,
+    getInfoUserByAccessTokenAPI,
 } = require("../services/CRUD_Info_User");
 const { createUserAPI } = require("../controllers/CRUD_user");
 ///////// list router API
@@ -21,6 +22,7 @@ routerAPIUser.get("/refeshTokenAPI", refeshTokenAPI);
 routerAPIUser.post("/verifyTokenAPI", verifyTokenAPI);
 routerAPIUser.delete("/cleanCookieAPI", cleanCookieAPI);
 routerAPIUser.get("/getInfoUserAPI", getInfoUserAPI);
+routerAPIUser.get("/getInfoUserByAccessTokenAPI", getInfoUserByAccessTokenAPI);
 routerAPIUser.get("/getInfoAdminAPI", getInfoAdminAPI);
 routerAPIUser.get("/getInfoStudentAPI", getInfoStudentAPI);
 routerAPIUser.post("/createUserAPI", checkEmailMiddle, createUserAPI);

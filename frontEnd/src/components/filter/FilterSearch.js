@@ -2,16 +2,30 @@ import React, { useState } from "react";
 import star from "../../assets/image/star.png";
 import "../../assets/style/Search/filterSearch.css";
 import star_no from "../../assets/image/star-no.png";
-export const FilterSearch = ({ hdfilter }) => {
+import axios from "axios";
+export const FilterSearch = ({ hdfilter, dataSearch, setDataSearch }) => {
     const [ratingEx, setRatingEx] = useState(false);
     const [topicEx, setTopicEx] = useState(false);
     const [rotato1, setRotato1] = useState(false);
     const [rotato2, setRotato2] = useState(false);
     const [checkRating, setCheckRating] = useState("");
     const [checkTopic, setCheckTopic] = useState("");
+    console.log("check rating: ", checkRating);
+    console.log("check topic: ", checkTopic);
+    const [dataCategory, setDataCategory] = useState([]);
+    const handleCategory = async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:8081/category/getCategoryAPI`
+            );
+            setDataCategory(response.data.data);
+        } catch (error) {
+            console.log("error handle get category filter: ", error);
+        }
+    };
     return (
         <div className={`${hdfilter ? "" : "hidden"} filter_specifically`}>
-            <div className="block_filter-child">
+            {/* <div className="block_filter-child">
                 <div className="header_block_filter-child">
                     <h2 className="filter-rating">Đánh Giá </h2>
                     <span
@@ -120,7 +134,7 @@ export const FilterSearch = ({ hdfilter }) => {
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> */}
             <hr className="hr-filter" />
             <div className="block_filter-child">
                 <div className="header_block_filter-child">

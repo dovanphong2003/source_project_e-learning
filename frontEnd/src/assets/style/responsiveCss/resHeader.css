@@ -1,0 +1,204 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+    .header-all {
+        display: none;
+    }
+    .info_user::before {
+        display: none;
+    }
+    .info_was-sig-in {
+        right: 0;
+        top: 40px;
+        left: auto !important;
+    }
+    .log-in {
+        border: none;
+        width: 100%;
+    }
+    .sign-up {
+        border: none;
+        background-color: #fff;
+        color: #000;
+        width: 100%;
+    }
+    .sign_up-header {
+        color: #000;
+    }
+    .info-user-sig_in {
+        padding: 0;
+    }
+    .info_was-sig-in {
+        min-width: none;
+    }
+    .info_was-sig-in {
+        display: block;
+        right: -40px !important;
+        top: 20px;
+    }
+    .info-user-sig_in {
+        min-height: 40px;
+    }
+    .bnt-hello-user {
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        color: #334ed3;
+        font-size: 15px;
+    }
+    .input-header {
+        font-size: 14px;
+    }
+    .logo {
+        width: auto !important;
+        margin-right: 20px;
+    }
+    .form-header {
+        display: none;
+    }
+    .btn-search-for-mobile {
+        display: flex;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        border-top: 1px solid #ccc;
+    }
+    h2 {
+        font-size: 20px !important;
+    }
+    .input-header {
+        width: 70% !important;
+    }
+    .form-header {
+        width: 100% !important;
+    }
+    .bnt-go-page-admin {
+        border: 1px solid #1c1d1f;
+        width: 100px;
+    }
+    .log_in-header span {
+        font-size: 12px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+    .header-all {
+        display: none;
+    }
+    .header-mobile {
+        display: flex;
+    }
+    .info_user::before {
+        display: none;
+    }
+    .info_was-sig-in {
+        right: 0;
+        top: 40px;
+        left: auto !important;
+    }
+    .log-in {
+        border: none;
+    }
+    .sign-up {
+        border: none;
+        background-color: #fff;
+        color: #000;
+    }
+    .sign_up-header {
+        color: #000;
+    }
+    .info-user-sig_in {
+        padding: 0;
+    }
+    .info_was-sig-in {
+        min-width: none;
+    }
+    main {
+        min-height: 80vh;
+    }
+    .info-user-sig_in {
+        min-height: 40px;
+    }
+    .info_was-sig-in {
+        min-width: none;
+    }
+    .info_was-sig-in {
+        display: block;
+    }
+    .bnt-hello-user {
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        color: #334ed3;
+        font-size: 15px;
+    }
+    .logo {
+        width: auto !important;
+        margin-right: 20px;
+    }
+    .btn-search-for-mobile {
+        display: none;
+    }
+    .bnt-go-page-admin {
+        border: 1px solid #1c1d1f;
+        width: 260px;
+    }
+    .log_in-header span {
+        width: 100%;
+    }
+    .cart {
+        margin-left: 0;
+    }
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+    .header-mobile {
+        display: none;
+    }
+    .info_user::before {
+        display: none;
+    }
+    .info_was-sig-in {
+        right: 0;
+        top: 40px;
+        left: auto !important;
+    }
+    .log-in {
+        padding: 4px 0px;
+        width: 260px;
+    }
+    .sign-up {
+        border: none;
+        background-color: #fff;
+        color: #000;
+        width: 100%;
+    }
+    .sign_up-header {
+        color: #000;
+    }
+    .info-user-sig_in {
+        padding: 0;
+    }
+    .info_was-sig-in {
+        min-width: none;
+    }
+    main {
+        min-height: 80vh;
+    }
+    .btn-search-for-mobile {
+        display: none;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    .header-mobile {
+        display: none;
+    }
+    .btn-search-for-mobile {
+        display: none;
+    }
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+}

@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
 }
 .filter_sort-by,
 .filter_result {
@@ -74,4 +75,8 @@
 }
 .container_display-search {
     margin-top: 12px;
+}
+.span-result-not-defined {
+    font-size: 20px;
+    margin-top: 20px;
 }

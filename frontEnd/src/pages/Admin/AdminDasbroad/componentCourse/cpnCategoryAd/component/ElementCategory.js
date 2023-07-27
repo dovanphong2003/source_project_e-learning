@@ -58,7 +58,7 @@ export const ElementCategory = ({
                             : "Không có khóa học nào"}
                     </ul>
                     <div className="dispay-two_btn">
-                        <div className="two_bnt-sub_category">
+                        <div className="two_bnt-sub_category two_bnt-sub_category-mobile">
                             <button
                                 onClick={() => {
                                     navigate(

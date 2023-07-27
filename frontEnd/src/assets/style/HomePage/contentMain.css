@@ -10,5 +10,6 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0px -10px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: start;
 }

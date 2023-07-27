@@ -1,7 +1,7 @@
 const { pool } = require("../config/database"); // use pool
 const bcrypt = require("bcrypt");
 const checkAccount = async (req, res, next) => {
-    const { password, email } = req.body;
+    const { password, email, checkLogin } = req.body;
     try {
         const response = await pool.query(
             "SELECT user_password,user_email FROM users WHERE user_email = $1",

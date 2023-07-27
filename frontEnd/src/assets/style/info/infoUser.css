@@ -44,3 +44,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.element-info-user {
+    display: inline-block;
+}
