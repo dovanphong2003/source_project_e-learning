@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 const accessToken = createContext();
 const AccessProvider = ({ children }) => {
     const [isAccess, setIsAccess] = useState("");

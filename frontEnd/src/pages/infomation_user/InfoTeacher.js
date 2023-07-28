@@ -1,7 +1,7 @@
 import React from "react";
 import ReactQuill from "react-quill";
 import { useState } from "react";
-import "react-quill/dist/quill.snow.css";
+// import "react-quill/dist/quill.snow.css";
 export const InfoTeacher = ({ data }) => {
     const [value, setValue] = useState("");
     return (

@@ -3,13 +3,12 @@ import "../../assets/style/viewVideo/viewVideoCr.css";
 import "../../assets/style/responsiveCss/resViewVideoCourse.css";
 import ReactQuill from "react-quill";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-quill/dist/quill.snow.css";
+// import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import imageDemo from "../../assets/image/image_demo.png";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Plyr from "plyr";
-import "https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js";
 import { ToastContainer, toast } from "react-toastify"; // toast
 import { RoleContext } from "../../context/RoleContext";
 import { useContext } from "react";
@@ -140,9 +139,9 @@ export const ViewVideoCourse = () => {
                         navigation(
                             `/detail-course/${
                                 param.id
-                            }/view-video/${lastIndex}?numberLesson=${
-                                Number(numberLesson) - 1
-                            }`
+                            }/view-video/${lastIndex}?numberLesson=${Number(
+                                numberLesson
+                            ) - 1}`
                         );
                         window.location.reload();
                         return;
@@ -166,9 +165,9 @@ export const ViewVideoCourse = () => {
                         navigation(
                             `/detail-course/${
                                 param.id
-                            }/view-video/${indexNext}?numberLesson=${
-                                Number(numberLesson) + 1
-                            }`
+                            }/view-video/${indexNext}?numberLesson=${Number(
+                                numberLesson
+                            ) + 1}`
                         );
                         window.location.reload();
                         return;
@@ -395,9 +394,8 @@ export const ViewVideoCourse = () => {
                                                   <li className="name-module_video">
                                                       <ul className="list-content-video">
                                                           <h3 className="title_list-video">
-                                                              {` Module ${
-                                                                  index + 1
-                                                              }: ${
+                                                              {` Module ${index +
+                                                                  1}: ${
                                                                   el.module_name
                                                               }`}
                                                           </h3>

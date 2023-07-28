@@ -20,7 +20,7 @@ import {
     signInWithPopup,
     getRedirectResult,
     FacebookAuthProvider,
-} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+} from "firebase/auth";
 
 export const Login = () => {
     const delay = async (ms) => {
@@ -183,8 +183,9 @@ export const Login = () => {
             const user = result.user;
             console.log("info user: ", result.user);
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            const credential =
-                FacebookAuthProvider.credentialFromResult(result);
+            const credential = FacebookAuthProvider.credentialFromResult(
+                result
+            );
             // const accessToken = credential.accessToken;
             getInfoUser(user.reloadUserInfo); // get info user
 
