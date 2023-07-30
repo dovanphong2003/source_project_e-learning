@@ -1,3 +1,4 @@
+import React from "react";
 import { ProductCart } from "../../components/card/ProductCart";
 import "../../assets/style/HomePage/contentMain.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";

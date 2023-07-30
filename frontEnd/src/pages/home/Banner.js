@@ -1,3 +1,4 @@
+import React from "react";
 import "../../assets/style/HomePage/banner.css";
 import banner from "../../assets/image/banner2.png";
 import { Link } from "react-router-dom";

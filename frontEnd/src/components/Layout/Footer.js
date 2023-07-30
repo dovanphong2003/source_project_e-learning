@@ -1,3 +1,4 @@
+import React from "react";
 import "../../assets/style/Footer.css";
 import iconF from "../../assets/image/facebook.svg";
 import iconT from "../../assets/image/twitter.svg";

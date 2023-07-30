@@ -1,3 +1,4 @@
+import React from "react";
 import { createContext, useContext, useState } from "react";
 const CreateCourseData = createContext();
 const CreateCourseDataProvider = ({ children }) => {

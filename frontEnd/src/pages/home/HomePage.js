@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import "../../assets/style/HomePage/homePage.css";
 import "../../assets/style/responsiveCss/resHomePage.css";

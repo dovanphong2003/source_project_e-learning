@@ -1,3 +1,4 @@
+import React from "react";
 import { ProductCart } from "../../components/card/ProductCart";
 import "../../assets/style/HomePage/contentMain.css";
 export const ListCardOfUser = ({ data }) => {
