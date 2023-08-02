@@ -13,10 +13,8 @@ const { routeAPICourse } = require("./src/routes/routeCourse");
 const { routeAPIEnrolment } = require("./src/routes/routeEnrolment");
 const { routerComment } = require("./src/routes/routeComment");
 const cookieParser = require("cookie-parser");
-// const upload = multer({ dest: "./image" });
-// bytes.format("2mb");
 const corsOptions = {
-    origin: process.env.URL_FRONTEND, //
+    origin: [process.env.URL_FRONTEND, "http://localhost:3000"],
     credentials: true,
 };
 // Import the functions you need from the SDKs you need
@@ -39,4 +37,5 @@ app.use("/comment", routerComment);
 app.listen(port, async () => {
     console.log("connect server success !");
     console.log(`on port ${port}`);
+    console.log("hehe boy: ", process.env.URL_FRONTEND);
 });
