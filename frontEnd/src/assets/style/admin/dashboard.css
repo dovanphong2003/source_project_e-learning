@@ -173,6 +173,10 @@ p {
 #myChartOverview {
     max-width: 300px;
     max-height: 300px;
+    display: inline-block !important;
+}
+#myChartRevenue {
+    display: inline-block !important;
 }
 .charOverview {
     display: flex;

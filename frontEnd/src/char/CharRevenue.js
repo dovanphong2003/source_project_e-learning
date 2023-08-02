@@ -190,8 +190,7 @@ export const CharRevenue = () => {
                 <div>
                     <canvas
                         id="myChartRevenue"
-                        width={"100%"}
-                        height={"100%"}
+                        style={{ display: "inline-block !important" }}
                     ></canvas>
                 </div>
             </div>

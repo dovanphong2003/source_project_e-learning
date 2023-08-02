@@ -44,7 +44,10 @@ export const CharCrOverview = ({ total_pending, total_handle }) => {
             <div className="title-cart-char">Tổng Quan Về Xử Lí Khóa Học</div>
             <div className="charOverview">
                 <div>
-                    <canvas id="myChartOverview"></canvas>
+                    <canvas
+                        id="myChartOverview"
+                        style={{ display: "inline-block !important" }}
+                    ></canvas>
                 </div>
             </div>
             <div className="info-charOverview">
