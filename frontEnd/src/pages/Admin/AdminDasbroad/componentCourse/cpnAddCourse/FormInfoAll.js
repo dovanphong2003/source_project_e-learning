@@ -123,7 +123,7 @@ export const FormInfoAll = ({ form, setForm }) => {
         try {
             const response = await axios.post(
                 `${
-                    process.env.URL_BACKEND
+                    process.env.REACT_APP_URL_BACKEND
                 }/course/createCourseAPI?title_name=${encodeURIComponent(
                     isData.title_name
                 )}`,

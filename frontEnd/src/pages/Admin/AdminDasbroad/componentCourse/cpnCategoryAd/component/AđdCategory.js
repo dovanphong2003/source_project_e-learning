@@ -95,7 +95,7 @@ export const AđdCategory = () => {
         try {
             const response = await axios.post(
                 `${
-                    process.env.URL_BACKEND
+                    process.env.REACT_APP_URL_BACKEND
                 }/category/addCategoryAPI?title=${encodeURIComponent(
                     formData.title
                 )}`,

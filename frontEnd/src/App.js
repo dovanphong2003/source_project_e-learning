@@ -4,7 +4,9 @@ import { DisplayAdmin } from "./assets/display/DisplayAdmin";
 import { useContext } from "react";
 import { RoleContext } from "./context/RoleContext";
 import AutoScrollTop from "./components/Sections/AutoScrollTop";
-const App = function() {
+// import dotenv from "dotenv";
+const App = function () {
+    // dotenv.config();
     const { isRole, setUser } = useContext(RoleContext);
     return isRole === "admin" ? (
         <>

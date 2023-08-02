@@ -39,7 +39,7 @@ export const CheckOut = ({
             ArrId_course,
         };
         await axios.post(
-            `${process.env.URL_BACKEND}/enrolment/upDataEnrolmentsAPI`,
+            `${process.env.REACT_APP_URL_BACKEND}/enrolment/upDataEnrolmentsAPI`,
             dataPost
         );
     };
@@ -47,7 +47,7 @@ export const CheckOut = ({
     // handle delete cartItem of user
     const deleteCartItemOfUser = async () => {
         await axios.delete(
-            `${process.env.URL_BACKEND}/course/deleteAllCourseCartAPI?id_user=${isIdUser}`
+            `${process.env.REACT_APP_URL_BACKEND}/course/deleteAllCourseCartAPI?id_user=${isIdUser}`
         );
     };
 

@@ -20,7 +20,7 @@ export const ElementCategory = ({
     const handleDeleteCategory = async () => {
         try {
             const response = await axios.delete(
-                `${process.env.URL_BACKEND}/category/deleteCategoryAPI?id=${data.category_id}&name_image=${data.image_category}`
+                `${process.env.REACT_APP_URL_BACKEND}/category/deleteCategoryAPI?id=${data.category_id}&name_image=${data.image_category}`
             );
             return response.data.result;
         } catch (error) {

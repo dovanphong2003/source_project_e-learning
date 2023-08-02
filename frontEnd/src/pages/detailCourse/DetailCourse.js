@@ -32,7 +32,7 @@ export const DetailCourse = () => {
     const getModuleLesson = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/product/getModuleLessonDetailAPI?idCourse=${param.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/product/getModuleLessonDetailAPI?idCourse=${param.id}`
             );
             setDataModuleAndLesson(response.data.data);
         } catch (error) {
@@ -42,7 +42,7 @@ export const DetailCourse = () => {
     const getInfoCourseUseId = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/course/getInfoCourseUseIdAPI?idCourse=${param.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/course/getInfoCourseUseIdAPI?idCourse=${param.id}`
             );
             if (response.data.data.length === 0) {
                 setCheckChangeIdNotDefined(true);
@@ -104,7 +104,7 @@ export const DetailCourse = () => {
     const fncgetInfoUserByAccessTokenAPI = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/getInfoUserByAccessTokenAPI?accessToken=${AccessToken}`
+                `${process.env.REACT_APP_URL_BACKEND}/getInfoUserByAccessTokenAPI?accessToken=${AccessToken}`
             );
             console.log("data id user: ", response.data.data);
             setDataUser(response.data.data);
@@ -124,7 +124,7 @@ export const DetailCourse = () => {
     const funcGetItemCartUser = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/course/getCartItemsAPI?isIdUser=${dataUser.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/course/getCartItemsAPI?isIdUser=${dataUser.id}`
             );
             fncSetCartOriginData(response.data.data);
             fncSetCartOrigin(response.data.data);
@@ -138,7 +138,7 @@ export const DetailCourse = () => {
         event.preventDefault();
         try {
             const response = await axios.post(
-                `${process.env.URL_BACKEND}/course/addCourseToCartAPI?idCourse=${param.id}&id_user=${dataUser.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/course/addCourseToCartAPI?idCourse=${param.id}&id_user=${dataUser.id}`
             );
             notifySuccess("Thêm thành công !");
             setcheckHandle(!checkhandle);
@@ -152,7 +152,7 @@ export const DetailCourse = () => {
 
         try {
             const response = await axios.delete(
-                `${process.env.URL_BACKEND}/course/deleteCourseCartAPI?idCourse=${param.id}&id_user=${dataUser.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/course/deleteCourseCartAPI?idCourse=${param.id}&id_user=${dataUser.id}`
             );
             notifySuccess("Gỡ thành công !");
             setcheckHandle(!checkhandle);
@@ -170,7 +170,7 @@ export const DetailCourse = () => {
     const checkCouseOfUser = async () => {
         try {
             const resposne = await axios.get(
-                `${process.env.URL_BACKEND}/enrolment/getDataEnrolmentOfUserAPI?user_id=${dataUser.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentOfUserAPI?user_id=${dataUser.id}`
             );
             setDataCourseOfUser(resposne.data.data);
         } catch (error) {

@@ -2,7 +2,7 @@ import axios from "axios";
 export const RefeshToken = async () => {
     try {
         const refeshToken = await axios.get(
-            `${process.env.URL_BACKEND}/refeshTokenAPI`,
+            `${process.env.REACT_APP_URL_BACKEND}/refeshTokenAPI`,
             { withCredentials: true } // cai nay de gui http only cookie tu phia client len server
         );
         return refeshToken.data.accessTokenNew;

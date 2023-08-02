@@ -12,7 +12,7 @@ export const EditCategory = () => {
     const getDataFormEdit = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/category/getOneCategoryAPI?id=${param.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/category/getOneCategoryAPI?id=${param.id}`
             );
             setDataOrigin(...response.data.data);
         } catch (error) {
@@ -27,7 +27,7 @@ export const EditCategory = () => {
     const handleDeleteCategory = async (id, name_image) => {
         try {
             const response = await axios.delete(
-                `${process.env.URL_BACKEND}/category/deleteCategoryAPI?id=null&name_image=${name_image}`
+                `${process.env.REACT_APP_URL_BACKEND}/category/deleteCategoryAPI?id=null&name_image=${name_image}`
             );
             return response.data.result;
         } catch (error) {
@@ -137,7 +137,9 @@ export const EditCategory = () => {
             console.log("title: ", formData.title);
             console.log("file: ", formData.image);
             const response = await axios.post(
-                `${process.env.URL_BACKEND}/category/editCategoryAPI?id=${
+                `${
+                    process.env.REACT_APP_URL_BACKEND
+                }/category/editCategoryAPI?id=${
                     param.id
                 }&title=${encodeURIComponent(formData.title)}`,
                 data,

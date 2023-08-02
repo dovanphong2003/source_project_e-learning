@@ -1,5 +1,5 @@
 module.exports = {
-    presets: ["@babel/preset-env"],
+    presets: ["@babel/preset-env", "@babel/preset-react"],
     plugins: [
         // Thêm @babel/plugin-syntax-dynamic-import vào đây
         "@babel/plugin-syntax-dynamic-import",

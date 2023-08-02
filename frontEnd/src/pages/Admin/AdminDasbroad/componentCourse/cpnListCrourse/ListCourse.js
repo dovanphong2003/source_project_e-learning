@@ -12,7 +12,7 @@ export const ListCourse = ({ infoBasicCourse }) => {
     const notifySuccess = (content) => toast.success(content);
     const setBestSeller = async (id_course, action) => {
         const response = await axios.post(
-            `${process.env.URL_BACKEND}/course/setBesellerAPI`,
+            `${process.env.REACT_APP_URL_BACKEND}/course/setBesellerAPI`,
             { id_course, action }
         );
         if (response.data) {

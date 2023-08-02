@@ -26,7 +26,7 @@ export const ViewVideoCourse = () => {
     const handleGetDataLeson = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/course/getLessonCourseUseIdAPI?idLesson=${param.idvideo}`
+                `${process.env.REACT_APP_URL_BACKEND}/course/getLessonCourseUseIdAPI?idLesson=${param.idvideo}`
             );
             if (response.data.data.length) {
                 setDataLesson(response.data.data[0]);
@@ -39,7 +39,7 @@ export const ViewVideoCourse = () => {
     const getModuleLesson = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/product/getModuleLessonDetailAPI?idCourse=${param.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/product/getModuleLessonDetailAPI?idCourse=${param.id}`
             );
             setDataModuleAndLesson(response.data.data);
         } catch (error) {
@@ -54,7 +54,7 @@ export const ViewVideoCourse = () => {
     }, [param.idvideo]);
     const getDataComment = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/comment/getDataCommentAPI?id_lesson=${param.idvideo}`
+            `${process.env.REACT_APP_URL_BACKEND}/comment/getDataCommentAPI?id_lesson=${param.idvideo}`
         );
         getDtComment(
             response.data.data.map((el) => {
@@ -199,7 +199,7 @@ export const ViewVideoCourse = () => {
         };
         try {
             const response = await axios.post(
-                `${process.env.URL_BACKEND}/comment/postCommentAPI`,
+                `${process.env.REACT_APP_URL_BACKEND}/comment/postCommentAPI`,
                 data
             );
             notifySuccess("comment thành công !");

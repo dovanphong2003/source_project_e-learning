@@ -8,7 +8,7 @@ export const DeleteCookie = async () => {
             localStorage.removeItem("accessToken");
         }
         const deleteRefreshToken = await axios.delete(
-            `${process.env.URL_BACKEND}/cleanCookieAPI`,
+            `${process.env.REACT_APP_URL_BACKEND}/cleanCookieAPI`,
             { withCredentials: true }
         );
         return deleteRefreshToken;

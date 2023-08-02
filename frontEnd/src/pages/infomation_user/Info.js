@@ -20,7 +20,7 @@ export const Info = () => {
     const getInfoUser = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/getInfoUserAPI?idUser=${param.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/getInfoUserAPI?idUser=${param.id}`
             );
             getDataUser(response.data.dataUser);
             return response.data.dataUser;

@@ -50,7 +50,7 @@ export const Register = () => {
         };
         try {
             const response = await axios.post(
-                `${process.env.URL_BACKEND}/registerAPI`,
+                `${process.env.REACT_APP_URL_BACKEND}/registerAPI`,
                 data
             );
             document.getElementById("name_register").value = "";

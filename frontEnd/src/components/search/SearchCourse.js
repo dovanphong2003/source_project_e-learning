@@ -16,7 +16,7 @@ export const SearchCourse = () => {
     const [dataSearch, setDataSearch] = useState([false]);
     const getDataSearch = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/course/getDataSearchAPI?key_word=${contentSearch}`
+            `${process.env.REACT_APP_URL_BACKEND}/course/getDataSearchAPI?key_word=${contentSearch}`
         );
         if (!response.data.data) {
             setDataSearch([]);

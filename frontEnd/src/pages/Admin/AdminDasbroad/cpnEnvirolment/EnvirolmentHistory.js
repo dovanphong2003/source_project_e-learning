@@ -8,7 +8,7 @@ export const EnvirolmentHistory = () => {
     const [dataEnrolment, setDataEnrolment] = useState([]);
     const getDataEnrolment = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/enrolment/getDataEnrolmentAPI`
+            `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentAPI`
         );
         setDataEnrolment(
             response.data.data.map((el) => ({

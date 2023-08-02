@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+// import dotenv from "dotenv";
 import Logo from "../../assets/image/logo.png";
 import name_logo from "../../assets/image/name_logo.png";
 import "../../assets/style/styleHeader.css";
@@ -15,6 +16,7 @@ import { accessToken } from "../../context/AccessToken";
 import { CartContext } from "../../context/CartContext";
 import axios from "axios";
 export const Header = () => {
+    console.log("hehe boy:", `${process.env.REACT_APP_URL_BACKEND}`);
     const { isAccess, getIsAccess } = useContext(accessToken);
     useEffect(() => {
         getIsAccess(localStorage.getItem("accessToken"));
@@ -111,7 +113,7 @@ export const Header = () => {
     const [categories, setCategories] = useState([]);
     const dataCategories = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/product/getAllProductAPI`
+            `${process.env.REACT_APP_URL_BACKEND}/product/getAllProductAPI`
         );
 
         setCategories(response.data.data);
@@ -126,7 +128,7 @@ export const Header = () => {
     const funcGetItemCartUser = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/course/getCartItemsAPI?isIdUser=${isIdUser}`
+                `${process.env.REACT_APP_URL_BACKEND}/course/getCartItemsAPI?isIdUser=${isIdUser}`
             );
             console.log("res:", response);
             fncSetCartOrigin(response.data.data);

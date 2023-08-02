@@ -31,7 +31,7 @@ export const AddLessonCourse = () => {
     //get data_course
     const getNameCourse = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/course/getNameAndIdAPI`
+            `${process.env.REACT_APP_URL_BACKEND}/course/getNameAndIdAPI`
         );
         if (response.data) {
             setData(response.data.data);
@@ -52,7 +52,7 @@ export const AddLessonCourse = () => {
     const getNameModule = async () => {
         const id = selectInputRefs.current[0].getValue()[0].value;
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/course/getNameModuleAPI?id=${id}`
+            `${process.env.REACT_APP_URL_BACKEND}/course/getNameModuleAPI?id=${id}`
         );
         if (response.data) {
             if (response.data.message) {
@@ -165,7 +165,7 @@ export const AddLessonCourse = () => {
                 console.log("bat dau upload");
                 setStartRun(true);
                 const response = await axios.post(
-                    `${process.env.URL_BACKEND}/course/postLessonTwoAPI`,
+                    `${process.env.REACT_APP_URL_BACKEND}/course/postLessonTwoAPI`,
                     data
                 );
                 console.log("khong co loi gi ca ban oi ");
@@ -176,7 +176,7 @@ export const AddLessonCourse = () => {
             } else {
                 setStartRun(true);
                 const response = await axios.post(
-                    `${process.env.URL_BACKEND}/course/postLessonOneAPI`,
+                    `${process.env.REACT_APP_URL_BACKEND}/course/postLessonOneAPI`,
                     formDataObject
                 );
                 notifySuccess("tạo thành công !");

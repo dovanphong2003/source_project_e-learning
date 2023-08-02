@@ -15,7 +15,7 @@ export const DashBStudent = () => {
     const [dataCourseHaveBuy, setDataCourseHaveBuy] = useState([]);
     const getInfoStudent = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/getInfoStudentAPI`
+            `${process.env.REACT_APP_URL_BACKEND}/getInfoStudentAPI`
         );
         setDataStudent(
             response.data.dataUser.map((el) => ({
@@ -30,7 +30,7 @@ export const DashBStudent = () => {
     const getCourseUserHaveBuy = async () => {
         try {
             const response = await axios.get(
-                `${process.env.URL_BACKEND}/enrolment/getDataEnrolmentAPI`
+                `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentAPI`
             );
             setDataCourseHaveBuy(response.data.data);
         } catch (error) {

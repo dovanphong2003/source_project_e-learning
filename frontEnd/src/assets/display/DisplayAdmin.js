@@ -16,7 +16,7 @@ export const DisplayAdmin = () => {
         try {
             const getInfUserAPI = await axios.get(
                 `${
-                    process.env.URL_BACKEND
+                    process.env.REACT_APP_URL_BACKEND
                 }/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
                     "accessToken"
                 )}`

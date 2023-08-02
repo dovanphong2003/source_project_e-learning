@@ -126,7 +126,7 @@ export const CharRevenue = () => {
     console.log("handle date Time: ", dataSevenDay);
     const getDataEnrolment = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/enrolment/getDataEnrolmentRevenueAPI`
+            `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentRevenueAPI`
         );
         setDataRevenue(response.data.data);
     };

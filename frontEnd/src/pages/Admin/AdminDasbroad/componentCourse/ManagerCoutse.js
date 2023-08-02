@@ -9,7 +9,7 @@ export const ManagerCoutse = () => {
     const [infoBasicCourse, setInfoBasicCourse] = useState([]);
     const getDataAllCourse = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/course/getAllCourseAPI`
+            `${process.env.REACT_APP_URL_BACKEND}/course/getAllCourseAPI`
         );
         console.log("data: ", response.data.data);
         if (response.data) {

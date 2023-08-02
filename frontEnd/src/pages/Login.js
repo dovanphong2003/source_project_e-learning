@@ -45,7 +45,7 @@ export const Login = () => {
         console.log("data:", data);
         try {
             const response = await axios.post(
-                `${process.env.URL_BACKEND}/loginAPI`,
+                `${process.env.REACT_APP_URL_BACKEND}/loginAPI`,
                 data,
                 { withCredentials: true } // bat cai nay len moi nhan cookie đc
             );
@@ -91,7 +91,7 @@ export const Login = () => {
                     checkLogin: "google",
                 };
                 const response = await axios.post(
-                    `${process.env.URL_BACKEND}/loginAPI`,
+                    `${process.env.REACT_APP_URL_BACKEND}/loginAPI`,
                     data,
                     { withCredentials: true } // bat cai nay len moi nhan cookie đc
                 );
@@ -117,7 +117,7 @@ export const Login = () => {
                         avatar_url: user.reloadUserInfo.photoUrl,
                     };
                     const response = await axios.post(
-                        `${process.env.URL_BACKEND}/registerAPI`,
+                        `${process.env.REACT_APP_URL_BACKEND}/registerAPI`,
                         data
                     );
 
@@ -129,7 +129,7 @@ export const Login = () => {
                             checkLogin: "google",
                         };
                         const response = await axios.post(
-                            `${process.env.URL_BACKEND}/loginAPI`,
+                            `${process.env.REACT_APP_URL_BACKEND}/loginAPI`,
                             data,
                             { withCredentials: true } // bat cai nay len moi nhan cookie đc
                         );
@@ -196,7 +196,7 @@ export const Login = () => {
                     checkLogin: "google",
                 };
                 const response = await axios.post(
-                    `${process.env.URL_BACKEND}/loginAPI`,
+                    `${process.env.REACT_APP_URL_BACKEND}/loginAPI`,
                     data,
                     { withCredentials: true } // bat cai nay len moi nhan cookie đc
                 );
@@ -222,7 +222,7 @@ export const Login = () => {
                         avatar_url: user.reloadUserInfo.photoUrl,
                     };
                     const response = await axios.post(
-                        `${process.env.URL_BACKEND}/registerAPI`,
+                        `${process.env.REACT_APP_URL_BACKEND}/registerAPI`,
                         data
                     );
 
@@ -234,7 +234,7 @@ export const Login = () => {
                             checkLogin: "google",
                         };
                         const response = await axios.post(
-                            `${process.env.URL_BACKEND}/loginAPI`,
+                            `${process.env.REACT_APP_URL_BACKEND}/loginAPI`,
                             data,
                             { withCredentials: true } // bat cai nay len moi nhan cookie đc
                         );

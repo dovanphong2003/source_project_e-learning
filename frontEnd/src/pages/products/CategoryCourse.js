@@ -8,7 +8,7 @@ export const CategoryCourse = () => {
     const param = useParams();
     const [listCourse, setListCourse] = useState([false]);
     const getCourseCategory = async () => {
-        const url = `${process.env.URL_BACKEND}/product/getProductAPI?id=${param.id}`;
+        const url = `${process.env.REACT_APP_URL_BACKEND}/product/getProductAPI?id=${param.id}`;
         const response = await axios.get(url);
         setListCourse(response.data.data);
     };

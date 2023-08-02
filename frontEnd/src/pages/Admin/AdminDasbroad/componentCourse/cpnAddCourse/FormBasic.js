@@ -10,7 +10,7 @@ export const FormBasic = ({ selectInputRefs, checkFree, setCheckFree }) => {
     // get data category...
     const getDataCategory = async () => {
         const response = await axios.get(
-            `${process.env.URL_BACKEND}/category/getCategoryAPI`
+            `${process.env.REACT_APP_URL_BACKEND}/category/getCategoryAPI`
         );
         setDataCategory(response.data.data);
     };
