@@ -9,12 +9,16 @@ const pool = new Pool({
     database: "inital_db",
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
+    ssl: {
+        rejectUnauthorized: false,
+    },
 });
 pool.connect((err) => {
     if (err) {
         console.log("error: ", err.message);
         return;
     }
+    console.log(process.env.LOCALHOST_CONNECT_DATABASE);
     console.log("database connected !");
 });
 module.exports = {
