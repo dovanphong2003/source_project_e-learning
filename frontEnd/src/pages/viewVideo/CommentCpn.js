@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import Parser from "html-react-parser"; // change string ( html ) --> to html
 import { ToastContainer, toast } from "react-toastify"; // toast
 import axios from "axios";

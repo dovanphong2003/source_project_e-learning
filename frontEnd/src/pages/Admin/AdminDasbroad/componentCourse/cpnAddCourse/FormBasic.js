@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import Select from "react-select";
 import { useState } from "react";
 import { useCreateCourseDataContext } from "../../../../../context/CreateCourseData";
+import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 export const FormBasic = ({ selectInputRefs, checkFree, setCheckFree }) => {
     const [dataCategory, setDataCategory] = useState([]);

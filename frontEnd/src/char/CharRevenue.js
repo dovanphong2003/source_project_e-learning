@@ -188,7 +188,11 @@ export const CharRevenue = () => {
             <div className="title-cart-char">Quản Trị Doanh Thu Tuần Này</div>
             <div className="char">
                 <div>
-                    <canvas id="myChartRevenue"></canvas>
+                    <canvas
+                        id="myChartRevenue"
+                        width={"100%"}
+                        height={"100%"}
+                    ></canvas>
                 </div>
             </div>
         </div>

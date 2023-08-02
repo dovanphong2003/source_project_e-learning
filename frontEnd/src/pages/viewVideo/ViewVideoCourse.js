@@ -3,7 +3,7 @@ import "../../assets/style/viewVideo/viewVideoCr.css";
 import "../../assets/style/responsiveCss/resViewVideoCourse.css";
 import ReactQuill from "react-quill";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-// import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import imageDemo from "../../assets/image/image_demo.png";
 import { Link, useParams } from "react-router-dom";

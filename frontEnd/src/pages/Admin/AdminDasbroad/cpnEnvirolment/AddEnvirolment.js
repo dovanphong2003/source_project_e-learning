@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import Select from "react-select";
+import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import axios from "axios";
 import "./addEnvirolment.css";
