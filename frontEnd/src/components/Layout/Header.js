@@ -111,7 +111,7 @@ export const Header = () => {
     const [categories, setCategories] = useState([]);
     const dataCategories = async () => {
         const response = await axios.get(
-            "http://localhost:8081/product/getAllProductAPI"
+            `${process.env.URL_BACKEND}/product/getAllProductAPI`
         );
 
         setCategories(response.data.data);
@@ -126,7 +126,7 @@ export const Header = () => {
     const funcGetItemCartUser = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8081/course/getCartItemsAPI?isIdUser=${isIdUser}`
+                `${process.env.URL_BACKEND}/course/getCartItemsAPI?isIdUser=${isIdUser}`
             );
             console.log("res:", response);
             fncSetCartOrigin(response.data.data);

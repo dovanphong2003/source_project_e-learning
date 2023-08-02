@@ -107,7 +107,7 @@ export const ShoppingCart = () => {
                                                                 try {
                                                                     const response =
                                                                         await axios.delete(
-                                                                            `http://localhost:8081/course/deleteCourseCartAPI?idCourse=${data.course_id}&id_user=${isIdUser}`
+                                                                            `${process.env.URL_BACKEND}/course/deleteCourseCartAPI?idCourse=${data.course_id}&id_user=${isIdUser}`
                                                                         );
                                                                     setcheckHandle(
                                                                         !checkhandle

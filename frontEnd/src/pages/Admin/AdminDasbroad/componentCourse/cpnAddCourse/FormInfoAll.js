@@ -122,7 +122,9 @@ export const FormInfoAll = ({ form, setForm }) => {
         data.append("image_course", isData.image_course);
         try {
             const response = await axios.post(
-                `http://localhost:8081/course/createCourseAPI?title_name=${encodeURIComponent(
+                `${
+                    process.env.URL_BACKEND
+                }/course/createCourseAPI?title_name=${encodeURIComponent(
                     isData.title_name
                 )}`,
                 data,

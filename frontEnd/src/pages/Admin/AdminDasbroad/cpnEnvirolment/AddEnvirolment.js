@@ -13,7 +13,7 @@ export const AddEnvirolment = () => {
     const notifySuccess = (content) => toast.success(content);
     const getDataCourseAPI = async () => {
         const response = await axios.get(
-            "http://localhost:8081/course/getAllCourseAPI"
+            `${process.env.URL_BACKEND}/course/getAllCourseAPI`
         );
         console.log(
             "data: ",
@@ -28,7 +28,7 @@ export const AddEnvirolment = () => {
     const [dataStudent, setDataStudent] = useState([]);
     const getInfoStudent = async () => {
         const response = await axios.get(
-            "http://localhost:8081/getInfoStudentAPI"
+            `${process.env.URL_BACKEND}/getInfoStudentAPI`
         );
         setDataStudent(
             response.data.dataUser.map((el) => ({
@@ -61,7 +61,7 @@ export const AddEnvirolment = () => {
         };
         try {
             const response = await axios.post(
-                "http://localhost:8081/enrolment/upDataEnrolmentAPI",
+                `${process.env.URL_BACKEND}/enrolment/upDataEnrolmentAPI`,
                 data
             );
             notifySuccess("Ghi danh thành công !");

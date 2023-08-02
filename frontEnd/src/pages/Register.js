@@ -50,7 +50,7 @@ export const Register = () => {
         };
         try {
             const response = await axios.post(
-                "http://localhost:8081/registerAPI",
+                `${process.env.URL_BACKEND}/registerAPI`,
                 data
             );
             document.getElementById("name_register").value = "";

@@ -26,7 +26,7 @@ export const ViewVideoCourse = () => {
     const handleGetDataLeson = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8081/course/getLessonCourseUseIdAPI?idLesson=${param.idvideo}`
+                `${process.env.URL_BACKEND}/course/getLessonCourseUseIdAPI?idLesson=${param.idvideo}`
             );
             if (response.data.data.length) {
                 setDataLesson(response.data.data[0]);
@@ -39,7 +39,7 @@ export const ViewVideoCourse = () => {
     const getModuleLesson = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8081/product/getModuleLessonDetailAPI?idCourse=${param.id}`
+                `${process.env.URL_BACKEND}/product/getModuleLessonDetailAPI?idCourse=${param.id}`
             );
             setDataModuleAndLesson(response.data.data);
         } catch (error) {
@@ -54,7 +54,7 @@ export const ViewVideoCourse = () => {
     }, [param.idvideo]);
     const getDataComment = async () => {
         const response = await axios.get(
-            `http://localhost:8081/comment/getDataCommentAPI?id_lesson=${param.idvideo}`
+            `${process.env.URL_BACKEND}/comment/getDataCommentAPI?id_lesson=${param.idvideo}`
         );
         getDtComment(
             response.data.data.map((el) => {
@@ -139,9 +139,9 @@ export const ViewVideoCourse = () => {
                         navigation(
                             `/detail-course/${
                                 param.id
-                            }/view-video/${lastIndex}?numberLesson=${Number(
-                                numberLesson
-                            ) - 1}`
+                            }/view-video/${lastIndex}?numberLesson=${
+                                Number(numberLesson) - 1
+                            }`
                         );
                         window.location.reload();
                         return;
@@ -165,9 +165,9 @@ export const ViewVideoCourse = () => {
                         navigation(
                             `/detail-course/${
                                 param.id
-                            }/view-video/${indexNext}?numberLesson=${Number(
-                                numberLesson
-                            ) + 1}`
+                            }/view-video/${indexNext}?numberLesson=${
+                                Number(numberLesson) + 1
+                            }`
                         );
                         window.location.reload();
                         return;
@@ -199,7 +199,7 @@ export const ViewVideoCourse = () => {
         };
         try {
             const response = await axios.post(
-                "http://localhost:8081/comment/postCommentAPI",
+                `${process.env.URL_BACKEND}/comment/postCommentAPI`,
                 data
             );
             notifySuccess("comment thành công !");
@@ -394,8 +394,9 @@ export const ViewVideoCourse = () => {
                                                   <li className="name-module_video">
                                                       <ul className="list-content-video">
                                                           <h3 className="title_list-video">
-                                                              {` Module ${index +
-                                                                  1}: ${
+                                                              {` Module ${
+                                                                  index + 1
+                                                              }: ${
                                                                   el.module_name
                                                               }`}
                                                           </h3>

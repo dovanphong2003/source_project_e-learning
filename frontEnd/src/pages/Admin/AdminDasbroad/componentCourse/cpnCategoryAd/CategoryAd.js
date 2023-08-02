@@ -17,7 +17,7 @@ export const CategoryAd = () => {
     const getDataCategory = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:8081/category/getCategoryAPI"
+                `${process.env.URL_BACKEND}/category/getCategoryAPI`
             );
             // console.log("res: ", response);
             setDataCategory(response.data.data);
@@ -32,7 +32,7 @@ export const CategoryAd = () => {
     const getCourseOfCategory = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:8081/category/getCourseOfCategoryAPI"
+                `${process.env.URL_BACKEND}/category/getCourseOfCategoryAPI`
             );
             // console.log("ressssssssssssssssssssssss: ", response);
             setCourseOfCategory(response.data.data);

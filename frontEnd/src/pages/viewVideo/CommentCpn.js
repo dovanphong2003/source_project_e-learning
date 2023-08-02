@@ -37,7 +37,7 @@ export const CommentCpn = ({
             };
             try {
                 const response = await axios.post(
-                    "http://localhost:8081/comment/postCommentAPI",
+                    `${process.env.URL_BACKEND}/comment/postCommentAPI`,
                     dataUser
                 );
                 console.log("res: ", response);
@@ -73,7 +73,7 @@ export const CommentCpn = ({
         try {
             const dataArrCommentChild = arrCommentChild.join(",");
             const response = await axios.delete(
-                `http://localhost:8081/comment/deleteDataCommentAPI?id_comment=${data.comment_id}&id_comment_child=${dataArrCommentChild}`
+                `${process.env.URL_BACKEND}/comment/deleteDataCommentAPI?id_comment=${data.comment_id}&id_comment_child=${dataArrCommentChild}`
             );
             getDataComment();
         } catch (error) {

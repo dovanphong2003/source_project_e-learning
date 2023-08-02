@@ -133,7 +133,7 @@ routeAPICourse.get("/getCourseOfUserAPI", getCourseOfUserAPI);
 routeAPICourse.post("/postLessonOneAPI", postLessonAPI);
 
 ///////////////////////////////////////////////
-const firebase = require("firebase/app"); // get firebase
+
 const {
     getStorage,
     ref,
@@ -142,6 +142,7 @@ const {
 } = require("firebase/storage");
 
 // conffig firebase ( lay config khi tao project tren firebase)
+const { initializeApp } = require("firebase/app");
 const firebaseConfig = {
     apiKey: "AIzaSyA1mvjVf45GUiyYy3RHT1NruFfXdiRgeDM",
     authDomain: "upload-video-to-firebase-f9d48.firebaseapp.com",
@@ -151,8 +152,7 @@ const firebaseConfig = {
     appId: "1:620684388407:web:615612e566f672f44b77b2",
     measurementId: "G-SVXHT8H28Y",
 };
-firebase.initializeApp(firebaseConfig); // connect config
-
+const app = initializeApp(firebaseConfig);
 const storageCourse = getStorage(); // get strorage
 
 // config upload file

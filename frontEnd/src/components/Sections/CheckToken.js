@@ -8,7 +8,7 @@ export const CheckToken = async () => {
     if (accessToken) {
         try {
             const responseVerify = await axios.post(
-                "http://localhost:8081/verifyTokenAPI",
+                `${process.env.URL_BACKEND}/verifyTokenAPI`,
                 { accessToken, location: location.pathname }
             );
             const dataResult = {

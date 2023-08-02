@@ -45,7 +45,7 @@ export const Login = () => {
         console.log("data:", data);
         try {
             const response = await axios.post(
-                "http://localhost:8081/loginAPI",
+                `${process.env.URL_BACKEND}/loginAPI`,
                 data,
                 { withCredentials: true } // bat cai nay len moi nhan cookie đc
             );
@@ -91,7 +91,7 @@ export const Login = () => {
                     checkLogin: "google",
                 };
                 const response = await axios.post(
-                    "http://localhost:8081/loginAPI",
+                    `${process.env.URL_BACKEND}/loginAPI`,
                     data,
                     { withCredentials: true } // bat cai nay len moi nhan cookie đc
                 );
@@ -117,7 +117,7 @@ export const Login = () => {
                         avatar_url: user.reloadUserInfo.photoUrl,
                     };
                     const response = await axios.post(
-                        "http://localhost:8081/registerAPI",
+                        `${process.env.URL_BACKEND}/registerAPI`,
                         data
                     );
 
@@ -129,7 +129,7 @@ export const Login = () => {
                             checkLogin: "google",
                         };
                         const response = await axios.post(
-                            "http://localhost:8081/loginAPI",
+                            `${process.env.URL_BACKEND}/loginAPI`,
                             data,
                             { withCredentials: true } // bat cai nay len moi nhan cookie đc
                         );
@@ -183,9 +183,8 @@ export const Login = () => {
             const user = result.user;
             console.log("info user: ", result.user);
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            const credential = FacebookAuthProvider.credentialFromResult(
-                result
-            );
+            const credential =
+                FacebookAuthProvider.credentialFromResult(result);
             // const accessToken = credential.accessToken;
             getInfoUser(user.reloadUserInfo); // get info user
 
@@ -197,7 +196,7 @@ export const Login = () => {
                     checkLogin: "google",
                 };
                 const response = await axios.post(
-                    "http://localhost:8081/loginAPI",
+                    `${process.env.URL_BACKEND}/loginAPI`,
                     data,
                     { withCredentials: true } // bat cai nay len moi nhan cookie đc
                 );
@@ -223,7 +222,7 @@ export const Login = () => {
                         avatar_url: user.reloadUserInfo.photoUrl,
                     };
                     const response = await axios.post(
-                        "http://localhost:8081/registerAPI",
+                        `${process.env.URL_BACKEND}/registerAPI`,
                         data
                     );
 
@@ -235,7 +234,7 @@ export const Login = () => {
                             checkLogin: "google",
                         };
                         const response = await axios.post(
-                            "http://localhost:8081/loginAPI",
+                            `${process.env.URL_BACKEND}/loginAPI`,
                             data,
                             { withCredentials: true } // bat cai nay len moi nhan cookie đc
                         );

@@ -9,7 +9,7 @@ export const DashBAdmin = () => {
     const [checkAdminRoot, setCheckAdminRoot] = useState(false);
     const getInfoAdmin = async () => {
         const response = await axios.get(
-            "http://localhost:8081/getInfoAdminAPI"
+            `${process.env.URL_BACKEND}/getInfoAdminAPI`
         );
         setDataAdmin(
             response.data.dataUser.map((el) => ({

@@ -40,7 +40,7 @@ export const AddStudentDB = () => {
         }
         try {
             const response = await axios.post(
-                "http://localhost:8081/createUserAPI",
+                `${process.env.URL_BACKEND}/createUserAPI`,
                 formData
             );
             notify("Tạo Thành Công !");

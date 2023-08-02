@@ -15,7 +15,7 @@ export const AddModuleCrouse = () => {
     //get data_course
     const getNameCourse = async () => {
         const response = await axios.get(
-            "http://localhost:8081/course/getNameAndIdAPI"
+            `${process.env.URL_BACKEND}/course/getNameAndIdAPI`
         );
         if (response.data) {
             setData(response.data.data);
@@ -43,7 +43,7 @@ export const AddModuleCrouse = () => {
             id_course: refCourse.current.getValue()[0].value,
         };
         const response = await axios.post(
-            "http://localhost:8081/course/postModuleAPI",
+            `${process.env.URL_BACKEND}/course/postModuleAPI`,
             data
         );
         console.log("ressssssssssssss: ", response);

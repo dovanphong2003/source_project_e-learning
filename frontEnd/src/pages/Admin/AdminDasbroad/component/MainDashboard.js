@@ -8,7 +8,7 @@ export const MainDashboard = () => {
     const getNumberData = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:8081/course/getDataForCourseAPI"
+                `${process.env.URL_BACKEND}/course/getDataForCourseAPI`
             );
             console.log("hehe boy: ", response);
             setDataNumberCourse(response.data.data[0]);

@@ -16,7 +16,7 @@ export const FilterSearch = ({ hdfilter, dataSearch, setDataSearch }) => {
     const handleCategory = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8081/category/getCategoryAPI`
+                `${process.env.URL_BACKEND}/category/getCategoryAPI`
             );
             setDataCategory(response.data.data);
         } catch (error) {

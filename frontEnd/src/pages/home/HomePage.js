@@ -17,7 +17,7 @@ export const HomePage = () => {
     const getCourseBSellerAndNews = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:8081/course/getCourseBSellerAndNewsAPI"
+                `${process.env.URL_BACKEND}/course/getCourseBSellerAndNewsAPI`
             );
             setDataCourseNews(response.data.data.dataCourseNews);
             setDataCourseSeller(response.data.data.dataCourseSeller);
@@ -34,7 +34,7 @@ export const HomePage = () => {
     const getCourseOfUser = async () => {
         try {
             const response = await axios.get(
-                `http://localhost:8081/course/getCourseOfUserAPI?isIdUser=${isIdUser}`
+                `${process.env.URL_BACKEND}/course/getCourseOfUserAPI?isIdUser=${isIdUser}`
             );
             if (response.data) {
                 setDataCourseOfUser(response.data.data);

@@ -11,10 +11,13 @@ import axios from "axios";
 export const DisplayAdmin = () => {
     const { checkVerify, setCheckVerify } = useContext(RoleContext);
     const [dataUser, setDaTaUser] = useState({});
+
     const getInfoUser = async () => {
         try {
             const getInfUserAPI = await axios.get(
-                `http://localhost:8081/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
+                `${
+                    process.env.URL_BACKEND
+                }/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
                     "accessToken"
                 )}`
             );

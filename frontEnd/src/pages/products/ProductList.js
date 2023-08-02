@@ -48,7 +48,7 @@ export const ProductList = () => {
     const getLengthAllCourse = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:8081/product/getLengthAllProductsAPI"
+                `${process.env.URL_BACKEND}/product/getLengthAllProductsAPI`
             );
             console.log("resssss: ", response);
             getLengthCourse(Number(response.data.lengthCourse));
@@ -63,7 +63,7 @@ export const ProductList = () => {
     const handlePageChange = async (limit, page) => {
         try {
             const respose = await axios.get(
-                `http://localhost:8081/product/getAllProductLimitAPI?limit=${limit}&page=${page}`
+                `${process.env.URL_BACKEND}/product/getAllProductLimitAPI?limit=${limit}&page=${page}`
             );
             console.log("resssssssss: ", respose);
             setProducts(respose.data.data);
