@@ -5,6 +5,9 @@ import { useContext, useState, useEffect } from "react";
 import { RoleContext } from "../../context/RoleContext";
 import { useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { VerifyToken } from "../../components/Sections/FunctionAll";
+import { ToastContainer, toast } from "react-toastify";
+
 export const CheckOut = ({
     totalPrice,
     data,
@@ -14,6 +17,7 @@ export const CheckOut = ({
 }) => {
     const { isIdUser } = useContext(RoleContext);
     const navigate = useNavigate();
+    const notifyError = (content) => toast.error(content);
     function generateRandomString(length) {
         const characters =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -30,6 +34,12 @@ export const CheckOut = ({
 
     // handle enrolment student with success pay
     const handleEnrollMent = async () => {
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
         const ArrId_course = data.map((el) => ({
             id_course: el.course_id,
             course_name: el.course_name,
@@ -85,6 +95,18 @@ export const CheckOut = ({
 
     return (
         <div className="container_all-checkout">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <div className="container_check-out-detail">
                 <div className="info-header-container-check_out">
                     <h2>Thông tin đơn hàng</h2>

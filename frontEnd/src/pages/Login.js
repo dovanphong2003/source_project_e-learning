@@ -1,28 +1,40 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import faceook from "../assets/image/facebookBlue.png";
 import google from "../assets/image/chrome.png";
 import "../assets/style/Login/login.css";
 import "../assets/style/responsiveCss/resLogin.css";
-
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners"; // loading
 import { ToastContainer, toast } from "react-toastify"; // toast
 import axios from "axios";
-import { RoleContext } from "../context/RoleContext";
-import { FireBaseLogin } from "../assets/firebase/ConfigLoginFirebase";
 
-// login google, facebook
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
 import {
     getAuth,
     GoogleAuthProvider,
-    signInWithRedirect,
     signInWithPopup,
-    getRedirectResult,
     FacebookAuthProvider,
 } from "firebase/auth";
 
-export const Login = () => {
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBrDM1AB-Aj0s6mUifgRlQUAZVb3SHylDg",
+    authDomain: "log-in-9626b.firebaseapp.com",
+    projectId: "log-in-9626b",
+    storageBucket: "log-in-9626b.appspot.com",
+    messagingSenderId: "736221508892",
+    appId: "1:736221508892:web:d00b21733aebc74bd3b6d9",
+};
+
+// Initialize Firebase
+const FireBaseLogin = initializeApp(firebaseConfig);
+
+export const Login = ({ setRoleUser }) => {
     const delay = async (ms) => {
         return new Promise((resolve) => setTimeout(resolve, ms));
     };
@@ -32,12 +44,11 @@ export const Login = () => {
     const navigate = useNavigate();
     const notify = (content) => toast.error(content);
     const notifySuccess = (content) => toast.success(content);
-    const { isRole, setUser, infoUser, getInfoUser } = useContext(RoleContext);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { email, password, checkLogin: "normal" };
         setIsLoading(true);
-        await delay(1000);
+        await delay(2000);
         setIsLoading(false);
         if (!email || !password) {
             return notify("vui lòng nhập đầy đủ thông tin !");
@@ -49,13 +60,11 @@ export const Login = () => {
                 data,
                 { withCredentials: true } // bat cai nay len moi nhan cookie đc
             );
-            console.log("user roel: ", response.data.role);
-            if (response.data.role) {
-                setUser(response.data.role);
-            }
             localStorage.setItem("accessToken", response.data.tokenAcessUser);
             localStorage.setItem("nameUser", response.data.name);
-            console.log("accessToken", response.data.tokenAcessUser);
+            localStorage.setItem("login", true);
+            localStorage.setItem("role", response.data.role);
+            setRoleUser(response.data.role);
             return navigate("/");
         } catch (error) {
             console.log("error: ", error);
@@ -81,7 +90,6 @@ export const Login = () => {
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user; // info user
-            getInfoUser(user.reloadUserInfo); // get info user
 
             // login --------------
             try {
@@ -95,14 +103,14 @@ export const Login = () => {
                     data,
                     { withCredentials: true } // bat cai nay len moi nhan cookie đc
                 );
-                if (response.data.role) {
-                    setUser(response.data.role);
-                }
                 localStorage.setItem(
                     "accessToken",
                     response.data.tokenAcessUser
                 );
                 localStorage.setItem("nameUser", response.data.name);
+                localStorage.setItem("login", true);
+                localStorage.setItem("role", response.data.role);
+                setRoleUser(response.data.role);
                 return navigate("/");
             } catch (error) {
                 // if user not defined account of website
@@ -133,14 +141,14 @@ export const Login = () => {
                             data,
                             { withCredentials: true } // bat cai nay len moi nhan cookie đc
                         );
-                        if (response.data.role) {
-                            setUser(response.data.role);
-                        }
                         localStorage.setItem(
                             "accessToken",
                             response.data.tokenAcessUser
                         );
                         localStorage.setItem("nameUser", response.data.name);
+                        localStorage.setItem("login", true);
+                        localStorage.setItem("role", response.data.role);
+                        setRoleUser(response.data.role);
                         return navigate("/");
                     } else {
                         notify("Đăng kí không thành công !");
@@ -163,7 +171,12 @@ export const Login = () => {
             const email = error.customData.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-            console.log("error handle login google: ", error);
+            console.log(
+                "error handle login google: ",
+                errorMessage,
+                "err code: ",
+                errorCode
+            );
             // ...
         }
     };
@@ -186,7 +199,6 @@ export const Login = () => {
             const credential =
                 FacebookAuthProvider.credentialFromResult(result);
             // const accessToken = credential.accessToken;
-            getInfoUser(user.reloadUserInfo); // get info user
 
             // login --------------
             try {
@@ -200,14 +212,14 @@ export const Login = () => {
                     data,
                     { withCredentials: true } // bat cai nay len moi nhan cookie đc
                 );
-                if (response.data.role) {
-                    setUser(response.data.role);
-                }
                 localStorage.setItem(
                     "accessToken",
                     response.data.tokenAcessUser
                 );
                 localStorage.setItem("nameUser", response.data.name);
+                localStorage.setItem("login", true);
+                localStorage.setItem("role", response.data.role);
+                setRoleUser(response.data.role);
                 return navigate("/");
             } catch (error) {
                 // if user not defined account of website
@@ -238,14 +250,14 @@ export const Login = () => {
                             data,
                             { withCredentials: true } // bat cai nay len moi nhan cookie đc
                         );
-                        if (response.data.role) {
-                            setUser(response.data.role);
-                        }
                         localStorage.setItem(
                             "accessToken",
                             response.data.tokenAcessUser
                         );
                         localStorage.setItem("nameUser", response.data.name);
+                        localStorage.setItem("login", true);
+                        localStorage.setItem("role", response.data.role);
+                        setRoleUser(response.data.role);
                         return navigate("/");
                     } else {
                         notify("Đăng kí không thành công !");

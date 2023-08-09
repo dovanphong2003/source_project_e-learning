@@ -30,8 +30,6 @@ export const ProductCart = ({ courseHaveBuy, data }) => {
     };
     useEffect(() => {
         if (data) {
-            console.log("dataaaa; ", data);
-            console.log(data.course_id);
             const getLessonCourse = async () => {
                 const url = `${process.env.REACT_APP_URL_BACKEND}/product/getLessonCourseAPI?idCourse=${data.course_id}`;
                 const response = await axios.get(url);

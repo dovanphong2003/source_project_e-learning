@@ -13,11 +13,14 @@ import { Info } from "../pages/infomation_user/Info";
 import { ShoppingCart } from "../pages/cart/ShoppingCart";
 import { PageNotFound } from "../components/PageNotFound";
 import { CategoryCourse } from "../pages/products/CategoryCourse";
-export const AllRoute = () => {
+export const AllRoute = ({ setRoleUser }) => {
     return (
         <Routes>
             <Route path="/" element={<HomePage />}></Route>
-            <Route path="log-in" element={<Login />}></Route>
+            <Route
+                path="log-in"
+                element={<Login setRoleUser={setRoleUser} />}
+            ></Route>
             <Route path="register" element={<Register />}></Route>
             <Route path="forgetPassword" element={<ForgetPw />}></Route>
             <Route path="all-Course" element={<ProductList />}></Route>

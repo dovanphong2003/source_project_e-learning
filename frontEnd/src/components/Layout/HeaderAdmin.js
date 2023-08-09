@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Logo from "../../assets/image/logo.png";
+import { useEffect, useState } from "react";
 import name_logo from "../../assets/image/name_logo.png";
 import "../../assets/style/headerAdmin.css";
 import "../../assets/style/responsiveCss/resHeaderAdmin.css";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { RoleContext } from "../../context/RoleContext";
-import { CheckToken } from "../Sections/CheckToken";
-import { RefeshToken } from "../Sections/RefeshToken";
 import { DeleteCookie } from "../Sections/DeleteToken";
-import { accessToken } from "../../context/AccessToken";
 import axios from "axios";
-export const HeaderAdmin = ({ dataUser }) => {
-    const { isAccess, getIsAccess } = useContext(accessToken);
-    useEffect(() => {
-        getIsAccess(localStorage.getItem("accessToken"));
-    }, []);
-    const { isRole, setUser, checkVerify, setCheckVerify } =
-        useContext(RoleContext);
+export const HeaderAdmin = ({ dataUser, setRoleUser }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [checkLogin, setCheckLogin] = useState(false);
@@ -29,31 +17,6 @@ export const HeaderAdmin = ({ dataUser }) => {
     const deleteRefreshCookie = async () => {
         const result = await DeleteCookie();
     };
-    const verifyToken = async () => {
-        console.log("bat dau verify");
-        try {
-            const response = await CheckToken();
-            if (response === "jwt expired") {
-                const newtoken = await RefeshToken();
-                getIsAccess(newtoken);
-                localStorage.setItem("accessToken", newtoken);
-            }
-            if (response === "jwt malformed") {
-                deleteRefreshCookie();
-                setCheckLogin(false);
-                navigate("/log-in");
-                return;
-            }
-            setCheckLogin(true);
-        } catch (error) {
-            // Xử lý lỗi nếu có
-            console.log("errrrrrrrrrrrrr: ", error);
-        }
-        console.log("ket thuc verify !");
-    };
-    if (localStorage.getItem("accessToken")) {
-        verifyToken();
-    }
 
     useEffect(() => {
         const fncCheckLogin = async () => {
@@ -78,9 +41,6 @@ export const HeaderAdmin = ({ dataUser }) => {
         };
         fncCheckLogin();
     }, [location.pathname]);
-    useEffect(() => {
-        setCheckVerify(!checkVerify);
-    }, [location.pathname, setCheckLogin]);
     return (
         <>
             <header className="header_bgrcl header-admin-all">
@@ -103,7 +63,13 @@ export const HeaderAdmin = ({ dataUser }) => {
                         <div
                             onClick={(e) => {
                                 e.preventDefault();
-                                setUser("virtualUser");
+                                if (
+                                    localStorage.getItem("role") &&
+                                    localStorage.getItem("role") === "admin"
+                                ) {
+                                    localStorage.setItem("role", "virtualUser");
+                                    setRoleUser("virtualUser");
+                                }
                                 navigate("/");
                             }}
                             className="log-in btn-header visite-website bgr-admin-header"
@@ -197,33 +163,11 @@ export const HeaderAdmin = ({ dataUser }) => {
                                         setHidden ? "" : "hidden"
                                     } `}
                                 >
-                                    {/* <button className="info-user-sig_in">
-                                        <span class="material-symbols-outlined">
-                                            account_circle
-                                        </span>
-                                        <span className="fnc-user">
-                                            <Link to="#">
-                                                Thông tin cá nhân
-                                            </Link>
-                                        </span>
-                                    </button>
-
-                                    <button className="info-user-sig_in">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                        <span className="fnc-user">
-                                            <Link to="#">
-                                                Chỉnh sửa trang cá nhân
-                                            </Link>
-                                        </span>
-                                    </button> */}
-
                                     <button
                                         onClick={(e) => {
                                             e.preventDefault();
                                             deleteRefreshCookie();
-                                            setUser("student");
+                                            setRoleUser("student");
                                             navigate("/log-in");
                                         }}
                                         className="info-user-sig_in"
@@ -344,33 +288,11 @@ export const HeaderAdmin = ({ dataUser }) => {
                                         setHidden ? "" : "hidden"
                                     } `}
                                 >
-                                    {/* <button className="info-user-sig_in">
-                                        <span class="material-symbols-outlined">
-                                            account_circle
-                                        </span>
-                                        <span className="fnc-user">
-                                            <Link to="#">
-                                                Thông tin cá nhân
-                                            </Link>
-                                        </span>
-                                    </button>
-
-                                    <button className="info-user-sig_in">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                        <span className="fnc-user">
-                                            <Link to="#">
-                                                Chỉnh sửa trang cá nhân
-                                            </Link>
-                                        </span>
-                                    </button> */}
-
                                     <button
                                         onClick={(e) => {
                                             e.preventDefault();
                                             deleteRefreshCookie();
-                                            setUser("student");
+                                            setRoleUser("student");
                                             navigate("/log-in");
                                         }}
                                         className="info-user-sig_in"
@@ -390,7 +312,13 @@ export const HeaderAdmin = ({ dataUser }) => {
                 <div
                     onClick={(e) => {
                         e.preventDefault();
-                        setUser("virtualUser");
+                        if (
+                            localStorage.getItem("role") &&
+                            localStorage.getItem("role") === "admin"
+                        ) {
+                            localStorage.setItem("role", "virtualUser");
+                            setRoleUser("virtualUser");
+                        }
                         navigate("/");
                     }}
                     className="log-in btn-header visite-website bgr-admin-header"

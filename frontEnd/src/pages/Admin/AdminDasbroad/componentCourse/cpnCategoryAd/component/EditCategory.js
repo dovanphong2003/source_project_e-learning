@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Await, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { VerifyToken } from "../../../../../../components/Sections/FunctionAll";
 export const EditCategory = () => {
     const param = useParams();
     const navigation = useNavigate();
@@ -25,6 +26,12 @@ export const EditCategory = () => {
 
     // handle remove mage have update
     const handleDeleteCategory = async (id, name_image) => {
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
         try {
             const response = await axios.delete(
                 `${process.env.REACT_APP_URL_BACKEND}/category/deleteCategoryAPI?id=null&name_image=${name_image}`
@@ -119,7 +126,12 @@ export const EditCategory = () => {
     // handle upload file....
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("hehe boy: ", formData.image);
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
         if (!formData.title && !formData.image) {
             notifyError("Không có thay đổi nào để chỉnh sửa !");
             // resetForm();

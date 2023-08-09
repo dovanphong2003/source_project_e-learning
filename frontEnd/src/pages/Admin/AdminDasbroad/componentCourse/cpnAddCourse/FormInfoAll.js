@@ -4,6 +4,7 @@ import { ResultForm } from "./ResultForm";
 import { SetInfoVideo } from "./SetInfoVideo";
 import { useCreateCourseDataContext } from "../../../../../context/CreateCourseData";
 import { ToastContainer, toast } from "react-toastify";
+import { VerifyToken } from "../../../../../components/Sections/FunctionAll";
 import axios from "axios";
 export const FormInfoAll = ({ form, setForm }) => {
     // get value
@@ -83,7 +84,7 @@ export const FormInfoAll = ({ form, setForm }) => {
     // when onlick submit
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("form::::: ", isData);
+
         if (isData.title_name === "") {
             notifyError("vui lòng nhập tiêu đề !");
             return;
@@ -109,6 +110,14 @@ export const FormInfoAll = ({ form, setForm }) => {
             notifyError("file không hợp lệ, vui lòng chọn lại file !");
             resestUrlAndImage();
             return "";
+        }
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Bạn không thể thực hiện tác vụ trên !");
+
+            // break function !
+            return;
         }
         const data = new FormData();
         data.append("title_name", isData.title_name);
@@ -139,7 +148,6 @@ export const FormInfoAll = ({ form, setForm }) => {
             );
             setProgress(0);
             resetForm();
-            console.log("resssssssssssss: ", response);
             notifySuccess("tạo thành công !");
         } catch (error) {
             console.log("err add category: ", error);

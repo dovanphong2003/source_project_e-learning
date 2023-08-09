@@ -3,6 +3,7 @@ import "../../../cssPageAdmin/courseCss/addCtgrCpn.css";
 import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { VerifyToken } from "../../../../../../components/Sections/FunctionAll";
 
 export const AđdCategory = () => {
     const [formData, setFormData] = useState({
@@ -72,7 +73,12 @@ export const AđdCategory = () => {
     // handle upload file....
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("data: ", formData);
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
         if (formData.title === "") {
             notifyError("vui lòng nhập tiêu đề !");
             // resetForm();
@@ -88,6 +94,7 @@ export const AđdCategory = () => {
             resetForm();
             return "";
         }
+
         const data = new FormData();
         data.append("title", formData.title);
         data.append("image", formData.image);

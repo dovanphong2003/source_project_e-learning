@@ -14,8 +14,17 @@ const pool = new Pool({
         rejectUnauthorized: false,
     },
 });
+// const pool = new Pool({
+//     host: "localhost",
+//     user: "postgres", // Thay đổi nếu bạn sử dụng tên người dùng khác.
+//     max: 20,
+//     port: 5433, // Sử dụng giá trị từ biến môi trường.
+//     password: "password", // Sử dụng giá trị từ biến môi trường.
+//     idleTimeoutMillis: 30000,
+//     connectionTimeoutMillis: 4000,
+// });
 
-pool.connect((err) => {
+pool.connect(async (err) => {
     if (err) {
         console.error("Error connecting to database:", err.message);
         console.error("info maition:", {

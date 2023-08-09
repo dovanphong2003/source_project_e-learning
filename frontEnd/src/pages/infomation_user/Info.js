@@ -3,24 +3,47 @@ import { InfoStudent } from "./InfoStudent";
 import "../../assets/style/info/infoUser.css";
 import "../../assets/style/responsiveCss/resInfoUser.css";
 import { InfoTeacher } from "./InfoTeacher";
-import { RoleContext } from "../../context/RoleContext";
-import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { RefeshToken } from "../../components/Sections/RefeshToken";
 import { useNavigate } from "react-router-dom";
-import { accessToken } from "../../context/AccessToken";
+import { VerifyToken } from "../../components/Sections/FunctionAll";
 export const Info = () => {
-    const { isAccess, getIsAccess } = useContext(accessToken);
     const param = useParams();
     const navigate = useNavigate();
-    const { isRole, setUser } = useContext(RoleContext);
+    const isRole = localStorage.getItem("role")
+        ? localStorage.getItem("role")
+        : null;
+
+    const [getDataIdUser, setDataIdUser] = useState({});
+    const fncgetInfoUserByAccessTokenAPI = async () => {
+        try {
+            const response = await axios.get(
+                `${
+                    process.env.REACT_APP_URL_BACKEND
+                }/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
+                    "accessToken"
+                )}`
+            );
+            setDataIdUser(response.data.data);
+        } catch (error) {
+            if (error.response.data.ec.message === "jwt expired") {
+                const funcVerifyToken = await VerifyToken();
+                await funcVerifyToken();
+                fncgetInfoUserByAccessTokenAPI();
+            }
+            console.log("error get id user: ", error);
+        }
+    };
+    useEffect(() => {
+        if (localStorage.getItem("accessToken")) {
+            fncgetInfoUserByAccessTokenAPI();
+        }
+    }, [localStorage.getItem("nameUser")]);
     const [dataUser, getDataUser] = useState({});
     const getInfoUser = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL_BACKEND}/getInfoUserAPI?idUser=${param.id}`
+                `${process.env.REACT_APP_URL_BACKEND}/getInfoUserAPI?idUser=${getDataIdUser.id}`
             );
             getDataUser(response.data.dataUser);
             return response.data.dataUser;
@@ -31,8 +54,10 @@ export const Info = () => {
         }
     };
     useEffect(() => {
-        getInfoUser();
-    }, [isAccess]);
+        if (getDataIdUser.id) {
+            getInfoUser();
+        }
+    }, [getDataIdUser.id]);
     if (isRole === "student") {
         return (
             <main>

@@ -4,7 +4,8 @@ const bytes = require("bytes");
 const multer = require("multer"); // use multer upload image
 const app = express();
 const cors = require("cors"); // cai dat goi http
-const port = process.env.PORT || 8081;
+// const port = process.env.PORT || 8081;
+const port = 8081;
 const bodyParser = require("body-parser");
 const { routerAPIUser } = require("./src/routes/routerAPIUser");
 const { routeAPIProduct } = require("./src/routes/routeProduct");
@@ -14,12 +15,10 @@ const { routeAPIEnrolment } = require("./src/routes/routeEnrolment");
 const { routerComment } = require("./src/routes/routeComment");
 const cookieParser = require("cookie-parser");
 const corsOptions = {
-    origin: [process.env.URL_FRONTEND, "http://localhost:3000"],
+    origin: [process.env.URL_FRONTEND],
     credentials: true,
 };
-// Import the functions you need from the SDKs you need
 
-// Initialize Firebase
 app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions));
 app.use(express.json());

@@ -1,54 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
-// import dotenv from "dotenv";
-import Logo from "../../assets/image/logo.png";
+import { useContext, useEffect, useState } from "react";
 import name_logo from "../../assets/image/name_logo.png";
 import "../../assets/style/styleHeader.css";
 import "../../assets/style/responsiveCss/resHeader.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { CheckToken } from "../Sections/CheckToken";
-import { RefeshToken } from "../Sections/RefeshToken";
 import { DeleteCookie } from "../Sections/DeleteToken";
-import { Loading } from "./Loading";
 import Swal from "sweetalert2";
-import { RoleContext } from "../../context/RoleContext";
-import { accessToken } from "../../context/AccessToken";
 import { CartContext } from "../../context/CartContext";
+import { VerifyToken } from "../Sections/FunctionAll";
 import axios from "axios";
-export const Header = () => {
-    console.log("hehe boy:", `${process.env.REACT_APP_URL_BACKEND}`);
-    const { isAccess, getIsAccess } = useContext(accessToken);
-    useEffect(() => {
-        getIsAccess(localStorage.getItem("accessToken"));
-    }, []);
-    const { isRole, setUser, isIdUser, getIdUser, checkVerify } =
-        useContext(RoleContext);
+export const Header = ({ setRoleUser }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [checkLogin, setCheckLogin] = useState(false);
-    const [hd, setHd] = useState(false);
 
     // delete Refresh Cookie
     const deleteRefreshCookie = async () => {
         const result = await DeleteCookie();
     };
     useEffect(() => {
-        if (hd === true) {
-            setHd(false);
-        }
-        // const time = 2000 + Math.floor(Math.random() * 4) * 1000;
-        const time = 1000;
-        const reloadPage = async () => {
-            await setTimeout(() => {
-                setHd(true);
-            }, time);
-        };
-        if (location.pathname === "/") {
-            reloadPage();
-        } else {
-            setHd(true);
-        }
-
         const fncCheckLogin = async () => {
             if (
                 !(
@@ -73,54 +43,64 @@ export const Header = () => {
         };
         fncCheckLogin();
     }, [location.pathname]);
-    if (localStorage.getItem("accessToken")) {
-        const verifyToken = async () => {
-            try {
-                const response = await CheckToken();
-                if (response === "jwt expired") {
-                    const newtoken = await RefeshToken();
-                    getIsAccess(newtoken);
-                    localStorage.setItem("accessToken", newtoken);
-                }
-                if (response === "jwt malformed") {
-                    deleteRefreshCookie();
-                    setCheckLogin(false);
-                    navigate("/log-in");
-                    // const newtoken = await RefeshToken();
-                    // getIsAccess(newtoken);
-                    return;
-                }
-                getIdUser(response.id);
-                if (isRole !== "virtualUser") {
-                    setUser(response.role);
-                }
-                setCheckLogin(true);
-            } catch (error) {
-                // Xử lý lỗi nếu có
-                console.log("errrrrrrrrrrrrr: ", error);
+
+    // get info user - id
+    const [dataUser, setDataUser] = useState({});
+    const fncgetInfoUserByAccessTokenAPI = async () => {
+        try {
+            const response = await axios.get(
+                `${
+                    process.env.REACT_APP_URL_BACKEND
+                }/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
+                    "accessToken"
+                )}`
+            );
+            setDataUser(response.data.data);
+        } catch (error) {
+            if (error.response.data.ec.message === "jwt expired") {
+                const funcVerifyToken = await VerifyToken();
+                await funcVerifyToken();
+                fncgetInfoUserByAccessTokenAPI();
             }
-        };
-        if (checkVerify) {
-            verifyToken();
-        } else {
-            verifyToken();
+            console.log("error get id user: ", error);
         }
-    } else {
-        console.log("không có access token");
-    }
-
-    // get data API categories
-    const [categories, setCategories] = useState([]);
-    const dataCategories = async () => {
-        const response = await axios.get(
-            `${process.env.REACT_APP_URL_BACKEND}/product/getAllProductAPI`
-        );
-
-        setCategories(response.data.data);
     };
     useEffect(() => {
-        dataCategories();
-    }, []);
+        if (localStorage.getItem("accessToken")) {
+            fncgetInfoUserByAccessTokenAPI();
+        }
+    }, [localStorage.getItem("nameUser")]);
+
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        if (
+            localStorage.getItem("accessToken") &&
+            localStorage.getItem("login") === "true"
+        ) {
+            console.log("login true");
+            setCheckLogin(true);
+        } else {
+            console.log("login false");
+
+            setCheckLogin(false);
+        }
+    }, [location.pathname]);
+    const DataCategories = async () => {
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_URL_BACKEND}/product/getAllProductAPI`
+            );
+
+            if (response.data && response.data.data) {
+                setCategories(response.data.data);
+            }
+        } catch (error) {
+            console.log("error: ", error);
+        }
+    };
+    useEffect(() => {
+        DataCategories();
+    }, [location.pathname]);
     const nameUser = localStorage.getItem("nameUser");
 
     // get cartItem
@@ -128,24 +108,22 @@ export const Header = () => {
     const funcGetItemCartUser = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL_BACKEND}/course/getCartItemsAPI?isIdUser=${isIdUser}`
+                `${process.env.REACT_APP_URL_BACKEND}/course/getCartItemsAPI?isIdUser=${dataUser.id}`
             );
-            console.log("res:", response);
             fncSetCartOrigin(response.data.data);
         } catch (error) {
             console.log("error get item cart user: ", error);
         }
     };
     useEffect(() => {
-        if (!cartOrigin.length && isIdUser) {
+        if (!cartOrigin.length && dataUser.id) {
             funcGetItemCartUser();
         }
-    }, [isIdUser]);
+    }, [dataUser.id]);
     const [hiddenMenu, setHiddenMenu] = useState(true);
     const [hiddenCategory, setHiddenCategory] = useState(true);
     return (
         <header>
-            <Loading hd={hd} />
             <div className="header-flex header-all">
                 <Link to="/" className="logo">
                     <img
@@ -232,11 +210,14 @@ export const Header = () => {
                             <span>Đăng Kí</span>
                         </Link>
                     </div>
-                ) : isRole === "virtualUser" ? (
+                ) : dataUser.role === "admin" &&
+                  localStorage.getItem("role") &&
+                  localStorage.getItem("role") === "virtualUser" ? (
                     <div className="log-in btn-header">
                         <Link
                             onClick={() => {
-                                setUser("admin");
+                                localStorage.setItem("role", "admin");
+                                setRoleUser("admin");
                             }}
                             className="log_in-header"
                             to="/"
@@ -245,14 +226,6 @@ export const Header = () => {
                         </Link>
                     </div>
                 ) : (
-                    // <button className="admin-website_header">
-                    //     <Link to="">
-                    //         {" "}
-                    //         <span className="link-admin-website">
-                    //             Quản Trị Viên
-                    //         </span>
-                    //     </Link>
-                    // </button>
                     <div className="info_user">
                         <span>
                             Xin chào, {nameUser ? nameUser : "Xin Chào !"}
@@ -272,7 +245,7 @@ export const Header = () => {
                                     edit
                                 </span>
                                 <span className="fnc-user">
-                                    <Link to={`/info-user/${isIdUser}`}>
+                                    <Link to={`/info-user/${dataUser.id}`}>
                                         Thông tin cá nhân
                                     </Link>
                                 </span>
@@ -283,6 +256,7 @@ export const Header = () => {
                                     e.preventDefault();
                                     deleteRefreshCookie();
                                     setCheckLogin(false);
+                                    setRoleUser("student");
                                     navigate("/log-in");
                                 }}
                                 className="info-user-sig_in"
@@ -432,11 +406,14 @@ export const Header = () => {
                             </Link>
                         </div>
                     </div>
-                ) : isRole === "virtualUser" ? (
+                ) : dataUser.role === "admin" &&
+                  localStorage.getItem("role") &&
+                  localStorage.getItem("role") === "virtualUser" ? (
                     <div className="log-in btn-header bnt-go-page-admin">
                         <Link
                             onClick={() => {
-                                setUser("admin");
+                                localStorage.setItem("role", "admin");
+                                setRoleUser("admin");
                             }}
                             className="log_in-header"
                             to="/"
@@ -474,7 +451,7 @@ export const Header = () => {
                                         }}
                                         className="fnc-user"
                                     >
-                                        <Link to={`/info-user/${isIdUser}`}>
+                                        <Link to={`/info-user/${dataUser.id}`}>
                                             Thông tin cá nhân
                                         </Link>
                                     </span>
@@ -487,6 +464,7 @@ export const Header = () => {
                                         setCheckLogin(false);
                                         navigate("/log-in");
                                         setHiddenMenu(!hiddenMenu);
+                                        setRoleUser("student");
                                     }}
                                     className="info-user-sig_in"
                                 >

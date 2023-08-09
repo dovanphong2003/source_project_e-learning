@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./cssPageAdmin/courseCss/add_file_video.css";
 import { ToastContainer, toast } from "react-toastify"; // toast
+import { VerifyToken } from "../../../components/Sections/FunctionAll";
 export const AddLessonCourse = () => {
     // message notication
     const notifyError = (content) => toast.error(content);
@@ -107,10 +108,7 @@ export const AddLessonCourse = () => {
         selectInputRefs.current[2].clearValue();
         if (hiddenType1) {
             setUrl("");
-            console.log("are you ok ?");
             document.getElementById("title_form-create_course").value = "";
-            console.log("are you ok ?");
-
             setHiddenType1(false);
         } else {
             getFileVideo({});
@@ -121,77 +119,85 @@ export const AddLessonCourse = () => {
     // handle upload file....
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (
-            !title ||
-            !selectInputRefs.current[0].getValue().length ||
-            !selectInputRefs.current[1].getValue().length
-        ) {
-            notifyError("Vui lòng điền đầy đủ thông tin!");
-            return " ";
-        }
-        if (hiddenType1 && !selectInputRefs.current[2].getValue().length) {
-            notifyError("Vui lòng điền đầy đủ thông tinnnn!");
-            return "";
-        }
-        if (hiddenType2 && !fileVideo.name) {
-            notifyError("Vui lòng chọn file video !");
-            return "";
-        }
-        if (hiddenType2 && breakk) {
-            notifyError("File không hợp lệ, chú ý định dạng !");
-            return "";
-        }
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (resultVerify) {
+            if (
+                !title ||
+                !selectInputRefs.current[0].getValue().length ||
+                !selectInputRefs.current[1].getValue().length
+            ) {
+                notifyError("Vui lòng điền đầy đủ thông tin!");
+                return " ";
+            }
+            if (hiddenType1 && !selectInputRefs.current[2].getValue().length) {
+                notifyError("Vui lòng điền đầy đủ thông tinnnn!");
+                return "";
+            }
+            if (hiddenType2 && !fileVideo.name) {
+                notifyError("Vui lòng chọn file video !");
+                return "";
+            }
+            if (hiddenType2 && breakk) {
+                notifyError("File không hợp lệ, chú ý định dạng !");
+                return "";
+            }
 
-        const data = new FormData();
-        data.append("title", title);
-        data.append("module", selectInputRefs.current[1].getValue()[0].value);
-        data.append(
-            "type_video",
-            selectInputRefs.current[2].getValue()[0].value
-        );
-        if (hiddenType1) {
-            data.append("url_video", url);
-        } else {
-            data.append("file_video", fileVideo);
-        }
-        const formDataObject = {};
-        if (hiddenType1) {
-            for (const [key, value] of data.entries()) {
-                formDataObject[key] = value;
-            }
-        }
-        try {
-            if (!formDataObject.title) {
-                console.log("bat dau upload");
-                setStartRun(true);
-                const response = await axios.post(
-                    `${process.env.REACT_APP_URL_BACKEND}/course/postLessonTwoAPI`,
-                    data
-                );
-                console.log("khong co loi gi ca ban oi ");
-                notifySuccess("tạo thành công !");
-                setStartRun(false);
-                setProgress(0);
-                refeshData();
+            const data = new FormData();
+            data.append("title", title);
+            data.append(
+                "module",
+                selectInputRefs.current[1].getValue()[0].value
+            );
+            data.append(
+                "type_video",
+                selectInputRefs.current[2].getValue()[0].value
+            );
+            if (hiddenType1) {
+                data.append("url_video", url);
             } else {
-                setStartRun(true);
-                const response = await axios.post(
-                    `${process.env.REACT_APP_URL_BACKEND}/course/postLessonOneAPI`,
-                    formDataObject
-                );
-                notifySuccess("tạo thành công !");
+                data.append("file_video", fileVideo);
+            }
+            const formDataObject = {};
+            if (hiddenType1) {
+                for (const [key, value] of data.entries()) {
+                    formDataObject[key] = value;
+                }
+            }
+            try {
+                if (!formDataObject.title) {
+                    console.log("bat dau upload");
+                    setStartRun(true);
+                    const response = await axios.post(
+                        `${process.env.REACT_APP_URL_BACKEND}/course/postLessonTwoAPI`,
+                        data
+                    );
+                    notifySuccess("tạo thành công !");
+                    setStartRun(false);
+                    setProgress(0);
+                    refeshData();
+                } else {
+                    setStartRun(true);
+                    const response = await axios.post(
+                        `${process.env.REACT_APP_URL_BACKEND}/course/postLessonOneAPI`,
+                        formDataObject
+                    );
+                    notifySuccess("tạo thành công !");
+                    setStartRun(false);
+                    setProgress(0);
+                    refeshData();
+                }
+            } catch (error) {
                 setStartRun(false);
                 setProgress(0);
                 refeshData();
+                if (error.response.data) {
+                    notifyError(error.response.data.error);
+                }
+                console.log("LOI LON ROI ANH BAN: ", error);
             }
-        } catch (error) {
-            setStartRun(false);
-            setProgress(0);
-            refeshData();
-            if (error.response.data) {
-                notifyError(error.response.data.error);
-            }
-            console.log("LOI LON ROI ANH BAN: ", error);
+        } else {
+            notifyError("Bạn không thể thực hiện hành động trên !");
         }
     };
 

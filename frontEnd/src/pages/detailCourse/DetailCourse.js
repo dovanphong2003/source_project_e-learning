@@ -12,14 +12,12 @@ import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
-import { RefeshToken } from "../../components/Sections/RefeshToken";
-import { accessToken } from "../../context/AccessToken";
+import { VerifyToken } from "../../components/Sections/FunctionAll";
 export const DetailCourse = () => {
     const param = useParams();
     const notifyError = (content) => toast.error(content);
     const notifySuccess = (content) => toast.success(content);
     const notifyWarning = (content) => toast.warning(content);
-    const { isAccess, getIsAccess } = useContext(accessToken);
     // const checkBuyCourse... có thể dùng context để check xem user đã mua khóa học chưa
     const [dataModulAndLesson, setDataModuleAndLesson] = useState([]);
     const [dataInfoCourse, setDataInfoCourse] = useState({});
@@ -110,9 +108,8 @@ export const DetailCourse = () => {
             setDataUser(response.data.data);
         } catch (error) {
             if (error.response.data.ec.message === "jwt expired") {
-                const newtoken = await RefeshToken();
-                getIsAccess(newtoken);
-                localStorage.setItem("accessToken", newtoken);
+                const funcVerifyToken = await VerifyToken();
+                await funcVerifyToken();
             }
             console.log("error get id user: ", error);
         }
@@ -136,6 +133,12 @@ export const DetailCourse = () => {
     // handle add course -> cart
     const handleAddCart = async (event) => {
         event.preventDefault();
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL_BACKEND}/course/addCourseToCartAPI?idCourse=${param.id}&id_user=${dataUser.id}`
@@ -168,6 +171,11 @@ export const DetailCourse = () => {
     }, [checkhandle, dataUser]);
     const [dataCourseOfUser, setDataCourseOfUser] = useState([false]);
     const checkCouseOfUser = async () => {
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            return;
+        }
         try {
             const resposne = await axios.get(
                 `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentOfUserAPI?user_id=${dataUser.id}`
@@ -199,7 +207,6 @@ export const DetailCourse = () => {
         // Clean up the timer on component unmount
         return () => clearTimeout(timer);
     }, []);
-    console.log("bi an 1: ", resultData);
     return (
         <main>
             <ToastContainer

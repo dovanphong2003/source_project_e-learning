@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./addEnvirolment.css";
 import { ToastContainer, toast } from "react-toastify";
+import { VerifyToken } from "../../../../components/Sections/FunctionAll";
 
 export const AddEnvirolment = () => {
     const listRef = useRef([useRef(null), useRef(null)]);
@@ -48,6 +49,12 @@ export const AddEnvirolment = () => {
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
         if (
             !listRef.current[0].getValue().length ||
             !listRef.current[1].getValue().length

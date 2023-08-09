@@ -8,7 +8,7 @@ import "../../assets/style/responsiveCss/resDashBroadAd.css";
 import { RoleContext } from "../../context/RoleContext";
 import axios from "axios";
 
-export const DisplayAdmin = () => {
+export const DisplayAdmin = ({ setRoleUser }) => {
     const { checkVerify, setCheckVerify } = useContext(RoleContext);
     const [dataUser, setDaTaUser] = useState({});
 
@@ -34,7 +34,7 @@ export const DisplayAdmin = () => {
     console.log("data user: ", dataUser);
     return (
         <>
-            <HeaderAdmin dataUser={dataUser} />
+            <HeaderAdmin dataUser={dataUser} setRoleUser={setRoleUser} />
             <main className="main_dash-board">
                 <div className="dash-board">
                     <Navigationdb dataUser={dataUser} forEl="all" />

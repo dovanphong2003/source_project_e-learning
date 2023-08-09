@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "../../assets/style/viewVideo/viewVideoCr.css";
 import "../../assets/style/responsiveCss/resViewVideoCourse.css";
 import ReactQuill from "react-quill";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import imageDemo from "../../assets/image/image_demo.png";
@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify"; // toast
 import { RoleContext } from "../../context/RoleContext";
 import { useContext } from "react";
 import { CommentCpn } from "./CommentCpn";
+import { VerifyToken } from "../../components/Sections/FunctionAll";
 import axios from "axios";
 export const ViewVideoCourse = () => {
     const clearComment = useRef(null);
@@ -182,6 +183,12 @@ export const ViewVideoCourse = () => {
     const { isIdUser, getIdUser } = useContext(RoleContext);
     const handlePostComment = async (event) => {
         event.preventDefault();
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyWarning("Không thể thực hiện hành động trên !");
+            return;
+        }
         if (!value || value === "<p><br></p>") {
             notifyWarning("Vui lòng điền nội dung comment !");
             return;

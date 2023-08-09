@@ -1,15 +1,15 @@
 import React from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 export const CheckToken = async () => {
-    const location = useLocation();
+    // const location = useLocation();
     const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
         try {
             const responseVerify = await axios.post(
                 `${process.env.REACT_APP_URL_BACKEND}/verifyTokenAPI`,
-                { accessToken, location: location.pathname }
+                { accessToken }
             );
             const dataResult = {
                 id: responseVerify.data.idUser,

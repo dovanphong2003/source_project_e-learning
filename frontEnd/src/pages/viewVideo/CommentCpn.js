@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import Parser from "html-react-parser"; // change string ( html ) --> to html
 import { ToastContainer, toast } from "react-toastify"; // toast
 import axios from "axios";
-import { RoleContext } from "../../context/RoleContext";
+import { VerifyToken } from "../../components/Sections/FunctionAll";
 export const CommentCpn = ({
     data,
     getDataComment,
@@ -14,12 +14,17 @@ export const CommentCpn = ({
 }) => {
     const [value2, setValue2] = useState("");
     const [setHidden, checkSetHidden] = useState(true);
-    const refDivParent2 = useRef(null);
     const notifyWarning = (content) => toast.warning(content);
     const notifySuccess = (content) => toast.success(content);
     const refComment = useRef(null);
     const handleRepComment = async (event) => {
         event.preventDefault();
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyWarning("Không thể thực hiện hành động trên !");
+            return;
+        }
         if (!value2 || value2 === "<p><br></p>") {
             notifyWarning("Vui lòng điền nội dung comment !");
             return;
@@ -49,10 +54,10 @@ export const CommentCpn = ({
                 editor.setContents([]);
                 checkSetHidden(!setHidden);
             } catch (error) {
+                // check comment error
                 notifyWarning("Đã xảy ra lỗi, comment không thành công !");
                 console.log("Err: ", error);
             }
-            // check comment error
         }
     };
     const arrCommentChild = [];

@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify"; // toast
 import { useState } from "react";
 import Select from "react-select";
 import axios from "axios";
+import { VerifyToken } from "../../../../../components/Sections/FunctionAll";
 export const AddStudentDB = () => {
     const notify = (content) => toast.success(content);
     const notifyErr = (content) => toast.error(content);
@@ -26,7 +27,12 @@ export const AddStudentDB = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("form data: ", formData);
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyErr("Không thể thực hiện hành động trên !");
+            return;
+        }
         if (
             !formData.password ||
             !formData.email ||

@@ -6,18 +6,30 @@ import "./styleListCourse.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { VerifyToken } from "../../../../../components/Sections/FunctionAll";
 export const ListCourse = ({ infoBasicCourse }) => {
     const [clHidden, setClHidden] = useState(false);
     const notifyError = (content) => toast.error(content);
     const notifySuccess = (content) => toast.success(content);
     const setBestSeller = async (id_course, action) => {
-        const response = await axios.post(
-            `${process.env.REACT_APP_URL_BACKEND}/course/setBesellerAPI`,
-            { id_course, action }
-        );
-        if (response.data) {
-            notifySuccess(response.data.message);
-        } else {
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
+        try {
+            const response = await axios.post(
+                `${process.env.REACT_APP_URL_BACKEND}/course/setBesellerAPI`,
+                { id_course, action }
+            );
+            if (response.data) {
+                notifySuccess(response.data.message);
+            } else {
+                notifyError("có lỗi khi thay đổi");
+            }
+        } catch (error) {
+            console.log("error handle set bestseller: ", error);
             notifyError("có lỗi khi thay đổi");
         }
     };

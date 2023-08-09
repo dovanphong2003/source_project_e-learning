@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useRef } from "react";
+import { VerifyToken } from "../../../components/Sections/FunctionAll";
 export const AddModuleCrouse = () => {
     // message notication
     const notifyError = (content) => toast.error(content);
@@ -31,26 +32,32 @@ export const AddModuleCrouse = () => {
     }, []);
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("data title; ", nameModule);
-        console.log("value select: ", refCourse.current.getValue());
-        console.log(refCourse.current.getValue().length);
-        if (refCourse.current.getValue().length === 0 || !nameModule) {
-            notifyError("Vui lòng nhập đầy đủ thông tin !");
-            return;
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (resultVerify) {
+            try {
+                if (refCourse.current.getValue().length === 0 || !nameModule) {
+                    notifyError("Vui lòng nhập đầy đủ thông tin !");
+                    return;
+                }
+                const data = {
+                    name_module: nameModule,
+                    id_course: refCourse.current.getValue()[0].value,
+                };
+                const response = await axios.post(
+                    `${process.env.REACT_APP_URL_BACKEND}/course/postModuleAPI`,
+                    data
+                );
+                document.getElementById("title_form-create_course").value = "";
+                setNameModule("");
+                notifySuccess("tạo thành công !");
+                refCourse.current.clearValue();
+            } catch (error) {
+                notifyError("Tạo không thành công, đã xảy ra lỗi !");
+            }
+        } else {
+            notifyError("Bạn không thể thực hiện hành động trên !");
         }
-        const data = {
-            name_module: nameModule,
-            id_course: refCourse.current.getValue()[0].value,
-        };
-        const response = await axios.post(
-            `${process.env.REACT_APP_URL_BACKEND}/course/postModuleAPI`,
-            data
-        );
-        console.log("ressssssssssssss: ", response);
-        document.getElementById("title_form-create_course").value = "";
-        setNameModule("");
-        notifySuccess("tạo thành công !");
-        refCourse.current.clearValue();
     };
     return (
         <form
