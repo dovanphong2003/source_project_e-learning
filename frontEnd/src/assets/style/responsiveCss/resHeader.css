@@ -8,7 +8,7 @@
         display: none;
     }
     .info_was-sig-in {
-        right: 0;
+        right: 0 !important;
         top: 40px;
         left: auto !important;
     }
@@ -33,7 +33,6 @@
     }
     .info_was-sig-in {
         display: block;
-        right: -40px !important;
         top: 20px;
     }
     .info-user-sig_in {
@@ -76,7 +75,7 @@
         width: 100px;
     }
     .log_in-header span {
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 
@@ -173,7 +172,7 @@
         border: none;
         background-color: #fff;
         color: #000;
-        width: 100%;
+        border: 1px solid #1c1d1f;
     }
     .sign_up-header {
         color: #000;

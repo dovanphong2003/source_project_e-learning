@@ -4,6 +4,26 @@
     .header-admin-all {
         display: none;
     }
+    .cart {
+        margin-left: 0;
+    }
+    .log_in-header {
+        width: 100% !important;
+        text-align: center;
+    }
+    .header-admin {
+        min-height: 90px !important;
+    }
+    .frame-admin {
+        max-height: 90px !important;
+    }
+    .info-frame-admin span {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Số dòng hiển thị */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Hiển thị dấu ... */
+    }
     .bgr-admin-header {
         width: auto;
         margin-left: 0 !important;

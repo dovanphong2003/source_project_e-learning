@@ -7,11 +7,9 @@ import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { DeleteCookie } from "../Sections/DeleteToken";
-import axios from "axios";
-export const HeaderAdmin = ({ dataUser, setRoleUser }) => {
+export const HeaderAdmin = ({ setRoleUser }) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [checkLogin, setCheckLogin] = useState(false);
     const [clickDashbroad, setClickDashbroad] = useState(false);
     const [setHidden, checkSetHidden] = useState(false);
     const deleteRefreshCookie = async () => {
@@ -34,7 +32,6 @@ export const HeaderAdmin = ({ dataUser, setRoleUser }) => {
                     text: "Vui lòng đăng nhập 😄",
                 }).then(() => {
                     deleteRefreshCookie();
-                    setCheckLogin(false);
                     navigate("/log-in");
                 });
             }
@@ -153,8 +150,8 @@ export const HeaderAdmin = ({ dataUser, setRoleUser }) => {
                             />
                             <div className="info-frame-admin">
                                 <span>
-                                    {dataUser.name
-                                        ? dataUser.name
+                                    {localStorage.getItem("nameUser")
+                                        ? localStorage.getItem("nameUser")
                                         : "Loading..."}
                                 </span>
                                 <p>Admin</p>
@@ -278,8 +275,8 @@ export const HeaderAdmin = ({ dataUser, setRoleUser }) => {
                             />
                             <div className="info-frame-admin">
                                 <span>
-                                    {dataUser.name
-                                        ? dataUser.name
+                                    {localStorage.getItem("nameUser")
+                                        ? localStorage.getItem("nameUser")
                                         : "Loading..."}
                                 </span>
                                 <p>Admin</p>

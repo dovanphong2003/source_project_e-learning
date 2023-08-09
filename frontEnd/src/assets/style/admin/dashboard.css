@@ -26,6 +26,8 @@
     padding: 40px 0px;
 }
 .image-name_hd-nav-db span {
+    width: 100%;
+    text-align: center;
     margin-top: 10px;
     font-size: 14px;
 }

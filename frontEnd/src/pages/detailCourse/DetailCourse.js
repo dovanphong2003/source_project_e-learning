@@ -13,6 +13,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import { VerifyToken } from "../../components/Sections/FunctionAll";
+import Swal from "sweetalert2";
+
 export const DetailCourse = () => {
     const param = useParams();
     const notifyError = (content) => toast.error(content);
@@ -150,6 +152,56 @@ export const DetailCourse = () => {
             notifyError("Đã có lỗi xảy ra !");
         }
     };
+
+    // if success get course free
+    const handleCheckOutSuccess = () => {
+        Swal.fire({
+            icon: "success",
+            title: "Xác nhận Hoàn Tất",
+            text: "Bạn đã nhận thành công !",
+        });
+        // handle user success get course
+        try {
+            navigation("/");
+        } catch (error) {
+            console.log("error handle user success !", error);
+        }
+    };
+    const id_course = param.id;
+
+    // handle get course free
+    const handleAddCourseFree = async (event) => {
+        event.preventDefault();
+        if (!dataInfoCourse.course_name || !dataUser.id) {
+            notifyError("Vui lòng thử lại sau giây lát !");
+            return;
+        }
+        const funcVerifyToken = await VerifyToken();
+        const resultVerify = await funcVerifyToken();
+        if (!resultVerify) {
+            notifyError("Không thể thực hiện hành động trên !");
+            return;
+        }
+        const dataPost = {
+            id_student: dataUser.id,
+            ArrId_course: [
+                {
+                    id_course: id_course,
+                    course_name: dataInfoCourse.course_name,
+                },
+            ],
+        };
+        try {
+            await axios.post(
+                `${process.env.REACT_APP_URL_BACKEND}/enrolment/upDataEnrolmentsAPI`,
+                dataPost
+            );
+            handleCheckOutSuccess();
+        } catch (error) {
+            console.log("error handle add course free: ", error);
+        }
+    };
+
     const handleDeleteCart = async (event) => {
         event.preventDefault();
 
@@ -457,14 +509,13 @@ export const DetailCourse = () => {
                                     >
                                         <button>Chưa có bài học</button>
                                     </a>
+                                ) : dataInfoCourse.course_price === "free" ? (
+                                    <a onClick={handleAddCourseFree} href="#">
+                                        <button>Lấy khóa học miễn phí</button>
+                                    </a>
                                 ) : (
                                     <a onClick={handleAddCart} href="#">
-                                        <button>
-                                            {dataInfoCourse.course_price ===
-                                            "free"
-                                                ? "Lấy khóa học miễn phí"
-                                                : "Thêm vào giỏ hàng"}
-                                        </button>
+                                        <button>Thêm vào giỏ hàng</button>
                                     </a>
                                 )}
                             </div>

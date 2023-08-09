@@ -80,29 +80,33 @@ export const HomePage = () => {
     return (
         <main>
             <Banner />
-            {dataCourseOfUser[0] !== false ? (
-                dataCourseOfUser.length ? (
-                    <div className="course_our_user">
-                        <div className="container-main">
-                            <h2 style={{ color: "#da0b4e" }}>
-                                Khóa Học Của Tôi
-                            </h2>
-                            <ListCardOfUser data={dataCourseOfUser} />
+            {localStorage.getItem("nameUser") ? (
+                dataCourseOfUser[0] !== false ? (
+                    dataCourseOfUser.length ? (
+                        <div className="course_our_user">
+                            <div className="container-main">
+                                <h2 style={{ color: "#da0b4e" }}>
+                                    Khóa Học Của Tôi
+                                </h2>
+                                <ListCardOfUser data={dataCourseOfUser} />
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        ""
+                    )
                 ) : (
-                    ""
+                    <Skeleton
+                        width={"100%"}
+                        height={"200px"}
+                        duration={2}
+                        count={1}
+                        className="skeleton-css"
+                        baseColor="#faf9ff"
+                        highlightColor="#dadada"
+                    />
                 )
             ) : (
-                <Skeleton
-                    width={"100%"}
-                    height={"200px"}
-                    duration={2}
-                    count={1}
-                    className="skeleton-css"
-                    baseColor="#faf9ff"
-                    highlightColor="#dadada"
-                />
+                ""
             )}
             <div className="container-main">
                 <CategoryListCard

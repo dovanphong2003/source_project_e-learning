@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavigationMain } from "../../navigationAdmin/NavigationMain";
 
-export const Navigationdb = ({ dataUser, forEl }) => {
+export const Navigationdb = ({ forEl }) => {
     const arrInfo = [
         { icon: "dashboard", title: "Trang Chủ" },
         { icon: "queue_play_next", title: "Khóa Học" },
@@ -74,7 +74,9 @@ export const Navigationdb = ({ dataUser, forEl }) => {
                             className="img-frame-admin"
                         />
                         <span>
-                            {dataUser.name ? dataUser.name : "loading..."}
+                            {localStorage.getItem("nameUser")
+                                ? localStorage.getItem("nameUser")
+                                : "loading..."}
                         </span>
                     </div>
                 </div>
