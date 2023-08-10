@@ -38,7 +38,10 @@ export const HomePage = () => {
         }
     };
     useEffect(() => {
-        if (localStorage.getItem("accessToken")) {
+        if (
+            localStorage.getItem("accessToken") &&
+            localStorage.getItem("nameUser")
+        ) {
             fncgetInfoUserByAccessTokenAPI();
         }
     }, [localStorage.getItem("nameUser")]);
