@@ -76,9 +76,9 @@ const getModuleLessonDetailAPI = async (req, res) => {
         });
     }
 };
-const handleCreateCategory = async (title, imageName, handle) => {
+const handleCreateCategory = async (title, url, handle) => {
     console.log("title: ", title);
-    console.log("imageName: ", imageName);
+    console.log("url_mage: ", url);
     try {
         if (handle === 1) {
             const checkNameCategory = await pool.query(
@@ -95,7 +95,7 @@ const handleCreateCategory = async (title, imageName, handle) => {
             const queryUpload = await pool.query(
                 `INSERT INTO coursecategories(category_name,image_category)
      VALUES($1,$2)`,
-                [title, imageName]
+                [title, url]
             );
             return "update success !";
         }
@@ -105,40 +105,24 @@ const handleCreateCategory = async (title, imageName, handle) => {
         return null;
     }
 };
-const handleEditCategory = async (title, imageName, id) => {
+const handleEditCategory = async (title, url, id) => {
     console.log("title: ", title);
-    console.log("imageName: ", imageName);
+    console.log("url: ", url);
     try {
-        const checkNameCategory = await pool.query(
-            `SELECT category_name FROM coursecategories WHERE category_id != $1`,
-            [id]
-        );
-        console.log("name: ", title);
-        for (let i = 0; i < checkNameCategory.rows.length; i++) {
-            if (checkNameCategory.rows[i].category_name === title) {
-                return "danh mục đã tồn tại";
-            }
-        }
-        console.log(234);
-        if (title && imageName) {
-            console.log(1);
+        if (title && url) {
             const queryUpload = await pool.query(
                 `UPDATE coursecategories SET category_name = $1,image_category  = $2 WHERE category_id=$3`,
-                [title, imageName, id]
+                [title, url, id]
             );
         } else if (title) {
-            console.log(3);
-
             const queryUpload = await pool.query(
                 `UPDATE coursecategories SET category_name = $1 WHERE category_id=$2`,
                 [title, id]
             );
-        } else if (imageName) {
-            console.log(3);
-
+        } else if (url) {
             const queryUpload = await pool.query(
                 `UPDATE coursecategories SET image_category  = $1 WHERE category_id=$2`,
-                [imageName, id]
+                [url, id]
             );
         }
         return "update success !";

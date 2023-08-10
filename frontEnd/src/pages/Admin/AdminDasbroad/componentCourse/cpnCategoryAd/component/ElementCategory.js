@@ -32,7 +32,7 @@ export const ElementCategory = ({
         <>
             <div className="element_category-admin">
                 <div className="image_element-category-admin">
-                    <img src={`/imageCategory/${data.image_category}`} alt="" />
+                    <img src={`${data.image_category}`} alt="" />
                 </div>
                 <div className="name-category_admin">
                     <div className="content_name-category_admin">
@@ -94,7 +94,7 @@ export const ElementCategory = ({
                                         );
                                     }
                                 }}
-                                className="bnt-sub_categor_delete"
+                                className="bnt-sub_categor_delete hidden"
                             >
                                 Xóa
                             </button>

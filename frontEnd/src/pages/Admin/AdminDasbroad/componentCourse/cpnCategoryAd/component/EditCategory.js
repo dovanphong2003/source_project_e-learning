@@ -237,7 +237,7 @@ export const EditCategory = () => {
                             <div className="input-upload_image">
                                 <label
                                     className="upload_file_image-course"
-                                    htmlFor="file_image-category_add"
+                                    htmlFor="file_image-category_edit"
                                 >
                                     <span class="material-symbols-outlined">
                                         upload
@@ -245,7 +245,7 @@ export const EditCategory = () => {
                                     <span>
                                         {" "}
                                         tải lên hình ảnh (hỗ trợ: jpeg, bmp,
-                                        png, svg và {"<"} 1 MB)
+                                        png, svg và {"<"} 5 MB)
                                     </span>
                                 </label>
                                 <input
@@ -257,7 +257,7 @@ export const EditCategory = () => {
                                 />
                                 <div className="image_display--upload_file">
                                     <img
-                                        src={`/imageCategory/${dataOrigin.image_category}`}
+                                        src={`${dataOrigin.image_category}`}
                                         className="image_file--upload"
                                         alt=""
                                     />

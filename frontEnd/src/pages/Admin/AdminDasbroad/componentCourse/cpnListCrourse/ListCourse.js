@@ -92,7 +92,7 @@ export const ListCourse = ({ infoBasicCourse }) => {
                         border: "1px solid #000",
                         objectFit: "cover",
                     }}
-                    src={`/imageCourse/${row.image_course}`}
+                    src={`${row.image_course}`}
                     alt={`Image ${row.id}`}
                     width="80"
                     height="60"

@@ -32,7 +32,9 @@ export const FormBasic = ({ selectInputRefs, checkFree, setCheckFree }) => {
         { value: "Nâng cao", label: "Nâng cao" },
     ];
 
-    const listInstructor = [{ value: "53951160", label: "Tạ Hoàng An" }];
+    const listInstructor = [
+        { value: "18062003", label: "Giảng viên mặc định" },
+    ];
 
     // context get data form basic
     const {

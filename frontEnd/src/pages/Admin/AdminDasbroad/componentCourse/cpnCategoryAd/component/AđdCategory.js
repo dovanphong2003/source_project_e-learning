@@ -182,7 +182,7 @@ export const AđdCategory = () => {
                                     <span>
                                         {" "}
                                         tải lên hình ảnh (hỗ trợ: jpeg, bmp,
-                                        png, svg và {"<"} 1 MB)
+                                        png, svg và {"<"} 5 MB)
                                     </span>
                                 </label>
                                 <input

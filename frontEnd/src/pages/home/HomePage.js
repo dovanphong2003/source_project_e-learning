@@ -77,6 +77,7 @@ export const HomePage = () => {
             getCourseOfUser();
         }
     }, [dataUser.id]);
+    console.log("hehe boy: ", dataCourseOfUser);
     return (
         <main>
             <Banner />

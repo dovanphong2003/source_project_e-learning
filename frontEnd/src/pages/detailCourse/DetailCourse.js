@@ -259,6 +259,16 @@ export const DetailCourse = () => {
         // Clean up the timer on component unmount
         return () => clearTimeout(timer);
     }, []);
+
+    // config price course
+    function formatCurrency(input) {
+        const numberWithCommas = input
+            .replace(/[,.đ]/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return numberWithCommas === "free"
+            ? numberWithCommas
+            : numberWithCommas + "đ";
+    }
     return (
         <main>
             <ToastContainer
@@ -388,7 +398,7 @@ export const DetailCourse = () => {
                             {dataInfoCourse.image_course ? (
                                 <img
                                     className="img_course-detail"
-                                    src={`/imageCourse/${dataInfoCourse.image_course}`}
+                                    src={`${dataInfoCourse.image_course}`}
                                     alt="image_Course"
                                 />
                             ) : (
@@ -409,7 +419,7 @@ export const DetailCourse = () => {
                             }`}
                         >
                             {dataInfoCourse.course_price ? (
-                                dataInfoCourse.course_price
+                                formatCurrency(dataInfoCourse.course_price)
                             ) : (
                                 <Skeleton
                                     width={"100%"}

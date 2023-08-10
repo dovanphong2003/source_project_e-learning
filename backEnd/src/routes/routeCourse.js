@@ -25,95 +25,31 @@ const {
 } = require("../controllers/CRUD_Course");
 // config upload image
 const multer = require("multer"); // use multer upload image
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        console.log(1);
-        cb(null, "../frontend/public/imageCourse");
-        console.log(2);
-    },
-    filename: function (req, file, cb) {
-        console.log("file: ", file);
-        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-        cb(null, uniqueSuffix + "-" + file.originalname);
-    },
-});
-async function fileFilter(req, file, cb) {
-    // The function should call `cb` with a boolean
-    // to indicate if the file should be accepted
-    // console.log(req.body);
-
-    console.log("fiels::::::", file);
-    const result = await handleCheckCreateCourse(req.query.title_name);
-    if (result === "Tên khóa học đã tồn tại") {
-        const error = new Error("Tên khóa học đã tồn tại");
-        error.status = 400; // Thiết lập mã lỗi HTTP tùy chọn
-        cb(error, false);
-    } else {
-        cb(null, true);
-    }
-}
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024, // max file image: 1mb
-    },
-    fileFilter: fileFilter,
-});
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         console.log(1);
+//         cb(null, "../frontend/public/imageCourse");
+//         console.log(2);
+//     },
+//     filename: function (req, file, cb) {
+//         console.log("file: ", file);
+//         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+//         cb(null, uniqueSuffix + "-" + file.originalname);
+//     },
+// });
+// const upload = multer({
+//     storage: storage,
+//     limits: {
+//         fileSize: 1024 * 1024, // max file image: 1mb
+//     },
+//     fileFilter: fileFilter,
+// });
 
 ////////////////////////////////////////////////////// route
 // set route
 const routeAPICourse = express.Router();
 
 // create course
-
-//post course
-routeAPICourse.post(
-    "/createCourseAPI",
-    (req, res, next) => {
-        // check loi,
-        /**
-         * trong trường hợp này, upload.single("image") là một middleware function,
-         *  và sau đó chúng ta gọi nó ngay lập tức bằng cách truyền req, res và
-         *  callback function vào trong cặp dấu ngoặc đơn tiếp theo (...).
-         * req và res được lấy ở bên trên.
-         */
-        // upload.single("ten_chua_file_anh_dua_vao");
-        upload.single("image_course")(req, res, async function (err) {
-            if (err) {
-                console.log("errrrrrrrrrr: ", err.message);
-                if (err.message === "Tên khóa học đã tồn tại") {
-                    res.status(400).json({ result: err.message });
-                } else {
-                    if (err.message === "File too large") {
-                        res.status(413).json({
-                            error: "Kích thước file vượt quá quy định",
-                        });
-                    } else {
-                        // Handle other multer errors
-                        res.status(500).json({
-                            error: "Có lỗi xảy ra trong quá trình xử lý file",
-                        });
-                    }
-                }
-            } else {
-                // File is valid, continue with further processing
-                next();
-            }
-        });
-    },
-    async function (req, res) {
-        // Handle successful processing
-        console.log("data: ", req.body);
-        const response = await handleCreateCourse(req.body, req.file);
-        if (response === "update success !") {
-            res.status(200).json({ message: "upload thành công !" });
-        } else {
-            res.status(500).json({
-                result: "Có lỗi xảy ra trong quá trình xử lý file",
-            });
-        }
-    }
-);
 
 // post module
 routeAPICourse.post("/postModuleAPI", postModuleAPI);
@@ -156,18 +92,37 @@ const app = initializeApp(firebaseConfig);
 const storageCourse = getStorage(); // get strorage
 
 // config upload file
+async function fileFilter(req, file, cb) {
+    const result = await handleCheckCreateCourse(req.query.title_name);
+    if (result === "Tên khóa học đã tồn tại") {
+        const error = new Error("Tên khóa học đã tồn tại");
+        error.status = 400; // Thiết lập mã lỗi HTTP tùy chọn
+        cb(error, false);
+    } else {
+        cb(null, true);
+    }
+}
 const uploadCourse = multer({
     storageCourse: multer.memoryStorage(),
     limits: {
-        fileSize: 1024 * 1024 * 20, // max file image: 1mb
+        fileSize: 1024 * 1024 * 5, // max file image: 5mb
     },
+    fileFilter: fileFilter,
 });
 
+//////////////// post course
 routeAPICourse.post(
-    "/postLessonTwoAPI",
+    "/createCourseAPI",
     (req, res, next) => {
-        // upload filem, check err
-        uploadCourse.single("file_video")(req, res, async function (err) {
+        // check loi,
+        /**
+         * trong trường hợp này, upload.single("image") là một middleware function,
+         *  và sau đó chúng ta gọi nó ngay lập tức bằng cách truyền req, res và
+         *  callback function vào trong cặp dấu ngoặc đơn tiếp theo (...).
+         * req và res được lấy ở bên trên.
+         */
+        // upload.single("ten_chua_file_anh_dua_vao");
+        uploadCourse.single("image_course")(req, res, async function (err) {
             if (err) {
                 console.log("errrrrrrrrrr: ", err.message);
                 if (err.message === "Tên khóa học đã tồn tại") {
@@ -183,6 +138,70 @@ routeAPICourse.post(
                             error: "Có lỗi xảy ra trong quá trình xử lý file",
                         });
                     }
+                }
+            } else {
+                // File is valid, continue with further processing
+                next();
+            }
+        });
+    },
+    async function (req, res) {
+        // Handle successful processing
+        const file = req.file;
+        const strorageRef = ref(storageCourse, req.file.originalname);
+        const metadata = {
+            contentType: file.mimetype,
+        };
+        // if no error -->
+        uploadBytes(strorageRef, req.file.buffer, metadata).then(() => {
+            // get url
+            getDownloadURL(strorageRef)
+                .then(async (url) => {
+                    // success !
+                    console.log("url course: ", url);
+                    const response = await handleCreateCourse(req.body, url);
+                    if (response) {
+                        res.status(200).json({
+                            message: "upload thành công !",
+                            url: url,
+                        });
+                    } else {
+                        res.status(404).json({ mesage: "Error not defined" });
+                    }
+                })
+                .catch((err) => {
+                    console.log("loi lon roi: ", err);
+                    res.status(500).json({
+                        message: "upload khong thanh cong",
+                    });
+                });
+        });
+    }
+);
+
+/////////////////// upload video course
+
+const uploadCourseVideo = multer({
+    storageCourse: multer.memoryStorage(),
+    limits: {
+        fileSize: 1024 * 1024 * 20, // max file image: 20mb
+    },
+});
+routeAPICourse.post(
+    "/postLessonTwoAPI",
+    (req, res, next) => {
+        // upload filem, check err
+        uploadCourseVideo.single("file_video")(req, res, async function (err) {
+            if (err) {
+                if (err.message === "File too large") {
+                    res.status(413).json({
+                        error: "Kích thước file vượt quá quy định",
+                    });
+                } else {
+                    // Handle other multer errors
+                    res.status(500).json({
+                        error: "Có lỗi xảy ra trong quá trình xử lý file",
+                    });
                 }
             } else {
                 // File is valid, continue with further processing

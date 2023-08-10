@@ -50,7 +50,16 @@ export const ShoppingCart = () => {
     useEffect(() => {
         setPrice(handleFormatNumber(totalPrice));
     }, [cartOrigin, checkhandle]);
-    console.log("hehe boy: ", cartOrigin);
+
+    // config price course
+    function formatCurrency(input) {
+        const numberWithCommas = input
+            .replace(/[,.đ]/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return numberWithCommas === "free"
+            ? numberWithCommas
+            : numberWithCommas + "đ";
+    }
     return (
         <main>
             {checkCheckOut ? (
@@ -79,7 +88,7 @@ export const ShoppingCart = () => {
                                                     <div className="image_price-course">
                                                         <div className="image_course-cart">
                                                             <img
-                                                                src={`/imageCourse/${data.image_course}`}
+                                                                src={`${data.image_course}`}
                                                                 alt=""
                                                             />
                                                         </div>
@@ -97,7 +106,9 @@ export const ShoppingCart = () => {
                                                     </div>
                                                     <div className="price_delete-el_cart">
                                                         <div className="price-course_info">
-                                                            {data.course_price}
+                                                            {formatCurrency(
+                                                                data.course_price
+                                                            )}
                                                         </div>
                                                         <button
                                                             onClick={async (

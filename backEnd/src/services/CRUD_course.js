@@ -28,7 +28,6 @@ const handleCreateCourse = async (data, data_file) => {
         result_course,
         url_course,
     } = data;
-    const { filename } = data_file;
     try {
         const queryUpload = await pool.query(
             `INSERT INTO courses(course_name,course_description,category_id,level_course,instructor_id,course_price,resultcourse,image_course,path_course,status)
@@ -41,7 +40,7 @@ const handleCreateCourse = async (data, data_file) => {
                 instructor,
                 price,
                 result_course,
-                filename,
+                data_file,
                 url_course,
                 "pending",
             ]

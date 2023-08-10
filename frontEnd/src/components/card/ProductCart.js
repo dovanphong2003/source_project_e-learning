@@ -5,29 +5,6 @@ import axios from "axios";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 export const ProductCart = ({ courseHaveBuy, data }) => {
     const [lessonCourse, setlessonCourse] = useState([]);
-    const handleFormatNumber = (number) => {
-        // convert to string
-        let strNumber = String(number);
-
-        // reverse
-        strNumber = strNumber.split("").reverse().join("");
-
-        // create arr save
-        let formattedArr = [];
-
-        for (let i = 0; i < strNumber.length; i++) {
-            if (i % 3 === 0 && i !== 0) {
-                formattedArr.push(".");
-            }
-            formattedArr.push(strNumber[i]);
-        }
-        // convert reverse -> to origin
-        formattedArr = formattedArr.reverse();
-
-        // add đ end
-        const formattedNumber = formattedArr.join("") + "đ";
-        return formattedNumber;
-    };
     useEffect(() => {
         if (data) {
             const getLessonCourse = async () => {
@@ -51,6 +28,16 @@ export const ProductCart = ({ courseHaveBuy, data }) => {
         // Clean up the timer on component unmount
         return () => clearTimeout(timer);
     }, []);
+
+    // function format number
+    function formatCurrency(input) {
+        const numberWithCommas = input
+            .replace(/[,.đ]/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return numberWithCommas === "free"
+            ? numberWithCommas
+            : numberWithCommas + "đ";
+    }
     return (
         <div className={`card`}>
             <div
@@ -77,7 +64,7 @@ export const ProductCart = ({ courseHaveBuy, data }) => {
                             ) : (
                                 <img
                                     className="img_course"
-                                    src={`/imageCourse/${data.image_course}`}
+                                    src={`${data.image_course}`}
                                     alt=""
                                 />
                             )
@@ -109,7 +96,7 @@ export const ProductCart = ({ courseHaveBuy, data }) => {
                             courseHaveBuy ? "hidden" : ""
                         } note_card debuted`}
                     >
-                        {data ? data.course_price : ""}
+                        {data ? formatCurrency(data.course_price) : ""}
                     </div>
                     <div
                         className={`${
