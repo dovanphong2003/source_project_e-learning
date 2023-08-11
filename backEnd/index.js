@@ -1,7 +1,4 @@
 const express = require("express"); // import libery express
-const { pool } = require("./src/config/database"); // use pool
-const bytes = require("bytes");
-const multer = require("multer"); // use multer upload image
 const app = express();
 const cors = require("cors"); // cai dat goi http
 // const port = process.env.PORT || 8081;
