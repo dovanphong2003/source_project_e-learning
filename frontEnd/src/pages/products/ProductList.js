@@ -50,11 +50,9 @@ export const ProductList = () => {
             const response = await axios.get(
                 `${process.env.REACT_APP_URL_BACKEND}/product/getLengthAllProductsAPI`
             );
-            console.log("resssss: ", response);
+
             getLengthCourse(Number(response.data.lengthCourse));
-        } catch (error) {
-            console.log("Error get length all course: ", error);
-        }
+        } catch (error) {}
     };
     useEffect(() => {
         getLengthAllCourse();
@@ -65,11 +63,9 @@ export const ProductList = () => {
             const respose = await axios.get(
                 `${process.env.REACT_APP_URL_BACKEND}/product/getAllProductLimitAPI?limit=${limit}&page=${page}`
             );
-            console.log("resssssssss: ", respose);
+
             setProducts(respose.data.data);
-        } catch (error) {
-            console.log("error handle get product limit - page: ", error);
-        }
+        } catch (error) {}
         // Gọi API hoặc thực hiện logic để lấy danh sách sản phẩm cho trang mới
         // và cập nhật giá trị của mảng products.
     };
@@ -250,7 +246,6 @@ export const ProductList = () => {
             ".ul_pagination_all-course"
         );
         const listBnt = listBntOrigin.querySelectorAll("li:not(.hidden)");
-        console.log("list bnt: ", listBnt);
 
         // th1: page = first
         if (page === 0) {
@@ -300,7 +295,6 @@ export const ProductList = () => {
             ".ul_pagination_all-course"
         );
         const listBnt = listBntOrigin.querySelectorAll("li:not(.hidden)");
-        console.log("list bnt: ", listBnt);
 
         // th1: page = first
         if (currentPage + page === pageNumber) {

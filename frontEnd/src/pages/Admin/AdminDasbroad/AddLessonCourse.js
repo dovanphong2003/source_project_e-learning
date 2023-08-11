@@ -166,7 +166,6 @@ export const AddLessonCourse = () => {
             }
             try {
                 if (!formDataObject.title) {
-                    console.log("bat dau upload");
                     setStartRun(true);
                     const response = await axios.post(
                         `${process.env.REACT_APP_URL_BACKEND}/course/postLessonTwoAPI`,
@@ -194,7 +193,6 @@ export const AddLessonCourse = () => {
                 if (error.response.data) {
                     notifyError(error.response.data.error);
                 }
-                console.log("LOI LON ROI ANH BAN: ", error);
             }
         } else {
             notifyError("Bạn không thể thực hiện hành động trên !");

@@ -1,7 +1,6 @@
 const { pool } = require("../config/database"); // use pool
 
 const handleCheckCreateCourse = async (title_course) => {
-    console.log("title: ", title_course);
     try {
         const checkNameCourse = await pool.query(
             `SELECT course_name FROM courses WHERE course_name = $1 `,
@@ -13,7 +12,6 @@ const handleCheckCreateCourse = async (title_course) => {
             return "không bị trùng tên khóa học";
         }
     } catch (error) {
-        console.log("error create category: ", error);
         return null;
     }
 };
@@ -47,7 +45,6 @@ const handleCreateCourse = async (data, data_file) => {
         );
         return "update success !";
     } catch (error) {
-        console.log("error create category: ", error);
         return null;
     }
 };
@@ -59,7 +56,6 @@ const handleGetAllCourse = async () => {
         );
         return response.rows;
     } catch (error) {
-        console.log("err getAllCourse: ", error);
         return null;
     }
 };
@@ -74,7 +70,6 @@ const handleGetInfoCourseUseIdAPI = async (course_id) => {
         );
         return response.rows;
     } catch (error) {
-        console.log("err getInfoCourseUseId: ", error);
         return null;
     }
 };
@@ -87,7 +82,6 @@ const handleGetLessonCourseUseIdAPI = async (lesson_id) => {
         );
         return response.rows;
     } catch (error) {
-        console.log("err getInfoCourseUseId: ", error);
         return null;
     }
 };
@@ -103,10 +97,8 @@ const getDataForCourse = async () => {
            (SELECT COUNT(course_id) FROM courses WHERE status = 'pending') AS total_pending,
            (SELECT COUNT(course_id) FROM courses WHERE status = 'handle') AS total_handle`
         );
-        console.log("data: ", response);
         return response.rows;
     } catch (error) {
-        console.log("err getAllCourse: ", error);
         return null;
     }
 };
@@ -117,7 +109,6 @@ const handleGetNameAndIdAPI = async () => {
         );
         return response.rows;
     } catch (error) {
-        console.log("err getAllCourse: ", error);
         return null;
     }
 };
@@ -129,7 +120,6 @@ const handlePostModuleAPI = async (name_module, id_course) => {
         );
         return "success ";
     } catch (error) {
-        console.log("err getAllCourse: ", error);
         return null;
     }
 };
@@ -149,7 +139,6 @@ const handleGetNameModuledAPI = async (idCourse) => {
             return "Khóa học này chưa có chương nào cả !";
         }
     } catch (error) {
-        console.log("err get name module: ", error);
         return null;
     }
 };
@@ -163,7 +152,6 @@ const handleCreateLessonOne = async (data) => {
         );
         return "update success !";
     } catch (error) {
-        console.log("error create category: ", error);
         return null;
     }
 };
@@ -190,7 +178,6 @@ const hanleSetBestSeller = async (id_course, action) => {
             return null;
         }
     } catch (error) {
-        console.log("error handle set best seller: ", error);
         return null;
     }
 };
@@ -204,7 +191,6 @@ const handleCreateLesson = async (data, url_video) => {
         );
         return "update success !";
     } catch (error) {
-        console.log("error create category: ", error);
         return null;
     }
 };
@@ -228,7 +214,6 @@ const getCourseBSellerAndNews = async () => {
         data.dataCourseSeller = dataCourseSeller.rows;
         return data;
     } catch (error) {
-        console.log("error get course best seller anhd news: ", error);
         return null;
     }
 };
@@ -242,14 +227,12 @@ const handleGetDataSeach = async (content) => {
     ORDER BY c.course_id DESC`,
             [content]
         );
-        console.log("ressult: ", result);
         if (!result.rows.length) {
             return "zero course";
         } else {
             return result.rows;
         }
     } catch (error) {
-        console.log("error get course search: ", error);
         return null;
     }
 };
@@ -261,10 +244,8 @@ const handleAddCourseToCart = async (idCourse, id_user) => {
         VALUES($1,$2)`,
             [idCourse, id_user]
         );
-        console.log("result: ", result);
         return "insert success";
     } catch (error) {
-        console.log("error handle add course to cart: ", error);
         return null;
     }
 };
@@ -275,10 +256,8 @@ const handleDeleteCourseToCart = async (idCourse, id_user) => {
             WHERE course_id = $1 AND user_id = $2`,
             [idCourse, id_user]
         );
-        console.log("result: ", result);
         return "delete success";
     } catch (error) {
-        console.log("error handle delete course to cart: ", error);
         return null;
     }
 };
@@ -290,10 +269,8 @@ const handleDeleteAllCourseToCart = async (id_user) => {
             WHERE user_id = $1`,
             [id_user]
         );
-        console.log("result: ", result);
         return "delete success";
     } catch (error) {
-        console.log("error handle delete course to cart: ", error);
         return null;
     }
 };
@@ -306,10 +283,8 @@ const handleGetCartItems = async (user_id) => {
             WHERE cc.user_id = $1 `,
             [user_id]
         );
-        console.log("result: ", result);
         return result.rows;
     } catch (error) {
-        console.log("error handler get cart items: ", error);
         return null;
     }
 };
@@ -324,7 +299,6 @@ const handleGetAllCourseOfUser = async (user_id) => {
         );
         return data.rows;
     } catch (error) {
-        console.log("error handle get all course of user; ", error);
         return null;
     }
 };

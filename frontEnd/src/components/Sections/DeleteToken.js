@@ -15,7 +15,6 @@ export const DeleteCookie = async () => {
         );
         return deleteRefreshToken;
     } catch (error) {
-        console.log("er: ", error);
         return "ban  da bi loi lon roi";
     }
 };

@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 const registerUserAPI = async (req, res) => {
     const { email, name, password, avatar_url } = req.body;
-    console.log("avatar_url: ", avatar_url);
     try {
         const hashPassword = await bcrypt.hash(password, 10);
         const result = await registerUser(
@@ -17,7 +16,6 @@ const registerUserAPI = async (req, res) => {
             response: "Đăng kí thành công !",
         });
     } catch (error) {
-        console.log("error: ", error);
         return res.status(400).json({
             EC: error,
         });

@@ -19,10 +19,8 @@ export const CategoryAd = () => {
             const response = await axios.get(
                 `${process.env.REACT_APP_URL_BACKEND}/category/getCategoryAPI`
             );
-            // console.log("res: ", response);
             setDataCategory(response.data.data);
         } catch (error) {
-            console.log("error get category: ", error);
             return "";
         }
     };
@@ -34,17 +32,14 @@ export const CategoryAd = () => {
             const response = await axios.get(
                 `${process.env.REACT_APP_URL_BACKEND}/category/getCourseOfCategoryAPI`
             );
-            // console.log("ressssssssssssssssssssssss: ", response);
             setCourseOfCategory(response.data.data);
         } catch (error) {
-            console.log("error get category: ", error);
             return "";
         }
     };
     useEffect(() => {
         getCourseOfCategory();
     }, []);
-    console.log(courseOfCategory);
     const navigate = useNavigate();
     return (
         <div className="category_list-admin">

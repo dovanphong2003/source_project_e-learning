@@ -6,7 +6,6 @@ const {
     getDataEnrolmentRevenue,
 } = require("../services/service_enrolment");
 const upDataEnrolmentAPI = async (req, res) => {
-    console.log("data: ", req.body);
     const { id_student, id_course, name_course } = req.body;
     const data = await insertDataEnrolment(id_student, id_course, name_course);
     if (data === "upload success") {
@@ -20,7 +19,6 @@ const upDataEnrolmentAPI = async (req, res) => {
 
 // update many
 const upDataEnrolmentsAPI = async (req, res) => {
-    console.log("data: ", req.body);
     const { id_student, ArrId_course } = req.body;
     const data = await insertDataEnrolments(id_student, ArrId_course);
     if (data === "upload success") {
@@ -48,7 +46,6 @@ const getDataEnrolmentRevenueAPI = async (req, res) => {
 
 const getDataEnrolmentOfUserAPI = async (req, res) => {
     const user_id = req.query.user_id;
-    console.log("userid: ", user_id);
     const data = await getDataEnrolmentOfUser(user_id);
     if (data) {
         res.status(200).json({ EC: 0, data: data });

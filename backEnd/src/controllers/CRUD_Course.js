@@ -60,7 +60,6 @@ const getLessonCourseUseIdAPI = async (req, res) => {
 };
 
 const postModuleAPI = async (req, res) => {
-    console.log("data: ", req.body);
     const { name_module, id_course } = req.body;
     const response = await handlePostModuleAPI(name_module, id_course);
     if (response) {
@@ -135,7 +134,6 @@ const deleteCourseCartAPI = async (req, res) => {
 
 const deleteAllCourseCartAPI = async (req, res) => {
     const { id_user } = req.query;
-    console.log("id user: ", id_user);
     const response = await handleDeleteAllCourseToCart(id_user);
     if (response) {
         res.status(200).json({ message: "delete success" });

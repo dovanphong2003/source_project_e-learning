@@ -53,7 +53,6 @@ export const Login = ({ setRoleUser }) => {
         if (!email || !password) {
             return notify("vui lòng nhập đầy đủ thông tin !");
         }
-        console.log("data:", data);
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_URL_BACKEND}/loginAPI`,
@@ -67,7 +66,6 @@ export const Login = ({ setRoleUser }) => {
             setRoleUser(response.data.role);
             return navigate("/");
         } catch (error) {
-            console.log("error: ", error);
             notify(error.response.data.EC);
         }
     };
@@ -154,10 +152,7 @@ export const Login = ({ setRoleUser }) => {
                         notify("Đăng kí không thành công !");
                     }
                 } catch (error) {
-                    console.log(
-                        "error handle register account google: ",
-                        error
-                    );
+                    notify("Đăng nhập không thành công !");
                     if (error.response && error.response.data) {
                         return notify(error.response.data.errorcode);
                     }
@@ -171,13 +166,6 @@ export const Login = ({ setRoleUser }) => {
             const email = error.customData.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-            console.log(
-                "error handle login google: ",
-                errorMessage,
-                "err code: ",
-                errorCode
-            );
-            // ...
         }
     };
 
@@ -186,7 +174,6 @@ export const Login = ({ setRoleUser }) => {
         event.preventDefault();
         const providerFacebook = new FacebookAuthProvider();
         const authFacebook = getAuth();
-        console.log("da vao den day !");
         try {
             const result = await signInWithPopup(
                 authFacebook,
@@ -194,7 +181,6 @@ export const Login = ({ setRoleUser }) => {
             );
             // The signed-in user info.
             const user = result.user;
-            console.log("info user: ", result.user);
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
             const credential =
                 FacebookAuthProvider.credentialFromResult(result);
@@ -263,19 +249,13 @@ export const Login = ({ setRoleUser }) => {
                         notify("Đăng kí không thành công !");
                     }
                 } catch (error) {
-                    console.log(
-                        "error handle register account google: ",
-                        error
-                    );
+                    notify("Đăng nhập không thành công !");
                     if (error.response && error.response.data) {
                         return notify(error.response.data.errorcode);
                     }
                 }
             }
-        } catch (error) {
-            console.log("error handle login facebook: ", error);
-            // ...
-        }
+        } catch (error) {}
     };
     return (
         <main>

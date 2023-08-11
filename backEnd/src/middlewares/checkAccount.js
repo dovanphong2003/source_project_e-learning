@@ -26,7 +26,6 @@ const checkAccount = async (req, res, next) => {
                     });
                 }
             } catch (error) {
-                console.log("error: ", error);
                 return res.status(500).json({
                     EC: "error server",
                 });

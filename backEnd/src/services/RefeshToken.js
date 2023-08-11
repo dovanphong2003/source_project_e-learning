@@ -19,7 +19,6 @@ const refeshTokenAPI = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log("err: ", error);
         res.status(404).json({
             error: error,
         });

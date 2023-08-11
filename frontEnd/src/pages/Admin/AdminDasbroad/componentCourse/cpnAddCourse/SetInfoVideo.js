@@ -8,10 +8,8 @@ export const SetInfoVideo = ({ breakk, setBreak, resestUrlAndImage }) => {
     const notifyError = (content) => toast.error(content);
     function handleFileUpload(event) {
         event.preventDefault();
-        console.log(event.target);
         setBreak(false);
         const files = event.target.files;
-        console.log(files);
         const allowedMimeTypes = [
             "image/jpeg",
             "image/png",

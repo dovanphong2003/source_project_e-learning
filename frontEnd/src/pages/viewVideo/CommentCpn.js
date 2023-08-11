@@ -46,7 +46,6 @@ export const CommentCpn = ({
                     `${process.env.REACT_APP_URL_BACKEND}/comment/postCommentAPI`,
                     dataUser
                 );
-                console.log("res: ", response);
                 notifySuccess("comment thành công !");
                 setValue2("");
                 const editor = refComment.current.getEditor();
@@ -56,7 +55,6 @@ export const CommentCpn = ({
             } catch (error) {
                 // check comment error
                 notifyWarning("Đã xảy ra lỗi, comment không thành công !");
-                console.log("Err: ", error);
             }
         }
     };
@@ -82,9 +80,7 @@ export const CommentCpn = ({
                 `${process.env.REACT_APP_URL_BACKEND}/comment/deleteDataCommentAPI?id_comment=${data.comment_id}&id_comment_child=${dataArrCommentChild}`
             );
             getDataComment();
-        } catch (error) {
-            console.log("error delete comment:  ", error);
-        }
+        } catch (error) {}
     };
     return (
         <ul className={`${data ? "" : "hidden"} container_list-comment-ul`}>

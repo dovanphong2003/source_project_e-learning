@@ -33,7 +33,6 @@ export const ViewVideoCourse = () => {
                 setDataLesson(response.data.data[0]);
             }
         } catch (error) {
-            console.log("err handle get data lesson: ", error);
             navigation("/error");
         }
     };
@@ -44,7 +43,6 @@ export const ViewVideoCourse = () => {
             );
             setDataModuleAndLesson(response.data.data);
         } catch (error) {
-            console.log("error where detailCourse: ", error);
             navigation("/error");
         }
     };
@@ -216,7 +214,6 @@ export const ViewVideoCourse = () => {
             editor.setContents([]);
         } catch (error) {
             notifyWarning("Đã xảy ra lỗi, comment không thành công !");
-            console.log("Err: ", error);
         }
     };
 

@@ -17,7 +17,6 @@ export const EditCategory = () => {
             );
             setDataOrigin(...response.data.data);
         } catch (error) {
-            console.log("errrrrrrrrrrr: ", error);
             if (error.response.data.EC === "error of param") {
                 navigation("/error");
             }
@@ -38,7 +37,6 @@ export const EditCategory = () => {
             );
             return response.data.result;
         } catch (error) {
-            console.log("err delete category: ", error);
             return null;
         }
     };
@@ -47,13 +45,8 @@ export const EditCategory = () => {
         title: "",
         image: null,
     });
-    console.log("form: ", formData);
     useEffect(() => {
         getDataFormEdit();
-        // setFormData({
-        //     title: dataOrigin ? dataOrigin.category_name : "",
-        //     image: null,
-        // });
     }, []);
     const resetForm = () => {
         // set data title
@@ -71,7 +64,6 @@ export const EditCategory = () => {
         // set image default
         const imageElement = document.querySelector(".image_file--upload");
         imageElement.src = defaultImageSrc;
-        console.log("data:::: ", dataOrigin);
     };
     // postgres upload
     const [progress, setProgress] = useState(0);
@@ -80,10 +72,8 @@ export const EditCategory = () => {
     const notifySuccess = (content) => toast.success(content);
     function handleFileUpload(event) {
         event.preventDefault();
-        console.log("event target::", event.target);
         setBreak(false);
         const files = event.target.files;
-        console.log(files);
         const allowedMimeTypes = [
             "image/jpeg",
             "image/png",
@@ -99,7 +89,6 @@ export const EditCategory = () => {
         // Kiểm tra xem định dạng file có trong danh sách cho phép hay không
         if (allowedMimeTypes.includes(files[0].type)) {
             const file = files[0];
-            console.log(123, file);
             setFormData({ ...formData, image: file });
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -146,8 +135,6 @@ export const EditCategory = () => {
         data.append("title", formData.title);
         data.append("image", formData.image);
         try {
-            console.log("title: ", formData.title);
-            console.log("file: ", formData.image);
             const response = await axios.post(
                 `${
                     process.env.REACT_APP_URL_BACKEND
@@ -164,7 +151,6 @@ export const EditCategory = () => {
                     },
                 }
             );
-            console.log("respnse:::::::: ", response);
             if (response.data.data) {
                 handleDeleteCategory(param.id, dataOrigin.image_category);
                 setDataOrigin({
@@ -182,7 +168,6 @@ export const EditCategory = () => {
             notifySuccess("Chỉnh Sửa Thành Công!");
             setProgress(0);
         } catch (error) {
-            console.log("err add category: ", error);
             if (
                 error.response.data.result &&
                 error.response.data.result === "danh mục đã tồn tại"

@@ -10,11 +10,8 @@ export const MainDashboard = () => {
             const response = await axios.get(
                 `${process.env.REACT_APP_URL_BACKEND}/course/getDataForCourseAPI`
             );
-            console.log("hehe boy: ", response);
             setDataNumberCourse(response.data.data[0]);
-        } catch (error) {
-            console.log("get data error");
-        }
+        } catch (error) {}
     };
 
     useEffect(() => {

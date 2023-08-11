@@ -33,12 +33,8 @@ export const DashBStudent = () => {
                 `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentAPI`
             );
             setDataCourseHaveBuy(response.data.data);
-        } catch (error) {
-            console.log("error get course user have buy: ", error);
-        }
+        } catch (error) {}
     };
-    console.log(dataStudent);
-    console.log(dataCourseHaveBuy);
 
     // handle use id_user -> get course of user
     const fncHandleData = (id_user, dataCourseHaveBuy, arrData) => {
@@ -64,12 +60,9 @@ export const DashBStudent = () => {
                       dataCourseHaveBuy,
                       []
                   );
-                  console.log("el: ", el);
-                  console.log("dataaaaaaaaa; ", getDataCourseOfUser);
                   return { ...el, courseHaveBuy: getDataCourseOfUser };
               })
             : "";
-    console.log("data allllllllll: ", dataAllForUser);
     useEffect(() => {
         getInfoStudent();
         getCourseUserHaveBuy();

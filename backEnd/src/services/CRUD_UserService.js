@@ -22,7 +22,6 @@ const registerUser = async (email, name, password, avatar_url) => {
         );
         return response;
     } catch (error) {
-        console.log("error: ", error);
         return null;
     }
 };
@@ -33,7 +32,6 @@ const loginUser = async (email) => {
         const refeshToken = await createRefreshToken(email);
         return { accessToken, refeshToken };
     } catch (error) {
-        console.log("error: ", error);
         return null;
     }
 };
@@ -53,7 +51,6 @@ const createUser = async (nameUser, email, password, infoUser, role) => {
         );
         return response;
     } catch (error) {
-        console.log("error: ", error);
         return null;
     }
 };

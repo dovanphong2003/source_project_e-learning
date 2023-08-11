@@ -13,7 +13,6 @@ const handlePostComment = async (
         );
         return "post success";
     } catch (error) {
-        console.log("error post comment: ", error);
         return null;
     }
 };
@@ -28,18 +27,13 @@ const handleGetComment = async (lesson_id) => {
         `,
             [lesson_id]
         );
-        // console.log("data result: ", result);
         return result.rows;
     } catch (error) {
-        console.log("error get data comment: ", error);
         return null;
     }
 };
 const handleDeleteComment = async (id_comment, id_comment_child) => {
     const arrNew = id_comment_child.split(",");
-    console.log("hehehaha boy: ", arrNew);
-    console.log("hehe boy: ", ...arrNew);
-    console.log("data delete: ", id_comment_child);
     try {
         if (arrNew && arrNew[0] !== "") {
             const responseDeleteParent = await pool.query(
@@ -53,7 +47,6 @@ const handleDeleteComment = async (id_comment, id_comment_child) => {
         );
         return 1;
     } catch (error) {
-        console.log("error delete comment: ", error);
         return null;
     }
 };

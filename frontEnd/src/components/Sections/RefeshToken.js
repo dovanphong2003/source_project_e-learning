@@ -8,7 +8,6 @@ export const RefeshToken = async () => {
         return refeshToken.data.accessTokenNew;
         // if(responseVerify)
     } catch (error) {
-        console.log("loi nang roi bro:", error);
         if (error.response.data.ec) {
             return error.response.data.ec;
         } else {

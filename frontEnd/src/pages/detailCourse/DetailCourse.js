@@ -35,9 +35,7 @@ export const DetailCourse = () => {
                 `${process.env.REACT_APP_URL_BACKEND}/product/getModuleLessonDetailAPI?idCourse=${param.id}`
             );
             setDataModuleAndLesson(response.data.data);
-        } catch (error) {
-            console.log("error where detailCourse: ", error);
-        }
+        } catch (error) {}
     };
     const getInfoCourseUseId = async () => {
         try {
@@ -49,9 +47,7 @@ export const DetailCourse = () => {
             } else {
                 setDataInfoCourse(response.data.data[0]);
             }
-        } catch (error) {
-            console.log("error where setDataInfoCourse: ", error);
-        }
+        } catch (error) {}
     };
 
     useEffect(() => {
@@ -83,7 +79,7 @@ export const DetailCourse = () => {
 
             return arr;
         }, []);
-        console.log("data lesson: ", dataLesson);
+
         if (dataLesson.length === 0) {
             setResultData(["no lessons yet"]);
         } else {
@@ -106,14 +102,13 @@ export const DetailCourse = () => {
             const response = await axios.get(
                 `${process.env.REACT_APP_URL_BACKEND}/getInfoUserByAccessTokenAPI?accessToken=${AccessToken}`
             );
-            console.log("data id user: ", response.data.data);
+
             setDataUser(response.data.data);
         } catch (error) {
             if (error.response.data.ec.message === "jwt expired") {
                 const funcVerifyToken = await VerifyToken();
                 await funcVerifyToken();
             }
-            console.log("error get id user: ", error);
         }
     };
     useEffect(() => {
@@ -127,9 +122,7 @@ export const DetailCourse = () => {
             );
             fncSetCartOriginData(response.data.data);
             fncSetCartOrigin(response.data.data);
-        } catch (error) {
-            console.log("error get item cart user: ", error);
-        }
+        } catch (error) {}
     };
 
     // handle add course -> cart
@@ -148,7 +141,6 @@ export const DetailCourse = () => {
             notifySuccess("Thêm thành công !");
             setcheckHandle(!checkhandle);
         } catch (error) {
-            console.log("error post add cart :", error);
             notifyError("Đã có lỗi xảy ra !");
         }
     };
@@ -163,9 +155,7 @@ export const DetailCourse = () => {
         // handle user success get course
         try {
             navigation("/");
-        } catch (error) {
-            console.log("error handle user success !", error);
-        }
+        } catch (error) {}
     };
     const id_course = param.id;
 
@@ -197,9 +187,7 @@ export const DetailCourse = () => {
                 dataPost
             );
             handleCheckOutSuccess();
-        } catch (error) {
-            console.log("error handle add course free: ", error);
-        }
+        } catch (error) {}
     };
 
     const handleDeleteCart = async (event) => {
@@ -212,7 +200,6 @@ export const DetailCourse = () => {
             notifySuccess("Gỡ thành công !");
             setcheckHandle(!checkhandle);
         } catch (error) {
-            console.log("error post add cart :", error);
             notifyError("Đã có lỗi xảy ra !");
         }
     };
@@ -233,9 +220,7 @@ export const DetailCourse = () => {
                 `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentOfUserAPI?user_id=${dataUser.id}`
             );
             setDataCourseOfUser(resposne.data.data);
-        } catch (error) {
-            console.log("error data course of user: ", error);
-        }
+        } catch (error) {}
     };
     useEffect(() => {
         if (dataUser.id) {

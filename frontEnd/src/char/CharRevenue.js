@@ -29,15 +29,18 @@ export const CharRevenue = () => {
             ? dataRevenue
                   .reduce((arr, obj) => {
                       const getDay = getDayOfDateTime(obj.created_at);
-                      const getTotalEl = Number(
-                          obj.course_price
-                              .split(".")
-                              .join("")
-                              .split("đ")
-                              .join("")
-                              .split(",")
-                              .join("")
-                      );
+                      const getTotalEl =
+                          obj.course_price === "free"
+                              ? 0
+                              : Number(
+                                    obj.course_price
+                                        .split(".")
+                                        .join("")
+                                        .split("đ")
+                                        .join("")
+                                        .split(",")
+                                        .join("")
+                                );
                       if (!arr.length) {
                           arr.push({ day: getDay, total: getTotalEl });
                       } else {
@@ -123,7 +126,6 @@ export const CharRevenue = () => {
     };
 
     const dataSevenDay = handleTotal && handleTotal.length ? funcGet() : [];
-    console.log("handle date Time: ", dataSevenDay);
     const getDataEnrolment = async () => {
         const response = await axios.get(
             `${process.env.REACT_APP_URL_BACKEND}/enrolment/getDataEnrolmentRevenueAPI`

@@ -8,9 +8,7 @@ const insertDataEnrolment = async (id_student, id_course, name_course) => {
             WHERE course_id = $1 AND user_id = $2`,
             [id_course, id_student]
         );
-        console.log("hehe boy: ", checkEnrolment);
         if (Number(checkEnrolment.rows[0].count)) {
-            console.log(" khóa học này đã ghi danh rồi !");
             return "enrolment exists";
         }
         const response = await pool.query(
@@ -19,7 +17,6 @@ const insertDataEnrolment = async (id_student, id_course, name_course) => {
         );
         return "upload success";
     } catch (error) {
-        console.log("error upload enrolment: ", error);
         return null;
     }
 };
@@ -39,7 +36,6 @@ const insertDataEnrolments = async (id_student, ArrId_course) => {
         }
         return "upload success";
     } catch (error) {
-        console.log("error upload enrolment: ", error);
         return null;
     }
 };
@@ -52,7 +48,6 @@ const getDataEnrolment = async () => {
         );
         return response.rows;
     } catch (error) {
-        console.log("Err get data enrolment: ", error);
         return null;
     }
 };
@@ -68,7 +63,6 @@ const getDataEnrolmentRevenue = async () => {
         );
         return response.rows;
     } catch (error) {
-        console.log("Err get data enrolment revenue: ", error);
         return null;
     }
 };
@@ -81,10 +75,8 @@ const getDataEnrolmentOfUser = async (user_id) => {
            WHERE user_id = $1`,
             [user_id]
         );
-        console.log("Data: ", response.rows);
         return response.rows;
     } catch (error) {
-        console.log("Err get data enrolment of user: ", error);
         return null;
     }
 };

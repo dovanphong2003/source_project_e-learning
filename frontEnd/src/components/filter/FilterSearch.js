@@ -6,12 +6,9 @@ import axios from "axios";
 export const FilterSearch = ({ hdfilter, dataSearch, setDataSearch }) => {
     const [ratingEx, setRatingEx] = useState(false);
     const [topicEx, setTopicEx] = useState(false);
-    const [rotato1, setRotato1] = useState(false);
     const [rotato2, setRotato2] = useState(false);
     const [checkRating, setCheckRating] = useState("");
     const [checkTopic, setCheckTopic] = useState("");
-    console.log("check rating: ", checkRating);
-    console.log("check topic: ", checkTopic);
     const [dataCategory, setDataCategory] = useState([]);
     const handleCategory = async () => {
         try {
@@ -19,9 +16,7 @@ export const FilterSearch = ({ hdfilter, dataSearch, setDataSearch }) => {
                 `${process.env.REACT_APP_URL_BACKEND}/category/getCategoryAPI`
             );
             setDataCategory(response.data.data);
-        } catch (error) {
-            console.log("error handle get category filter: ", error);
-        }
+        } catch (error) {}
     };
     return (
         <div className={`${hdfilter ? "" : "hidden"} filter_specifically`}>

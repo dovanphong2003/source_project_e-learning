@@ -39,7 +39,6 @@ export const ModulesLession = ({
                     return (
                         <Link
                             onClick={() => {
-                                console.log("check:  ", checkBuyCourse);
                                 if (!checkBuyCourse) {
                                     notifyWarning(
                                         "Bạn hãy mua khóa học để xem video !"

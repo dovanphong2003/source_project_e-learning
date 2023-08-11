@@ -19,10 +19,8 @@ export const AddResultCrs = ({ Mykey, id }) => {
                     const liIndex = Array.from(
                         liEl.parentNode.children
                     ).indexOf(liEl);
-                    console.log("index:::: ", liIndex);
                     const childToRemove = ulElement.children[liIndex]; // Lấy con thứ 3 (index 2)
                     ulElement.removeChild(childToRemove);
-                    console.log("Child index:", liIndex);
                 }}
                 className="icon_plus_delete material-symbols-outlined"
             >

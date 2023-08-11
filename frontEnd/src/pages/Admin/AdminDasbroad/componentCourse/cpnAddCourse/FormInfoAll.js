@@ -75,7 +75,6 @@ export const FormInfoAll = ({ form, setForm }) => {
             lis[i].remove();
         }
         document.getElementById("input_default_one_result-course").value = "";
-        console.log("end:<< ");
         // resest form into
         resest_formCourse();
         resestUrlAndImage();
@@ -150,7 +149,6 @@ export const FormInfoAll = ({ form, setForm }) => {
             resetForm();
             notifySuccess("tạo thành công !");
         } catch (error) {
-            console.log("err add category: ", error);
             if (
                 error.response.data.result &&
                 error.response.data.result === "Tên khóa học đã tồn tại"

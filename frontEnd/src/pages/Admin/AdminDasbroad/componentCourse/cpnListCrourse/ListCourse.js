@@ -29,7 +29,6 @@ export const ListCourse = ({ infoBasicCourse }) => {
                 notifyError("có lỗi khi thay đổi");
             }
         } catch (error) {
-            console.log("error handle set bestseller: ", error);
             notifyError("có lỗi khi thay đổi");
         }
     };

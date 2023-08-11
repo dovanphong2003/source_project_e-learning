@@ -26,7 +26,6 @@ const getOneCategoryAPI = async (req, res) => {
             res.status(401).json({ EC: "error of param" });
         }
     } catch (error) {
-        console.log("error handle get one category: ", error);
         res.status(404).json({ EC: error });
     }
 };

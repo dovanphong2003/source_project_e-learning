@@ -7,7 +7,6 @@ export const ElementCategory = ({
     data,
     courseOfCategory,
 }) => {
-    // console.log("data: ", data);
     const [dataCourse, getDataCourse] = useState([]);
     useEffect(() => {
         getDataCourse(
@@ -24,7 +23,6 @@ export const ElementCategory = ({
             );
             return response.data.result;
         } catch (error) {
-            console.log("err delete category: ", error);
             return null;
         }
     };
@@ -71,7 +69,6 @@ export const ElementCategory = ({
                             </button>
                             <button
                                 onClick={async () => {
-                                    console.log("123123123");
                                     const response = await Swal.fire({
                                         title: "Bạn có chắc chắn muốn xóa?",
                                         text: "Bạn sẽ không thể khôi phục điều này!",

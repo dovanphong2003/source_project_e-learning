@@ -17,14 +17,11 @@ export const AddEnvirolment = () => {
         const response = await axios.get(
             `${process.env.REACT_APP_URL_BACKEND}/course/getAllCourseAPI`
         );
-        console.log(
-            "data: ",
-            getDataCourse(
-                response.data.data.map((el) => ({
-                    value: el.course_id,
-                    label: `${el.course_name} - ${el.user_name}`,
-                }))
-            )
+        getDataCourse(
+            response.data.data.map((el) => ({
+                value: el.course_id,
+                label: `${el.course_name} - ${el.user_name}`,
+            }))
         );
     };
     const [dataStudent, setDataStudent] = useState([]);
@@ -75,7 +72,6 @@ export const AddEnvirolment = () => {
             notifySuccess("Ghi danh thành công !");
             resestForm();
         } catch (error) {
-            console.log("Error: ", error);
             if (error.response.data) {
                 notifyError(error.response.data.message);
                 resestForm();

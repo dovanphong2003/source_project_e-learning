@@ -54,7 +54,6 @@ export const AddStudentDB = () => {
                 ".input_form-course-title"
             );
             inputs.forEach((input) => {
-                console.log(input.value);
                 input.value = "";
             });
             setFormData({
@@ -66,8 +65,6 @@ export const AddStudentDB = () => {
             });
             selectInputRefs.current.clearValue();
         } catch (error) {
-            console.log(formData);
-            console.log("err: ", error);
             notifyErr(error.response.data.errorcode);
         }
     };

@@ -7,7 +7,6 @@ const getAllProductAPI = async (req, res) => {
             data: data.rows,
         });
     } catch (error) {
-        console.log("erroo:::::::::", error);
         res.status(404).json({
             EC: error,
         });
@@ -29,7 +28,6 @@ const getProductAPI = async (req, res) => {
             data: response.rows,
         });
     } catch (error) {
-        console.log("error: ", error);
         res.status(404).json({
             EC: error,
         });
@@ -50,7 +48,6 @@ const getLessonCourseAPI = async (req, res) => {
             Countlesson: responseLesson.rows[0].count,
         });
     } catch (error) {
-        console.log("error: ", error);
         res.status(404).json({
             EC: error,
         });
@@ -70,15 +67,12 @@ const getModuleLessonDetailAPI = async (req, res) => {
             data: response.rows,
         });
     } catch (error) {
-        console.log("error get detail course: ", error);
         res.status(404).json({
             EC: error,
         });
     }
 };
 const handleCreateCategory = async (title, url, handle) => {
-    console.log("title: ", title);
-    console.log("url_mage: ", url);
     try {
         if (handle === 1) {
             const checkNameCategory = await pool.query(
@@ -101,13 +95,10 @@ const handleCreateCategory = async (title, url, handle) => {
         }
         return "handle không xác định";
     } catch (error) {
-        console.log("error create category: ", error);
         return null;
     }
 };
 const handleEditCategory = async (title, url, id) => {
-    console.log("title: ", title);
-    console.log("url: ", url);
     try {
         if (title && url) {
             const queryUpload = await pool.query(
@@ -127,7 +118,6 @@ const handleEditCategory = async (title, url, id) => {
         }
         return "update success !";
     } catch (error) {
-        console.log("error create category: ", error);
         return null;
     }
 };
@@ -138,7 +128,6 @@ const getCategory = async () => {
         );
         return response.rows;
     } catch (error) {
-        console.log("error getcategory: ", error);
         return null;
     }
 };
@@ -153,7 +142,6 @@ const getCourseOfCategory = async () => {
         );
         return response.rows;
     } catch (error) {
-        console.log("error getcategory: ", error);
         return null;
     }
 };
@@ -170,7 +158,6 @@ const getOneCategory = async (id) => {
             return "id không hợp lệ";
         }
     } catch (error) {
-        console.log("error getcategory: ", error);
         return null;
     }
 };
@@ -187,16 +174,13 @@ const getAllProductLimitAPI = async (req, res) => {
     LIMIT $1 OFFSET $2`,
             [limit, offset]
         );
-        console.log(response.rows);
         res.status(200).json({ data: response.rows });
     } catch (error) {
-        console.log("error get all product limit: ", error);
         res.status(400).json({ err: error });
     }
 };
 const getLengthAllProductsAPI = async (req, res) => {
     const response = await pool.query(`SELECT COUNT(course_id) FROM courses`);
-    console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", response);
     res.status(200).json({ lengthCourse: response.rows[0].count });
 };
 module.exports = {

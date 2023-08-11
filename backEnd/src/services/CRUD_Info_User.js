@@ -12,7 +12,6 @@ const getInfoUserAPI = async (req, res) => {
             dataUser: data.rows[0],
         });
     } catch (error) {
-        console.log("err get info user: ", error);
         res.status(400).json({ ec: error });
     }
 };
@@ -37,7 +36,6 @@ const getInfoStudentAPI = async (req, res) => {
 };
 const getInfoUserByAccessTokenAPI = async (req, res) => {
     const accessToken = req.query.accessToken;
-    console.log("accestoken: ", accessToken);
     if (accessToken) {
         try {
             const decode = await jwt.verify(
@@ -46,7 +44,6 @@ const getInfoUserByAccessTokenAPI = async (req, res) => {
             );
             res.status(200).json({ data: decode });
         } catch (error) {
-            console.log("error get info user by access token: ", error);
             res.status(400).json({ ec: error });
             return;
         }

@@ -16,7 +16,6 @@ const verifyTokenAPI = async (req, res) => {
             return;
         }
     } else {
-        console.log(222222222222);
         res.status(404).json({
             ec: "Not found accessToken",
         });

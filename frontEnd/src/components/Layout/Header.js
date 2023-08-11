@@ -62,7 +62,6 @@ export const Header = ({ setRoleUser }) => {
                 await funcVerifyToken();
                 fncgetInfoUserByAccessTokenAPI();
             }
-            console.log("error get id user: ", error);
         }
     };
     useEffect(() => {
@@ -80,11 +79,8 @@ export const Header = ({ setRoleUser }) => {
             localStorage.getItem("accessToken") &&
             localStorage.getItem("login") === "true"
         ) {
-            console.log("login true");
             setCheckLogin(true);
         } else {
-            console.log("login false");
-
             setCheckLogin(false);
         }
     }, [location.pathname]);
@@ -97,9 +93,7 @@ export const Header = ({ setRoleUser }) => {
             if (response.data && response.data.data) {
                 setCategories(response.data.data);
             }
-        } catch (error) {
-            console.log("error: ", error);
-        }
+        } catch (error) {}
     };
     useEffect(() => {
         DataCategories();
@@ -114,9 +108,7 @@ export const Header = ({ setRoleUser }) => {
                 `${process.env.REACT_APP_URL_BACKEND}/course/getCartItemsAPI?isIdUser=${dataUser.id}`
             );
             fncSetCartOrigin(response.data.data);
-        } catch (error) {
-            console.log("error get item cart user: ", error);
-        }
+        } catch (error) {}
     };
     useEffect(() => {
         if (!cartOrigin.length && dataUser.id) {
@@ -172,7 +164,6 @@ export const Header = ({ setRoleUser }) => {
                         e.preventDefault();
                         const content =
                             document.getElementById(`gsearch`).value;
-                        console.log("content get value: ", content);
                         navigate(`/search/?contentSearch=${content}`);
 
                         // clear
@@ -340,7 +331,6 @@ export const Header = ({ setRoleUser }) => {
                         e.preventDefault();
                         const content =
                             document.getElementById(`gsearch`).value;
-                        console.log("content get value: ", content);
                         navigate(`/search/?contentSearch=${content}`);
 
                         // clear
@@ -500,7 +490,6 @@ export const Header = ({ setRoleUser }) => {
                 onSubmit={(e) => {
                     e.preventDefault();
                     const content = document.getElementById(`gsearch2`).value;
-                    console.log("content get value: ", content);
                     navigate(`/search/?contentSearch=${content}`);
 
                     // clear

@@ -25,28 +25,6 @@ const {
 } = require("../controllers/CRUD_Course");
 // config upload image
 const multer = require("multer"); // use multer upload image
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         console.log(1);
-//         cb(null, "../frontend/public/imageCourse");
-//         console.log(2);
-//     },
-//     filename: function (req, file, cb) {
-//         console.log("file: ", file);
-//         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-//         cb(null, uniqueSuffix + "-" + file.originalname);
-//     },
-// });
-// const upload = multer({
-//     storage: storage,
-//     limits: {
-//         fileSize: 1024 * 1024, // max file image: 1mb
-//     },
-//     fileFilter: fileFilter,
-// });
-
-////////////////////////////////////////////////////// route
-// set route
 const routeAPICourse = express.Router();
 
 // create course
@@ -124,7 +102,6 @@ routeAPICourse.post(
         // upload.single("ten_chua_file_anh_dua_vao");
         uploadCourse.single("image_course")(req, res, async function (err) {
             if (err) {
-                console.log("errrrrrrrrrr: ", err.message);
                 if (err.message === "Tên khóa học đã tồn tại") {
                     res.status(400).json({ result: err.message });
                 } else {
@@ -158,7 +135,6 @@ routeAPICourse.post(
             getDownloadURL(strorageRef)
                 .then(async (url) => {
                     // success !
-                    console.log("url course: ", url);
                     const response = await handleCreateCourse(req.body, url);
                     if (response) {
                         res.status(200).json({
@@ -170,7 +146,6 @@ routeAPICourse.post(
                     }
                 })
                 .catch((err) => {
-                    console.log("loi lon roi: ", err);
                     res.status(500).json({
                         message: "upload khong thanh cong",
                     });
@@ -210,8 +185,6 @@ routeAPICourse.post(
         });
     },
     async function (req, res) {
-        console.log("data: ", req.body);
-        console.log("file:", req.file);
         const file = req.file;
         const strorageRef = ref(storageCourse, req.file.originalname);
         const metadata = {
@@ -223,7 +196,6 @@ routeAPICourse.post(
             getDownloadURL(strorageRef)
                 .then(async (url) => {
                     // success !
-                    console.log("url: ", url);
                     const response = await handleCreateLesson(req.body, url);
                     if (response) {
                         res.status(200).json({
@@ -235,7 +207,6 @@ routeAPICourse.post(
                     }
                 })
                 .catch((err) => {
-                    console.log("loi lon roi: ", err);
                     res.status(500).json({
                         message: "upload khong thanh cong",
                     });

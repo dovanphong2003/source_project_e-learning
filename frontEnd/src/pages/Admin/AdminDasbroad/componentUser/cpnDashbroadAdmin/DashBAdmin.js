@@ -20,7 +20,6 @@ export const DashBAdmin = () => {
             }))
         );
     };
-    console.log(dataAdmin);
 
     useEffect(() => {
         getInfoAdmin();

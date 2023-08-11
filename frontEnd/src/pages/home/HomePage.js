@@ -34,7 +34,6 @@ export const HomePage = () => {
                 await funcVerifyToken();
                 fncgetInfoUserByAccessTokenAPI();
             }
-            console.log("error get id user: ", error);
         }
     };
     useEffect(() => {
@@ -53,9 +52,7 @@ export const HomePage = () => {
             );
             setDataCourseNews(response.data.data.dataCourseNews);
             setDataCourseSeller(response.data.data.dataCourseSeller);
-        } catch (error) {
-            console.log("error get data course seller and news: ", error);
-        }
+        } catch (error) {}
     };
     useEffect(() => {
         getCourseBSellerAndNews();
@@ -71,16 +68,14 @@ export const HomePage = () => {
             if (response.data) {
                 setDataCourseOfUser(response.data.data);
             }
-        } catch (error) {
-            console.log("error handle get course of user: ", error);
-        }
+        } catch (error) {}
     };
     useEffect(() => {
         if (dataUser.id) {
             getCourseOfUser();
         }
     }, [dataUser.id]);
-    console.log("hehe boy: ", dataCourseOfUser);
+
     return (
         <main>
             <Banner />

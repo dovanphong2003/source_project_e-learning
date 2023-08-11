@@ -28,10 +28,8 @@ export const AđdCategory = () => {
     const notifySuccess = (content) => toast.success(content);
     function handleFileUpload(event) {
         event.preventDefault();
-        console.log(event.target);
         setBreak(false);
         const files = event.target.files;
-        console.log(files);
         const allowedMimeTypes = [
             "image/jpeg",
             "image/png",
@@ -98,7 +96,6 @@ export const AđdCategory = () => {
         const data = new FormData();
         data.append("title", formData.title);
         data.append("image", formData.image);
-        console.log(data);
         try {
             const response = await axios.post(
                 `${
@@ -120,7 +117,6 @@ export const AđdCategory = () => {
             resetForm();
             setProgress(0);
         } catch (error) {
-            console.log("err add category: ", error);
             if (
                 error.response.data.result &&
                 error.response.data.result === "danh mục đã tồn tại"

@@ -31,7 +31,6 @@ export const Info = () => {
                 await funcVerifyToken();
                 fncgetInfoUserByAccessTokenAPI();
             }
-            console.log("error get id user: ", error);
         }
     };
     useEffect(() => {
@@ -48,7 +47,6 @@ export const Info = () => {
             getDataUser(response.data.dataUser);
             return response.data.dataUser;
         } catch (error) {
-            console.log("error handle info user: ", error);
             navigate("/");
             return "";
         }

@@ -12,16 +12,6 @@ const {
 } = require("../controllers/CRUD_category");
 // config upload image
 const multer = require("multer"); // use multer upload image
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, "../frontend/public/imageCategory");
-//     },
-//     filename: function (req, file, cb) {
-//         console.log("file: ", file);
-//         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-//         cb(null, uniqueSuffix + "-" + file.originalname);
-//     },
-// });
 
 // firebase
 const {
@@ -47,7 +37,6 @@ const storageCourse = getStorage(); // get strorage
 async function fileFilter(req, file, cb) {
     // The function should call `cb` with a boolean
     // to indicate if the file should be accepted
-    // console.log(req.body);
     const result = await handleCreateCategory(req.query.title, "", 1);
     if (result === "danh mục đã tồn tại") {
         const error = new Error("danh mục đã tồn tại");
@@ -81,7 +70,6 @@ routeAPICategory.post(
          */
         uploadCourse.single("image")(req, res, async function (err) {
             if (err) {
-                console.log("errrrrrrrrrr: ", err.message);
                 if (err.message === "danh mục đã tồn tại") {
                     res.status(400).json({ result: err.message });
                 } else {
@@ -116,7 +104,6 @@ routeAPICategory.post(
             getDownloadURL(strorageRef)
                 .then(async (url) => {
                     // success !
-                    console.log("url course: ", url);
                     const response = await handleCreateCategory(title, url, 2);
                     if (response) {
                         res.status(200).json({
@@ -128,7 +115,6 @@ routeAPICategory.post(
                     }
                 })
                 .catch((err) => {
-                    console.log("loi lon roi: ", err);
                     res.status(500).json({
                         message: "upload khong thanh cong",
                     });
@@ -144,7 +130,6 @@ routeAPICategory.post(
         // neu khong co file nao duoc tai len --> no se vao thang else luon
         uploadCourse.single("image")(req, res, async function (err) {
             if (err) {
-                console.log("errrrrrrrrrr: ", err.message);
                 if (err.message === "danh mục đã tồn tại") {
                     res.status(400).json({ result: err.message });
                 } else {
@@ -192,7 +177,6 @@ routeAPICategory.post(
             getDownloadURL(strorageRef)
                 .then(async (url) => {
                     // success !
-                    console.log("url course: ", url);
                     const response = await handleEditCategory(title, url, id);
                     if (response) {
                         res.status(200).json({
@@ -205,9 +189,9 @@ routeAPICategory.post(
                     }
                 })
                 .catch((err) => {
-                    console.log("loi lon roi: ", err);
                     res.status(500).json({
                         message: "upload khong thanh cong",
+                        err: err,
                     });
                 });
         });
@@ -237,7 +221,6 @@ routeAPICategory.delete("/deleteCategoryAPI", async (req, res) => {
         }
         fs.unlink(`../frontend/public/imageCategory/${name_image}`, (err) => {
             if (err) {
-                console.log("err delete category: ", err);
                 res.status(400).json({ err: "Lỗi file ảnh không tồn tại" });
             } else {
                 res.status(200).json({
@@ -246,7 +229,6 @@ routeAPICategory.delete("/deleteCategoryAPI", async (req, res) => {
             }
         });
     } catch (error) {
-        console.log("err delete category: ", error);
         res.status(400).json({ err: "Lỗi file ảnh không tồn tại" });
     }
 });

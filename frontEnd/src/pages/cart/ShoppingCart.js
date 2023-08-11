@@ -126,12 +126,7 @@ export const ShoppingCart = () => {
                                                                     deleteItemToCart(
                                                                         data.course_id
                                                                     );
-                                                                } catch (error) {
-                                                                    console.log(
-                                                                        "error post add cart :",
-                                                                        error
-                                                                    );
-                                                                }
+                                                                } catch (error) {}
                                                             }}
                                                         >
                                                             <span class="bnt-delete-cartitem material-symbols-outlined">

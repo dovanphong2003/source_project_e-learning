@@ -10,9 +10,7 @@ export const SearchCourse = () => {
     const [searchParam, changeSearchParam] = useSearchParams();
     const contentSearch = searchParam.get("contentSearch");
     const [sortCourse, setSort] = useState("");
-    console.log("sourrt course: ", sortCourse);
     const [hdfilter, setHdFilter] = useState(false);
-    console.log("hehe boy; ", contentSearch);
     const [dataSearch, setDataSearch] = useState([false]);
     const getDataSearch = async () => {
         const response = await axios.get(
@@ -30,7 +28,6 @@ export const SearchCourse = () => {
             getDataSearch();
         }
     }, [contentSearch]);
-    console.log("data; ", dataSearch);
     const sortedData =
         dataSearch[0] !== false
             ? dataSearch.slice().sort((a, b) => a.course_id - b.course_id)

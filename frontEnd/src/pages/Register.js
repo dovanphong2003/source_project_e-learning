@@ -64,7 +64,6 @@ export const Register = () => {
             );
             return navigation("/log-in");
         } catch (error) {
-            console.log("error: ", error);
             return notify(error);
         }
     };

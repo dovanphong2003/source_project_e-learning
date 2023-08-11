@@ -75,10 +75,7 @@ export const CheckOut = ({
             deleteCartItemOfUser();
             fncSetCartOrigin([]);
             navigate("/");
-            console.log("success !");
-        } catch (error) {
-            console.log("error handle user success !", error);
-        }
+        } catch (error) {}
     };
 
     // settime out sleketon
@@ -127,11 +124,8 @@ export const CheckOut = ({
                         "100%",
                         ["60%", "50%", "75%", "90%"],
                     ].map((el) => {
-                        console.log("el: ", el);
                         if (Array.isArray(el)) {
-                            console.log("arr: ", el);
                             return el.map((el_child) => {
-                                console.log("el child: ", el_child);
                                 return (
                                     <Skeleton
                                         width={`${el_child}`}

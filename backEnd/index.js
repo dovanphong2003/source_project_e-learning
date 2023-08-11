@@ -34,7 +34,6 @@ app.use("/course", routeAPICourse);
 app.use("/enrolment", routeAPIEnrolment);
 app.use("/comment", routerComment);
 app.listen(port, async () => {
-    console.log("connect server success !");
-    console.log(`on port ${port}`);
-    console.log("hehe boy: ", process.env.URL_FRONTEND);
+    // console.log("connect server success !");
+    // console.log(`on port ${port}`);
 });

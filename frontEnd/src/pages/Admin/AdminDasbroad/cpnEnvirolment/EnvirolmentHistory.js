@@ -19,7 +19,6 @@ export const EnvirolmentHistory = () => {
             }))
         );
     };
-    console.log("data: ", dataEnrolment);
     useEffect(() => {
         getDataEnrolment();
     }, []);
