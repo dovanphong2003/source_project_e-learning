@@ -55,7 +55,7 @@ pool.connect(async (err) => {
     //         rejectUnauthorized: false,
     //     },
     // });
-    // console.log("Database connected!");
+    console.log("Database connected!");
 });
 
 module.exports = {

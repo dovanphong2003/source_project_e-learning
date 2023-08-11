@@ -1,4 +1,4 @@
-
+/*
 CREATE TABLE public.coursecategories (
 	category_id serial4 NOT NULL,
 	category_name varchar(255) NOT NULL,
@@ -150,3 +150,4 @@ CREATE TABLE public."comments" (
 	CONSTRAINT comments_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES public."comments"(comment_id),
 	CONSTRAINT comments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id)
 );
+*/
