@@ -15,7 +15,32 @@ export const CheckOut = ({
     setCheckCheckOut,
     fncSetCartOrigin,
 }) => {
-    const { isIdUser } = useContext(RoleContext);
+    const [dataUser, setDataUser] = useState({});
+
+    // get info user - id
+    const fncgetInfoUserByAccessTokenAPI = async () => {
+        try {
+            const response = await axios.get(
+                `${
+                    process.env.REACT_APP_URL_BACKEND
+                }/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
+                    "accessToken"
+                )}`
+            );
+
+            setDataUser(response.data.data);
+        } catch (error) {
+            if (error.response.data.ec.message === "jwt expired") {
+                const funcVerifyToken = await VerifyToken();
+                await funcVerifyToken();
+            }
+        }
+    };
+    useEffect(() => {
+        if (localStorage.getItem("accessToken")) {
+            fncgetInfoUserByAccessTokenAPI();
+        }
+    }, [localStorage.getItem("nameUser")]);
     const navigate = useNavigate();
     const notifyError = (content) => toast.error(content);
     function generateRandomString(length) {
@@ -45,23 +70,32 @@ export const CheckOut = ({
             course_name: el.course_name,
         }));
         const dataPost = {
-            id_student: isIdUser,
+            id_student: dataUser.id,
             ArrId_course,
         };
-        await axios.post(
-            `${process.env.REACT_APP_URL_BACKEND}/enrolment/upDataEnrolmentsAPI`,
-            dataPost
-        );
+        try {
+            await axios.post(
+                `${process.env.REACT_APP_URL_BACKEND}/enrolment/upDataEnrolmentsAPI`,
+                dataPost
+            );
+        } catch (error) {}
     };
 
     // handle delete cartItem of user
     const deleteCartItemOfUser = async () => {
-        await axios.delete(
-            `${process.env.REACT_APP_URL_BACKEND}/course/deleteAllCourseCartAPI?id_user=${isIdUser}`
-        );
+        try {
+            await axios.delete(
+                `${process.env.REACT_APP_URL_BACKEND}/course/deleteAllCourseCartAPI?id_user=${dataUser.id}`
+            );
+        } catch (error) {}
     };
-
+    let checkHandleCheckOut = false;
     const handleCheckOutSuccess = (event) => {
+        if (checkHandleCheckOut || !dataUser.id) {
+            notifyError("Thanh Toán không thành công !");
+            return;
+        }
+        checkHandleCheckOut = true;
         event.preventDefault();
         Swal.fire({
             icon: "success",
@@ -70,12 +104,11 @@ export const CheckOut = ({
         });
 
         // handle user success get course
-        try {
-            handleEnrollMent();
-            deleteCartItemOfUser();
-            fncSetCartOrigin([]);
-            navigate("/");
-        } catch (error) {}
+        handleEnrollMent();
+        deleteCartItemOfUser();
+        fncSetCartOrigin([]);
+        checkHandleCheckOut = false;
+        navigate("/");
     };
 
     // settime out sleketon

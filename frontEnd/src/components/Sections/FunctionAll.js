@@ -50,11 +50,6 @@ const VerifyToken = async () => {
                     checkVerifyToken = false;
                     return false;
                 }
-                // getIdUser(response.id);
-                // if (isRole !== "virtualUser") {
-                //     // setUser(response.role);
-                // }
-                // setCheckLogin(true);
             } catch (error) {
                 // Xử lý lỗi nếu có
                 checkVerifyToken = false;

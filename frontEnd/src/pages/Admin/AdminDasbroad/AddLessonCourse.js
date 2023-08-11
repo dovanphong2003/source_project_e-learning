@@ -117,8 +117,16 @@ export const AddLessonCourse = () => {
     };
 
     // handle upload file....
+
+    let checkSubmit = false;
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (checkSubmit) {
+            notifyWarning("Yêu cầu đang được xử lí...");
+            return;
+        }
+        checkSubmit = true;
+
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (resultVerify) {
@@ -128,18 +136,22 @@ export const AddLessonCourse = () => {
                 !selectInputRefs.current[1].getValue().length
             ) {
                 notifyError("Vui lòng điền đầy đủ thông tin!");
+                checkSubmit = false;
                 return " ";
             }
             if (hiddenType1 && !selectInputRefs.current[2].getValue().length) {
                 notifyError("Vui lòng điền đầy đủ thông tinnnn!");
+                checkSubmit = false;
                 return "";
             }
             if (hiddenType2 && !fileVideo.name) {
                 notifyError("Vui lòng chọn file video !");
+                checkSubmit = false;
                 return "";
             }
             if (hiddenType2 && breakk) {
                 notifyError("File không hợp lệ, chú ý định dạng !");
+                checkSubmit = false;
                 return "";
             }
 
@@ -174,6 +186,7 @@ export const AddLessonCourse = () => {
                     notifySuccess("tạo thành công !");
                     setStartRun(false);
                     setProgress(0);
+                    checkSubmit = false;
                     refeshData();
                 } else {
                     setStartRun(true);
@@ -184,9 +197,11 @@ export const AddLessonCourse = () => {
                     notifySuccess("tạo thành công !");
                     setStartRun(false);
                     setProgress(0);
+                    checkSubmit = false;
                     refeshData();
                 }
             } catch (error) {
+                checkSubmit = false;
                 setStartRun(false);
                 setProgress(0);
                 refeshData();
@@ -196,6 +211,7 @@ export const AddLessonCourse = () => {
             }
         } else {
             notifyError("Bạn không thể thực hiện hành động trên !");
+            checkSubmit = false;
         }
     };
 

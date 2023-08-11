@@ -25,12 +25,19 @@ export const AddStudentDB = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    let checkSubmit = false;
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (checkSubmit) {
+            notifyErr("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkSubmit = true;
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (!resultVerify) {
             notifyErr("Không thể thực hiện hành động trên !");
+            checkSubmit = false;
             return;
         }
         if (
@@ -39,9 +46,11 @@ export const AddStudentDB = () => {
             !formData.fullName ||
             !formData.role
         ) {
+            checkSubmit = false;
             return notifyErr("vui lòng điền đầy đủ thông tin !");
         }
         if (formData.password.length < 8) {
+            checkSubmit = false;
             return notifyErr("Mật khẩu tối thiểu 8 kí tự !");
         }
         try {
@@ -49,13 +58,8 @@ export const AddStudentDB = () => {
                 `${process.env.REACT_APP_URL_BACKEND}/createUserAPI`,
                 formData
             );
+            checkSubmit = false;
             notify("Tạo Thành Công !");
-            const inputs = document.querySelectorAll(
-                ".input_form-course-title"
-            );
-            inputs.forEach((input) => {
-                input.value = "";
-            });
             setFormData({
                 fullName: "",
                 email: "",
@@ -65,6 +69,7 @@ export const AddStudentDB = () => {
             });
             selectInputRefs.current.clearValue();
         } catch (error) {
+            checkSubmit = false;
             notifyErr(error.response.data.errorcode);
         }
     };

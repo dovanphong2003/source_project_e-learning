@@ -30,14 +30,21 @@ export const AddModuleCrouse = () => {
     useEffect(() => {
         getNameCourse();
     }, []);
+    let checkSubmit = false;
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (checkSubmit) {
+            notifyError("Yêu cầu đang được xử lí... !");
+            return;
+        }
+        checkSubmit = true;
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (resultVerify) {
             try {
                 if (refCourse.current.getValue().length === 0 || !nameModule) {
                     notifyError("Vui lòng nhập đầy đủ thông tin !");
+                    checkSubmit = false;
                     return;
                 }
                 const data = {
@@ -52,11 +59,14 @@ export const AddModuleCrouse = () => {
                 setNameModule("");
                 notifySuccess("tạo thành công !");
                 refCourse.current.clearValue();
+                checkSubmit = false;
             } catch (error) {
                 notifyError("Tạo không thành công, đã xảy ra lỗi !");
+                checkSubmit = false;
             }
         } else {
             notifyError("Bạn không thể thực hiện hành động trên !");
+            checkSubmit = false;
         }
     };
     return (

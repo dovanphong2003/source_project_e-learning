@@ -44,18 +44,28 @@ export const AddEnvirolment = () => {
         listRef.current[0].clearValue();
         listRef.current[1].clearValue();
     };
+    let checkSubmit = false;
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (checkSubmit) {
+            notifyError("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkSubmit = true;
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (!resultVerify) {
             notifyError("Không thể thực hiện hành động trên !");
+            checkSubmit = false;
+
             return;
         }
         if (
             !listRef.current[0].getValue().length ||
             !listRef.current[1].getValue().length
         ) {
+            checkSubmit = false;
             notifyError("Vui lòng nhập đầy đủ thông tin !");
             return;
         }
@@ -71,7 +81,9 @@ export const AddEnvirolment = () => {
             );
             notifySuccess("Ghi danh thành công !");
             resestForm();
+            checkSubmit = false;
         } catch (error) {
+            checkSubmit = false;
             if (error.response.data) {
                 notifyError(error.response.data.message);
                 resestForm();

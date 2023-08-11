@@ -177,27 +177,60 @@ export const ViewVideoCourse = () => {
     };
 
     /////////////////////////////// comment
+    const [dataUser, setDataUser] = useState({});
 
-    const { isIdUser, getIdUser } = useContext(RoleContext);
+    // get info user - id
+    const fncgetInfoUserByAccessTokenAPI = async () => {
+        try {
+            const response = await axios.get(
+                `${
+                    process.env.REACT_APP_URL_BACKEND
+                }/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
+                    "accessToken"
+                )}`
+            );
+
+            setDataUser(response.data.data);
+        } catch (error) {
+            if (error.response.data.ec.message === "jwt expired") {
+                const funcVerifyToken = await VerifyToken();
+                await funcVerifyToken();
+            }
+        }
+    };
+    useEffect(() => {
+        if (localStorage.getItem("accessToken")) {
+            fncgetInfoUserByAccessTokenAPI();
+        }
+    }, [localStorage.getItem("nameUser")]);
+    let checkHandleComment = false;
     const handlePostComment = async (event) => {
         event.preventDefault();
+        if (checkHandleComment) {
+            notifyWarning("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkHandleComment = true;
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
-        if (!resultVerify) {
+        if (dataUser.id && !resultVerify) {
             notifyWarning("Không thể thực hiện hành động trên !");
+            checkHandleComment = false;
             return;
         }
         if (!value || value === "<p><br></p>") {
             notifyWarning("Vui lòng điền nội dung comment !");
+            checkHandleComment = false;
             return;
         }
         if (value.length > 3000) {
             notifyWarning("Độ dài vượt quá quy định !");
+            checkHandleComment = false;
             return;
         }
 
         const data = {
-            user_id: isIdUser,
+            user_id: dataUser.id,
             comment_content: value,
             lesson_id: param.idvideo,
             comment_parent: null,
@@ -212,7 +245,9 @@ export const ViewVideoCourse = () => {
             const editor = clearComment.current.getEditor();
             getDataComment();
             editor.setContents([]);
+            checkHandleComment = false;
         } catch (error) {
+            checkHandleComment = false;
             notifyWarning("Đã xảy ra lỗi, comment không thành công !");
         }
     };
@@ -528,7 +563,7 @@ export const ViewVideoCourse = () => {
                                               getDataComment={getDataComment}
                                               refDivParent={refDivParent}
                                               cpnChild={arrayChild}
-                                              isIdUser={isIdUser}
+                                              isIdUser={dataUser.id}
                                           />
                                       );
                                   } else {
@@ -538,7 +573,7 @@ export const ViewVideoCourse = () => {
                                               getDataComment={getDataComment}
                                               refDivParent={refDivParent}
                                               cpnChild={arrayChild}
-                                              isIdUser={isIdUser}
+                                              isIdUser={dataUser.id}
                                           />
                                       );
                                   }

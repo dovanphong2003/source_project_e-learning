@@ -112,7 +112,9 @@ export const DetailCourse = () => {
         }
     };
     useEffect(() => {
-        fncgetInfoUserByAccessTokenAPI();
+        if (localStorage.getItem("accessToken")) {
+            fncgetInfoUserByAccessTokenAPI();
+        }
     }, [localStorage.getItem("accessToken")]);
     //
     const funcGetItemCartUser = async () => {
@@ -126,12 +128,19 @@ export const DetailCourse = () => {
     };
 
     // handle add course -> cart
+    let checkHandleAddCart = false;
     const handleAddCart = async (event) => {
         event.preventDefault();
+        if (checkHandleAddCart) {
+            notifyWarning("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkHandleAddCart = true;
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (!resultVerify) {
             notifyError("Không thể thực hiện hành động trên !");
+            checkHandleAddCart = false;
             return;
         }
         try {
@@ -140,7 +149,9 @@ export const DetailCourse = () => {
             );
             notifySuccess("Thêm thành công !");
             setcheckHandle(!checkhandle);
+            checkHandleAddCart = false;
         } catch (error) {
+            checkHandleAddCart = false;
             notifyError("Đã có lỗi xảy ra !");
         }
     };
@@ -160,16 +171,24 @@ export const DetailCourse = () => {
     const id_course = param.id;
 
     // handle get course free
+    let checkHandleAddCartFree = false;
     const handleAddCourseFree = async (event) => {
         event.preventDefault();
+        if (checkHandleAddCartFree) {
+            notifyWarning("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkHandleAddCartFree = true;
         if (!dataInfoCourse.course_name || !dataUser.id) {
             notifyError("Vui lòng thử lại sau giây lát !");
+            checkHandleAddCartFree = false;
             return;
         }
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (!resultVerify) {
             notifyError("Không thể thực hiện hành động trên !");
+            checkHandleAddCartFree = false;
             return;
         }
         const dataPost = {
@@ -187,19 +206,30 @@ export const DetailCourse = () => {
                 dataPost
             );
             handleCheckOutSuccess();
-        } catch (error) {}
+            checkHandleAddCartFree = false;
+        } catch (error) {
+            checkHandleAddCartFree = false;
+        }
     };
 
+    let checkDeleteCart = false;
     const handleDeleteCart = async (event) => {
         event.preventDefault();
 
+        if (checkDeleteCart) {
+            notifyWarning("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkDeleteCart = true;
         try {
             const response = await axios.delete(
                 `${process.env.REACT_APP_URL_BACKEND}/course/deleteCourseCartAPI?idCourse=${param.id}&id_user=${dataUser.id}`
             );
             notifySuccess("Gỡ thành công !");
             setcheckHandle(!checkhandle);
+            checkDeleteCart = false;
         } catch (error) {
+            checkDeleteCart = false;
             notifyError("Đã có lỗi xảy ra !");
         }
     };

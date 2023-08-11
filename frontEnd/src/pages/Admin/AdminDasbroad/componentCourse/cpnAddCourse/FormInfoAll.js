@@ -81,16 +81,24 @@ export const FormInfoAll = ({ form, setForm }) => {
     };
 
     // when onlick submit
+    let checkOnclickSubmit = false;
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (checkOnclickSubmit) {
+            notifyError("Đang được xử lí...");
+            return;
+        }
+        checkOnclickSubmit = true;
 
         if (isData.title_name === "") {
             notifyError("vui lòng nhập tiêu đề !");
+            checkOnclickSubmit = false;
             return;
         }
         if (isData.image_course === null) {
             notifyError("vui lòng điền lại thông tin, và chọn file ảnh !");
             resestUrlAndImage();
+            checkOnclickSubmit = false;
             return "";
         }
         if (
@@ -103,18 +111,20 @@ export const FormInfoAll = ({ form, setForm }) => {
             !isData.url_course
         ) {
             notifyError("Vui lòng nhập đầy đủ các thông tin!");
+            checkOnclickSubmit = false;
             return "";
         }
         if (breakk) {
             notifyError("file không hợp lệ, vui lòng chọn lại file !");
             resestUrlAndImage();
+            checkOnclickSubmit = false;
             return "";
         }
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (!resultVerify) {
             notifyError("Bạn không thể thực hiện tác vụ trên !");
-
+            checkOnclickSubmit = false;
             // break function !
             return;
         }
@@ -148,7 +158,9 @@ export const FormInfoAll = ({ form, setForm }) => {
             setProgress(0);
             resetForm();
             notifySuccess("tạo thành công !");
+            checkOnclickSubmit = false;
         } catch (error) {
+            checkOnclickSubmit = false;
             if (
                 error.response.data.result &&
                 error.response.data.result === "Tên khóa học đã tồn tại"

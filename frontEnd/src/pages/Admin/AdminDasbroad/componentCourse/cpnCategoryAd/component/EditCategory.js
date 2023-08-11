@@ -113,22 +113,31 @@ export const EditCategory = () => {
     };
 
     // handle upload file....
+    let checkSubmit = false;
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (checkSubmit) {
+            notifyError("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkSubmit = true;
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (!resultVerify) {
             notifyError("Không thể thực hiện hành động trên !");
+            checkSubmit = false;
             return;
         }
         if (!formData.title && !formData.image) {
             notifyError("Không có thay đổi nào để chỉnh sửa !");
             // resetForm();
+            checkSubmit = false;
             return "";
         }
         if (breakk) {
             notifyError("file không hợp lệ, vui lòng chọn lại file !");
             resetForm();
+            checkSubmit = false;
             return "";
         }
         const data = new FormData();
@@ -167,7 +176,9 @@ export const EditCategory = () => {
             resetForm();
             notifySuccess("Chỉnh Sửa Thành Công!");
             setProgress(0);
+            checkSubmit = false;
         } catch (error) {
+            checkSubmit = false;
             if (
                 error.response.data.result &&
                 error.response.data.result === "danh mục đã tồn tại"

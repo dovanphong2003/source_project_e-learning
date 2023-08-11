@@ -70,27 +70,38 @@ export const AđdCategory = () => {
     };
 
     // handle upload file....
+    let checkSubmit = false;
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (checkSubmit) {
+            notifyError("Yêu cầu đang được xử lí...");
+            return;
+        }
+        checkSubmit = true;
+
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
         if (!resultVerify) {
             notifyError("Không thể thực hiện hành động trên !");
+            checkSubmit = false;
             return;
         }
         if (formData.title === "") {
             notifyError("vui lòng nhập tiêu đề !");
             // resetForm();
+            checkSubmit = false;
             return;
         }
         if (formData.image === null) {
             notifyError("vui lòng điền lại thông tin, và chọn file ảnh !");
             resetForm();
+            checkSubmit = false;
             return "";
         }
         if (breakk) {
             notifyError("file không hợp lệ, vui lòng chọn lại file !");
             resetForm();
+            checkSubmit = false;
             return "";
         }
 
@@ -117,6 +128,7 @@ export const AđdCategory = () => {
             notifySuccess("tạo thành công !");
             resetForm();
             setProgress(0);
+            checkSubmit = false;
         } catch (error) {
             if (
                 error.response.data.result &&
@@ -125,11 +137,12 @@ export const AđdCategory = () => {
                 resetForm();
                 notifyError("Danh mục đã tồn tại");
                 setProgress(0);
+                checkSubmit = false;
             } else {
                 resetForm();
-
                 notifyError(error.response.data.error);
                 setProgress(0);
+                checkSubmit = false;
             }
         }
     };

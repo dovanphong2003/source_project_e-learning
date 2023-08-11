@@ -44,13 +44,21 @@ export const Login = ({ setRoleUser }) => {
     const navigate = useNavigate();
     const notify = (content) => toast.error(content);
     const notifySuccess = (content) => toast.success(content);
+
+    let checkHandleSubmit = false;
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (checkHandleSubmit) {
+            notify("Đang đăng nhập, vui lòng đợi...");
+            return;
+        }
+        checkHandleSubmit = true;
         const data = { email, password, checkLogin: "normal" };
         setIsLoading(true);
         await delay(2000);
         setIsLoading(false);
         if (!email || !password) {
+            checkHandleSubmit = false;
             return notify("vui lòng nhập đầy đủ thông tin !");
         }
         try {
@@ -64,8 +72,10 @@ export const Login = ({ setRoleUser }) => {
             localStorage.setItem("login", true);
             localStorage.setItem("role", response.data.role);
             setRoleUser(response.data.role);
+            checkHandleSubmit = false;
             return navigate("/");
         } catch (error) {
+            checkHandleSubmit = false;
             notify(error.response.data.EC);
         }
     };
@@ -74,9 +84,14 @@ export const Login = ({ setRoleUser }) => {
     }
 
     // handle login with google
+    let checkHandleLoginGoogle = false;
     const handleLoginGoogle = async (event) => {
         event.preventDefault();
-
+        if (checkHandleLoginGoogle) {
+            notify("Yêu cầu đang được xử lí, vui lòng đợi !");
+            return;
+        }
+        checkHandleLoginGoogle = true;
         // login google
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
@@ -109,6 +124,7 @@ export const Login = ({ setRoleUser }) => {
                 localStorage.setItem("login", true);
                 localStorage.setItem("role", response.data.role);
                 setRoleUser(response.data.role);
+                checkHandleLoginGoogle = false;
                 return navigate("/");
             } catch (error) {
                 // if user not defined account of website
@@ -147,11 +163,14 @@ export const Login = ({ setRoleUser }) => {
                         localStorage.setItem("login", true);
                         localStorage.setItem("role", response.data.role);
                         setRoleUser(response.data.role);
+                        checkHandleLoginGoogle = false;
                         return navigate("/");
                     } else {
+                        checkHandleLoginGoogle = false;
                         notify("Đăng kí không thành công !");
                     }
                 } catch (error) {
+                    checkHandleLoginGoogle = false;
                     notify("Đăng nhập không thành công !");
                     if (error.response && error.response.data) {
                         return notify(error.response.data.errorcode);
@@ -166,12 +185,20 @@ export const Login = ({ setRoleUser }) => {
             const email = error.customData.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
+            checkHandleLoginGoogle = false;
         }
     };
 
     // handle login with facebook
+
+    let checkHandleLoginFacebook = false;
     const handleLoginFacebook = async (event) => {
         event.preventDefault();
+        if (checkHandleLoginFacebook) {
+            notify("Yêu cầu đang được xử lí, vui lòng đợi !");
+            return;
+        }
+        checkHandleLoginFacebook = true;
         const providerFacebook = new FacebookAuthProvider();
         const authFacebook = getAuth();
         try {
@@ -206,6 +233,7 @@ export const Login = ({ setRoleUser }) => {
                 localStorage.setItem("login", true);
                 localStorage.setItem("role", response.data.role);
                 setRoleUser(response.data.role);
+                checkHandleLoginFacebook = false;
                 return navigate("/");
             } catch (error) {
                 // if user not defined account of website
@@ -244,18 +272,23 @@ export const Login = ({ setRoleUser }) => {
                         localStorage.setItem("login", true);
                         localStorage.setItem("role", response.data.role);
                         setRoleUser(response.data.role);
+                        checkHandleLoginFacebook = false;
                         return navigate("/");
                     } else {
+                        checkHandleLoginFacebook = false;
                         notify("Đăng kí không thành công !");
                     }
                 } catch (error) {
+                    checkHandleLoginFacebook = false;
                     notify("Đăng nhập không thành công !");
                     if (error.response && error.response.data) {
                         return notify(error.response.data.errorcode);
                     }
                 }
             }
-        } catch (error) {}
+        } catch (error) {
+            checkHandleLoginFacebook = false;
+        }
     };
     return (
         <main>

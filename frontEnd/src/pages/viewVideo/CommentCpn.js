@@ -17,20 +17,29 @@ export const CommentCpn = ({
     const notifyWarning = (content) => toast.warning(content);
     const notifySuccess = (content) => toast.success(content);
     const refComment = useRef(null);
+    let checkRepComment = false;
     const handleRepComment = async (event) => {
         event.preventDefault();
+        if (checkRepComment) {
+            notifyWarning("Yêu cầu đang được xử lí !");
+            return;
+        }
+        checkRepComment = true;
         const funcVerifyToken = await VerifyToken();
         const resultVerify = await funcVerifyToken();
-        if (!resultVerify) {
+        if (isIdUser && !resultVerify) {
             notifyWarning("Không thể thực hiện hành động trên !");
+            checkRepComment = false;
             return;
         }
         if (!value2 || value2 === "<p><br></p>") {
             notifyWarning("Vui lòng điền nội dung comment !");
+            checkRepComment = false;
             return;
         }
         if (value2.length > 3000) {
             notifyWarning("Độ dài vượt quá quy định !");
+            checkRepComment = false;
             return;
         }
 
@@ -52,8 +61,10 @@ export const CommentCpn = ({
                 getDataComment();
                 editor.setContents([]);
                 checkSetHidden(!setHidden);
+                checkRepComment = false;
             } catch (error) {
                 // check comment error
+                checkRepComment = false;
                 notifyWarning("Đã xảy ra lỗi, comment không thành công !");
             }
         }
