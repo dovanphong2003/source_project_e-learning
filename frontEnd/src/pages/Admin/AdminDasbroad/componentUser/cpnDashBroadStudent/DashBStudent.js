@@ -5,12 +5,6 @@ import Swal from "sweetalert2";
 import "../cssCpnUsers/cssADminStudent.css";
 import axios from "axios";
 export const DashBStudent = () => {
-    const courseWasBuy = [
-        "học python từ con số 3",
-        "học javascript trong 5 phút",
-        "học c++ trong lúc ngủ",
-        "học pascal từ basic đến medium",
-    ];
     const [dataStudent, setDataStudent] = useState([]);
     const [dataCourseHaveBuy, setDataCourseHaveBuy] = useState([]);
     const getInfoStudent = async () => {
@@ -51,18 +45,6 @@ export const DashBStudent = () => {
             return arrData;
         }
     };
-
-    const dataAllForUser =
-        dataStudent.length && dataCourseHaveBuy.length
-            ? dataStudent.map((el) => {
-                  const getDataCourseOfUser = fncHandleData(
-                      el.user_id,
-                      dataCourseHaveBuy,
-                      []
-                  );
-                  return { ...el, courseHaveBuy: getDataCourseOfUser };
-              })
-            : "";
     useEffect(() => {
         getInfoStudent();
         getCourseUserHaveBuy();
@@ -185,7 +167,23 @@ export const DashBStudent = () => {
                         <DataTable
                             title="Danh Sách Học Viên"
                             columns={columns}
-                            data={dataAllForUser}
+                            data={
+                                dataStudent.length && dataCourseHaveBuy.length
+                                    ? dataStudent.map((el) => {
+                                          const getDataCourseOfUser =
+                                              fncHandleData(
+                                                  el.user_id,
+                                                  dataCourseHaveBuy,
+                                                  []
+                                              );
+                                          return {
+                                              ...el,
+                                              courseHaveBuy:
+                                                  getDataCourseOfUser,
+                                          };
+                                      })
+                                    : ""
+                            }
                             direction="auto"
                             fixedHeader
                             fixedHeaderScrollHeight="400px"
