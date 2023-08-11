@@ -1,0 +1,37 @@
+/* Mobile Phones */
+@media (max-width: 480px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng tối đa là 480px */
+
+    .form_add-category-list {
+        width: auto;
+    }
+    .content-main-dash-board {
+        width: 100%;
+    }
+    .form_add-category-list {
+        padding: 0px;
+    }
+    .input-upload_image {
+    }
+    .form_add-category-list {
+        width: 100%;
+    }
+    .upload_file_image-course span {
+        padding-right: 12px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 850px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 481px đến 768px */
+}
+
+/* Laptops */
+@media (min-width: 851px) and (max-width: 1366px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 769px đến 1366px */
+}
+
+/* Desktops */
+@media (min-width: 1367px) {
+    /* Đưa ra các CSS styles dành cho màn hình có chiều rộng từ 1367px trở lên */
+}

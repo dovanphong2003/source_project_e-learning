@@ -1,5 +1,6 @@
 import React from "react";
 import "../../../cssPageAdmin/courseCss/addCtgrCpn.css";
+import "../../../../../../assets/style/responsiveCss/resAddEditCategory.css";
 import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
