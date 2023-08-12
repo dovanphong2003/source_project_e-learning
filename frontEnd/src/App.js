@@ -50,16 +50,16 @@ const App = function () {
         }
     }, [localStorage.getItem("role")]);
     ////////////////////////////
-    return (localStorage.getItem("role") &&
-        localStorage.getItem("role") === "admin") ||
-        roleUser === "admin" ? (
+    return roleUser === "admin" ||
+        (localStorage.getItem("role") &&
+            localStorage.getItem("role") === "admin") ? (
         <>
             <AutoScrollTop />
             <DisplayAdmin setRoleUser={setRoleUser} />
         </>
-    ) : (localStorage.getItem("role") &&
-          localStorage.getItem("role") === "virtualUser") ||
-      roleUser === "virtualUser" ? (
+    ) : roleUser === "virtualUser" ||
+      (localStorage.getItem("role") &&
+          localStorage.getItem("role") === "virtualUser") ? (
         <>
             <AutoScrollTop />
             <DisplayUser

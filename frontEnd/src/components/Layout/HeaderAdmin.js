@@ -167,8 +167,8 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                                                 "role",
                                                 "student"
                                             );
-                                            setRoleUser("student");
                                             deleteRefreshCookie();
+                                            setRoleUser("student");
                                             navigate("/log-in");
                                         }}
                                         className="info-user-sig_in"
@@ -292,12 +292,8 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                                     <button
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            localStorage.setItem(
-                                                "role",
-                                                "student"
-                                            );
-                                            setRoleUser("student");
                                             deleteRefreshCookie();
+                                            setRoleUser("student");
                                             navigate("/log-in");
                                         }}
                                         className="info-user-sig_in"
