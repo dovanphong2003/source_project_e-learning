@@ -6,8 +6,6 @@ import axios from "axios";
 import { VerifyToken } from "./components/Sections/FunctionAll";
 const App = function () {
     const [roleUser, setRoleUser] = useState("student");
-
-    //////////////////////////
     // get info user - id
     const fncgetInfoUserByAccessTokenAPI = async () => {
         try {
@@ -18,7 +16,6 @@ const App = function () {
                     "accessToken"
                 )}`
             );
-            console.log("data user: ", response.data.data);
             localStorage.setItem("role", response.data.data.role);
             setRoleUser(response.data.data.role);
             return response.data.data;
@@ -35,7 +32,6 @@ const App = function () {
                                 "accessToken"
                             )}`
                         );
-                        console.log("data user: ", response.data.data);
                         localStorage.setItem("role", response.data.data.role);
                         setRoleUser(response.data.data.role);
                         return response.data.data;
@@ -45,7 +41,6 @@ const App = function () {
         }
     };
     useEffect(() => {
-        console.log("da vao den day");
         if (
             localStorage.getItem("accessToken") &&
             localStorage.getItem("role") &&
