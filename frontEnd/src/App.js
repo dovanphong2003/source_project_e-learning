@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DisplayUser } from "./assets/display/DisplayUser";
 import { DisplayAdmin } from "./assets/display/DisplayAdmin";
 import AutoScrollTop from "./components/Sections/AutoScrollTop";
 const App = function () {
     const [roleUser, setRoleUser] = useState("student");
+    useEffect(() => {
+        localStorage.getItem("role")
+            ? setRoleUser(localStorage.getItem("role"))
+            : setRoleUser("student");
+    }, [localStorage.getItem("role")]);
     return (localStorage.getItem("role") &&
         localStorage.getItem("role") === "admin") ||
         roleUser === "admin" ? (
