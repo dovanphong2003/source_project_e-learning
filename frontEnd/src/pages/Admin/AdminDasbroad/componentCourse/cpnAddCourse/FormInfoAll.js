@@ -36,7 +36,7 @@ export const FormInfoAll = ({ form, setForm }) => {
     // set price
     const [checkFree, setCheckFree] = useState(false);
 
-    // postgres for image upload
+    // postgres for upload course
     const [progress, setProgress] = useState(0);
     // break file, data if type file don't valid or data error
     const [breakk, setBreak] = useState(false);
@@ -213,6 +213,7 @@ export const FormInfoAll = ({ form, setForm }) => {
                         breakk={breakk}
                         setBreak={setBreak}
                         resestUrlAndImage={resestUrlAndImage}
+                        progress={progress}
                     />
                 </div>
             </form>

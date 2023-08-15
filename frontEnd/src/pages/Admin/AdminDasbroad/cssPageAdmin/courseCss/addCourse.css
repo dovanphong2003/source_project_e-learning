@@ -93,7 +93,7 @@
     border: 1px solid #dee2e6;
 }
 .form-course-title .select_form-course_title {
-    min-width: 500px !important;
+    width: 500px !important;
 }
 .next-component {
     display: flex;

@@ -50,7 +50,7 @@ async function fileFilter(req, file, cb) {
 const uploadCourse = multer({
     storageCourse: multer.memoryStorage(),
     limits: {
-        fileSize: 1024 * 1024 * 5, // max file image: 5mb
+        fileSize: 1024 * 1024 * 5, // max file image category: 5mb
     },
     fileFilter: fileFilter,
 });
@@ -64,8 +64,8 @@ routeAPICategory.post(
     (req, res, next) => {
         // check loi,
         /**
-         * trong trường hợp này, upload.single("image") là một middleware function,
-         *  và sau đó chúng ta gọi nó ngay lập tức bằng cách truyền req, res và
+         * trong trường hợp này, uploadCourse.single("image") là một middleware function,
+         *  và sau đó gọi nó ngay lập tức bằng cách truyền req, res và
          *  callback function vào trong cặp dấu ngoặc đơn tiếp theo (...).
          */
         uploadCourse.single("image")(req, res, async function (err) {

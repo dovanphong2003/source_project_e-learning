@@ -35,7 +35,7 @@ export const ProductCart = ({ courseHaveBuy, data }) => {
             .replace(/[,.đ]/g, "")
             .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return numberWithCommas === "free"
-            ? numberWithCommas
+            ? "Miễn phí"
             : numberWithCommas + "đ";
     }
     return (

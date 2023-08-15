@@ -105,7 +105,7 @@ export const ListCourse = ({ infoBasicCourse }) => {
             ),
         },
         {
-            name: "Sửa",
+            name: "Thay đổi",
             cell: (row) => (
                 <button
                     onClick={(e) => {
@@ -163,7 +163,7 @@ export const ListCourse = ({ infoBasicCourse }) => {
                                     ? "Gỡ best seller"
                                     : "Đặt Làm Best seller"}
                             </li>
-                            <li>Sửa giá khóa học</li>
+                            {/* <li>Sửa giá khóa học</li> */}
                         </ul>
                     </div>
                 </button>

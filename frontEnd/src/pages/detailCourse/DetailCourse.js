@@ -281,7 +281,7 @@ export const DetailCourse = () => {
             .replace(/[,.đ]/g, "")
             .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return numberWithCommas === "free"
-            ? numberWithCommas
+            ? "Miễn phí"
             : numberWithCommas + "đ";
     }
     return (
@@ -545,7 +545,7 @@ export const DetailCourse = () => {
                                 )}
                             </div>
                         ) : (
-                            <h1>heheheh</h1>
+                            ""
                         )}
                     </div>
                 </div>

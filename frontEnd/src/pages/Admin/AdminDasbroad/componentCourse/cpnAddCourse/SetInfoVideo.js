@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useCreateCourseDataContext } from "../../../../../context/CreateCourseData";
 
 import { ToastContainer, toast } from "react-toastify";
-export const SetInfoVideo = ({ breakk, setBreak, resestUrlAndImage }) => {
+export const SetInfoVideo = ({
+    breakk,
+    setBreak,
+    resestUrlAndImage,
+    progress,
+}) => {
     const { setUrl_course, setImage_course } = useCreateCourseDataContext();
 
     const notifyError = (content) => toast.error(content);
@@ -65,7 +70,7 @@ export const SetInfoVideo = ({ breakk, setBreak, resestUrlAndImage }) => {
                         <span>
                             {" "}
                             tải lên hình ảnh (hỗ trợ: jpeg, bmp, png, svg và{" "}
-                            {"<"} 1 MB)
+                            {"<"} 5 MB)
                         </span>
                     </label>
 
@@ -93,7 +98,9 @@ export const SetInfoVideo = ({ breakk, setBreak, resestUrlAndImage }) => {
                     <h4>Xác nhận!</h4>
                     <p>bạn chỉ cần một cú nhấp chuột</p>
                     <div className="bnt-submit-craete-student">
-                        <button type="submit">Xác Nhận Tạo</button>
+                        <button type="submit">
+                            {progress ? progress : "Xác Nhận Tạo"}
+                        </button>
                     </div>
                 </div>
             </div>
