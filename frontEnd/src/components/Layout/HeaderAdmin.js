@@ -46,13 +46,12 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                 localStorage.getItem("accessToken") ===
                     "refreshToken not defined"
             ) {
-                await deleteRefreshCookie();
-
                 await Swal.fire({
                     icon: "error",
                     title: "Phiên đăng nhập đã hết hạn",
                     text: "Vui lòng đăng nhập lại !",
                 }).then(() => {
+                    deleteRefreshCookie();
                     navigate("/log-in");
                 });
             }
