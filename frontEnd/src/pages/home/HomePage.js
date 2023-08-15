@@ -4,17 +4,13 @@ import "../../assets/style/HomePage/homePage.css";
 import "../../assets/style/responsiveCss/resHomePage.css";
 import { Banner } from "./Banner";
 import Skeleton from "react-loading-skeleton";
-
 import { CategoryListCard } from "./CategoryListCard";
 import { ListCardOfUser } from "./ListCardOfUser";
-import { useContext } from "react";
 import axios from "axios";
-import { RoleContext } from "../../context/RoleContext";
 import { VerifyToken } from "../../components/Sections/FunctionAll";
 export const HomePage = () => {
     const [dataCourseSeller, setDataCourseSeller] = useState([]);
     const [dataCourseNews, setDataCourseNews] = useState([]);
-    const { isIdUser } = useContext(RoleContext);
     const [dataUser, setDataUser] = useState({});
 
     // get id and info user use accesstoken
@@ -59,7 +55,7 @@ export const HomePage = () => {
     }, []);
 
     // get data cart of user
-    const [dataCourseOfUser, setDataCourseOfUser] = useState([false]);
+    const [dataCourseOfUser, setDataCourseOfUser] = useState(["false"]);
     const getCourseOfUser = async () => {
         try {
             const response = await axios.get(
@@ -80,7 +76,7 @@ export const HomePage = () => {
         <main>
             <Banner />
             {localStorage.getItem("nameUser") ? (
-                dataCourseOfUser[0] !== false ? (
+                dataCourseOfUser[0] !== "false" ? (
                     dataCourseOfUser.length ? (
                         <div className="course_our_user">
                             <div className="container-main">

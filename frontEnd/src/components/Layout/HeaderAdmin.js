@@ -38,6 +38,27 @@ export const HeaderAdmin = ({ setRoleUser }) => {
         };
         fncCheckLogin();
     }, [location.pathname]);
+    // check refreshToeken
+    useEffect(() => {
+        const fncCheckDeleteRefreshToken = async () => {
+            if (
+                localStorage.getItem("accessToken") &&
+                localStorage.getItem("accessToken") ===
+                    "refreshToken not defined"
+            ) {
+                await deleteRefreshCookie();
+
+                await Swal.fire({
+                    icon: "error",
+                    title: "Phiên đăng nhập đã hết hạn",
+                    text: "Vui lòng đăng nhập lại !",
+                }).then(() => {
+                    navigate("/log-in");
+                });
+            }
+        };
+        fncCheckDeleteRefreshToken();
+    }, [localStorage.getItem("accessToken")]);
     return (
         <>
             <header className="header_bgrcl header-admin-all">
