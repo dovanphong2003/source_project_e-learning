@@ -186,7 +186,7 @@ export const CommentCpn = ({
                     <div className="reply_comment-input">
                         <ReactQuill
                             className="ql-container editor-reply-comment ql-editor"
-                            theme="bubble"
+                            theme="snow"
                             value={value2}
                             onChange={setValue2}
                             toolbar="#toolbar"

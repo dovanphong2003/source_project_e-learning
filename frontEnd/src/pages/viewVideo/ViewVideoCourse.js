@@ -10,8 +10,6 @@ import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Plyr from "plyr";
 import { ToastContainer, toast } from "react-toastify"; // toast
-import { RoleContext } from "../../context/RoleContext";
-import { useContext } from "react";
 import { CommentCpn } from "./CommentCpn";
 import { VerifyToken } from "../../components/Sections/FunctionAll";
 import axios from "axios";
@@ -195,6 +193,15 @@ export const ViewVideoCourse = () => {
             if (error.response.data.ec.message === "jwt expired") {
                 const funcVerifyToken = await VerifyToken();
                 await funcVerifyToken();
+                const response = await axios.get(
+                    `${
+                        process.env.REACT_APP_URL_BACKEND
+                    }/getInfoUserByAccessTokenAPI?accessToken=${localStorage.getItem(
+                        "accessToken"
+                    )}`
+                );
+
+                setDataUser(response.data.data);
             }
         }
     };
