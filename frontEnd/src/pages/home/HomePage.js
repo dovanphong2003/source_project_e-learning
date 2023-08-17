@@ -71,7 +71,6 @@ export const HomePage = () => {
             getCourseOfUser();
         }
     }, [dataUser.id]);
-
     return (
         <main>
             <Banner />
