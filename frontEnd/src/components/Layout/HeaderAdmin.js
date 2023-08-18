@@ -164,7 +164,7 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                             className="frame-admin"
                         >
                             <img
-                                src="/image/image_user-default.jpg"
+                                src="/image/image_user-default.png"
                                 alt="avatar_admin"
                                 className="img-frame-admin"
                             />
