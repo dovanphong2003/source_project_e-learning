@@ -69,7 +69,7 @@ export const Navigationdb = ({ forEl }) => {
                 <div className="header-navigation_dash-board">
                     <div className="image-name_hd-nav-db">
                         <img
-                            src="/image/image_admin.jpg"
+                            src="/image/image_user-default.jpg"
                             alt=""
                             className="img-frame-admin"
                         />

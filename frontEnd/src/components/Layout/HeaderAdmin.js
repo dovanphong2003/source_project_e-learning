@@ -164,8 +164,8 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                             className="frame-admin"
                         >
                             <img
-                                src="/image/image_admin.jpg"
-                                alt=""
+                                src="/image/image_user-default.jpg"
+                                alt="avatar_admin"
                                 className="img-frame-admin"
                             />
                             <div className="info-frame-admin">
@@ -293,8 +293,8 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                             className="frame-admin"
                         >
                             <img
-                                src="/image/image_admin.jpg"
-                                alt=""
+                                src="/image/image_user-default.jpg"
+                                alt="avatar"
                                 className="img-frame-admin"
                             />
                             <div className="info-frame-admin">
