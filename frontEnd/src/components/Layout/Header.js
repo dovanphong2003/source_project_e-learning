@@ -32,13 +32,15 @@ export const Header = ({ setRoleUser }) => {
                 deleteRefreshCookie();
                 setCheckLogin(false);
                 navigate("/log-in");
-                await Swal.fire({
-                    icon: "error",
-                    title: "Huynh đài dừng bước !",
-                    text: "Vui lòng đăng nhập",
-                }).then(() => {
-                    // navigate("/log-in");
-                });
+                return;
+            }
+            if (
+                location.pathname === "/log-in" &&
+                localStorage.getItem("login")
+            ) {
+                deleteRefreshCookie();
+                window.location.reload();
+                return;
             }
         };
         fncCheckLogin();

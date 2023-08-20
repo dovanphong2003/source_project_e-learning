@@ -26,14 +26,18 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                 ) &&
                 !localStorage.getItem("accessToken")
             ) {
-                await Swal.fire({
-                    icon: "error",
-                    title: "Lỗi nặng rồi bro !",
-                    text: "Vui lòng đăng nhập 😄",
-                }).then(() => {
-                    deleteRefreshCookie();
-                    navigate("/log-in");
-                });
+                deleteRefreshCookie();
+                navigate("/log-in");
+                return;
+            }
+
+            if (
+                location.pathname === "/log-in" &&
+                localStorage.getItem("login")
+            ) {
+                deleteRefreshCookie();
+                window.location.reload();
+                return;
             }
         };
         fncCheckLogin();
@@ -164,7 +168,7 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                             className="frame-admin"
                         >
                             <img
-                                src="/image/image_user-default.png"
+                                src="/image_user-default.png"
                                 alt="avatar_admin"
                                 className="img-frame-admin"
                             />
@@ -293,7 +297,7 @@ export const HeaderAdmin = ({ setRoleUser }) => {
                             className="frame-admin"
                         >
                             <img
-                                src="/image/image_user-default.jpg"
+                                src="/image_user-default.jpg"
                                 alt="avatar"
                                 className="img-frame-admin"
                             />
