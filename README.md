@@ -6,7 +6,7 @@ Mình cũng sử dụng các công cụ như Firebase và AWS để lưu trữ d
 
 ## Chức năng
 
-Dự án E-Learning có một số chức năng sau:
+Một số chức năng của dự án:
 - Đăng kí và đăng nhập: Sử dụng JWT để xác thực người dùng, cung cấp cả việc đăng nhập qua tài khoản Facebook và Google.
 - Comment đa cấp: Cho phép người dùng bình luận và phản hồi trên nhiều cấp độ.
 - Phân trang và tìm kiếm: Hiển thị dữ liệu theo từng trang và cho phép tìm kiếm và sắp xếp dữ liệu.
