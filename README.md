@@ -33,7 +33,7 @@ kiểm tra accessToken khi người dùng thực hiện các yêu cầu quan tr�
 
 
 ## Lưu ý
-Để sử dụng đầy đủ chức năng, bạn cần cấu hình các tài khoản Firebase và AWS của Tôi trong dự án.
+Để sử dụng đầy đủ chức năng, bạn cần cấu hình các tài khoản Firebase và AWS trong dự án.
 
 ## Liên hệ
 
