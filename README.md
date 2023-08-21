@@ -2,7 +2,7 @@
 ## Giới thiệu
 
 Dự án E-Learning này được xây dựng bằng cách sử dụng ReactJS cho phần giao diện người dùng (Frontend) và NodeJS cho phần xử lý logic và dữ liệu (Backend). 
-Mình cũng sử dụng các công cụ như Firebase và AWS để lưu trữ dữ liệu, cụ thể là PostgreSQL cho cơ sở dữ liệu SQL. 
+Tôi cũng sử dụng các công cụ như Firebase và AWS để lưu trữ dữ liệu, cụ thể là PostgreSQL cho cơ sở dữ liệu SQL. 
 
 ## Chức năng
 
@@ -28,16 +28,16 @@ Một số chức năng của dự án:
 
 ## Cách hoạt động của xác thực
 
-Mình sử dụng JWT để xác thực người dùng. AccessToken có thời gian sống là 20 giây, 
+Tôi sử dụng JWT để xác thực người dùng. AccessToken có thời gian sống là 20 giây, 
 kiểm tra accessToken khi người dùng thực hiện các yêu cầu quan trọng như đăng bài hoặc lấy dữ liệu khóa học của họ.
 
 
 ## Lưu ý
-Để sử dụng đầy đủ chức năng, bạn cần cấu hình các tài khoản Firebase và AWS của mình trong dự án.
+Để sử dụng đầy đủ chức năng, bạn cần cấu hình các tài khoản Firebase và AWS của Tôi trong dự án.
 
 ## Liên hệ
 
-Nếu bạn có bất kỳ câu hỏi hoặc đề xuất nào, xin vui lòng liên hệ với mình qua email: dodaiphong299@gmail.com
+Nếu bạn có bất kỳ câu hỏi hoặc đề xuất nào, xin vui lòng liên hệ với Tôi qua email: dodaiphong299@gmail.com
 
 ## Liên kết
 
