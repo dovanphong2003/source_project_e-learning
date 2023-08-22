@@ -43,3 +43,6 @@ Nếu bạn có bất kỳ câu hỏi hoặc đề xuất nào, xin vui lòng li
 
 Trang Web: https://jdg-elearning.netlify.app/
 
+## Thông tin thêm
+Nếu khi vào mọi người thấy phần danh mục không có gì thì đợi khoảng 1-2 phút để render khởi động lại server, sau đó thì các chức năng hoạt động bình thường ạ !
+
